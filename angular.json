@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "agari-angular"
+    }
+  },
+  "defaultProject": "agari-angular",
+  "cli": {
+    "analytics": false
+  }
 }
