@@ -1,0 +1,9 @@
+query generateBracket($roundCount: Int!, $participantCount: Int!) {
+  generateBracket(roundCount: $roundCount, participantCount: $participantCount) {
+    rounds {
+      games {
+        participantNrs
+      }
+    }
+  }
+}

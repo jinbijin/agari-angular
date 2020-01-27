@@ -12,7 +12,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "graphql-generate": "graphql-codegen --config graphql-codegen.yml"
   },
   "jest": {
     "preset": "jest-preset-angular",
@@ -46,6 +47,11 @@
     "@angular/cli": "~9.0.0-rc.10",
     "@angular/compiler-cli": "~9.0.0-rc.11",
     "@angular/language-service": "~9.0.0-rc.11",
+    "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/introspection": "^1.11.2",
+    "@graphql-codegen/typescript": "^1.11.2",
+    "@graphql-codegen/typescript-apollo-angular": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
