@@ -4,12 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:ci": "ng serve --port=4242",
     "build": "ng build",
+    "cy": "cypress open",
+    "cy:verify": "cypress verify",
+    "cy:ci": "cypress run --record --port=4242",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "jest": {
     "preset": "jest-preset-angular",

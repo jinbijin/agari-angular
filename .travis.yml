@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+- 12.14.1
+os: linux
+addons:
+  ssh_known_hosts:
+    secure: retzwEPpCmrGDBkq39ciQXrLzulf1v8XRW/kLXu5JnlqhKSVTx5kA/KEVfEHhRBdXS/ABIUsM9afTVy63oMJvKNWQ8KTwyUm+TrCVmyya4IKlCb3/dUtCvmW8AlH6y72/425w3hOgAPjzw0rO3vG3hT+MKjBSu1pOnx1kaUXqgstZCkrETTttkZ7qxgKi2Qj+4Osl7siRv1QYa+NHtgJaj43KyTahc29lJ1V2Tt5W/0pSMcLREQ9xoS6DljaDRF94BED3XwCewXVL2edXa5vxrBa19of0+P3BzG8HGEj7GrGYi3l27ibSeqTX60WthrGgFrQ+gV13rJTGVN6bXAFK2mX2Cek2MTcKiGt44NMMt0AJCc31pWLjF59fgNMnIxTBXUnmIT4h9nKuD2bQBsfhEOKPEgR+8ZC7YzTehwPlbNwbyIXkRfaB/7gOFgQOQLa8FKU6MdsqRzcUiI8wGGfUnugviJcTypJUcU6rnidRNOF3YeyVJr74M0avKYg+MkCzVynxd+LslLPpJ9deoNTTHEqsW600djjfL0yBlCVKV3bhzgZfsszI/cY5MkN9O7vbfR/Snw1sgSqKTyG/tj4IoG10TqZl0cuCAgTHNXamD8VhXBuMlyBO9xGO+difx/2BCYQmYo1jtTV4hmChX4BzRAYgYTFEl+21ybov3SZCp4=
+cache:
+  npm: true
+  directories:
+  - ~/.cache
+install:
+- npm ci
+- npm run cy:verify
+script:
+- npm run build
+- npm run test:ci
+- npm run cy:ci
+deploy:
+- provider: script
+  cleanup: true
+  script: bash deploy/deploy.sh
+  on:
+    branch: feature/initial-setup
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_6759c9d09779_key -iv $encrypted_6759c9d09779_iv
+  -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
