@@ -8,7 +8,7 @@
     "build": "ng build",
     "cy": "cypress open",
     "cy:verify": "cypress verify",
-    "cy:ci": "cypress run --record --port=4242",
+    "cy:ci": "cypress run --record",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
