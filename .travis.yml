@@ -14,8 +14,9 @@ install:
 - npm run cy:verify
 script:
 - npm run build
+- npm run start:ci &
 - npm run test:ci
-- npm run cy:ci
+- npm run cy:ci -- --key $cypress_key
 deploy:
 - provider: script
   cleanup: true
