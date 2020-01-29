@@ -19,7 +19,7 @@ script:
 - npm run cy:ci -- --key $cypress_key
 deploy:
 - provider: script
-  cleanup: false
+  skip_cleanup: true
   script: bash deploy/deploy.sh
   on:
     branch: feature/initial-setup
