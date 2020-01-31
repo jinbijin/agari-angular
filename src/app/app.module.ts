@@ -1,10 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { appRoutes } from './app.routes';
+import { CoreModule } from './core/core.module';
 import { GraphQLModule } from './graphql/graphql.module';
 
 @NgModule({
@@ -13,9 +14,9 @@ import { GraphQLModule } from './graphql/graphql.module';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule,
+    CoreModule,
+    RouterModule.forRoot(appRoutes),
     GraphQLModule
   ],
   providers: [],
