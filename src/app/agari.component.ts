@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+  selector: 'agari-root',
+  templateUrl: './agari.component.html'
 })
-export class AppComponent {
+export class AgariComponent {
   public title = 'agari-angular';
 }
