@@ -8,25 +8,20 @@ import { environment } from '../../environments/environment';
 
 const uri = `${environment.apiBaseUrl}/graphql`;
 export function createApollo(httpLink: HttpLink) {
-  const link = ApolloLink.from([
-    httpLink.create({ uri })
-  ]);
+  const link = ApolloLink.from([httpLink.create({ uri })]);
   const cache = new InMemoryCache();
 
   return { link, cache };
 }
 
 @NgModule({
-  exports: [
-    ApolloModule,
-    HttpLinkModule
-  ],
+  exports: [ApolloModule, HttpLinkModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink],
-    },
-  ],
+      deps: [HttpLink]
+    }
+  ]
 })
-export class GraphQLModule { }
+export class GraphQLModule {}

@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier"],
   "rules": {
     "array-type": false,
     "arrow-parens": false,
@@ -31,6 +31,7 @@
     "object-literal-key-quotes": [true, "as-needed"],
     "object-literal-sort-keys": false,
     "ordered-imports": true,
+    "prettier": true,
     "quotemark": [true, "single"],
     "trailing-comma": false,
     "no-conflicting-lifecycle": true,
