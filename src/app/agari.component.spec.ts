@@ -1,27 +1,68 @@
-import { async, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AgariComponent } from './agari.component';
-import { PageModule } from './page/page.module';
+import { PageBase } from './instrumentation/test/page-base';
 
 describe('AgariComponent', () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let page: Page;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, RouterTestingModule, PageModule],
-      declarations: [AgariComponent]
+      declarations: [TestHostComponent, AgariComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AgariComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestHostComponent);
+    page = new Page(fixture);
+    fixture.detectChanges();
   });
 
-  it(`should have as title 'agari-angular'`, () => {
-    const fixture = TestBed.createComponent(AgariComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('agari-angular');
+  it('should create the app', () => {
+    expect(page.root).toBeTruthy();
+  });
+
+  it('should have a header', () => {
+    expect(page.header).toBeTruthy();
+  });
+
+  it('should have a content element', () => {
+    expect(page.content).toBeTruthy();
+  });
+
+  it('should have a footer element', () => {
+    expect(page.footer).toBeTruthy();
   });
 });
+
+class Page extends PageBase<TestHostComponent> {
+  get root() {
+    return this.query<HTMLElement>('agari-root');
+  }
+
+  get header() {
+    return this.query<HTMLElement>('agari-header');
+  }
+
+  get content() {
+    return this.query<HTMLElement>('agari-content');
+  }
+
+  get footer() {
+    return this.query<HTMLElement>('agari-footer');
+  }
+
+  constructor(fixture: ComponentFixture<TestHostComponent>) {
+    super(fixture);
+  }
+}
+
+@Component({
+  template: `
+    <agari-root></agari-root>
+  `
+})
+class TestHostComponent {}

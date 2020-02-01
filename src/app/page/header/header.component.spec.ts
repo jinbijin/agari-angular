@@ -1,34 +1,61 @@
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserModule } from '@angular/platform-browser';
+import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
+  let page: Page;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
-      imports: [MatButtonModule, MatIconModule, MatToolbarModule],
-      providers: []
+      declarations: [TestHostComponent, HeaderComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    page = new Page(fixture);
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 
   it(`should have brand 'アガリ'`, () => {
-    expect(component.brand).toEqual('アガリ');
+    expect(page.brand).toBeTruthy();
+    expect(page.brand.textContent).toEqual('アガリ');
+  });
+
+  it('should have a menu button', () => {
+    expect(page.menuButton).toBeTruthy();
   });
 });
+
+class Page extends PageBase<TestHostComponent> {
+  get root(): HTMLElement {
+    return this.query<HTMLElement>('agari-header');
+  }
+
+  get brand(): HTMLElement {
+    return this.query<HTMLElement>('a');
+  }
+
+  get menuButton(): HTMLButtonElement {
+    return this.query<HTMLButtonElement>('button');
+  }
+
+  constructor(fixture: ComponentFixture<TestHostComponent>) {
+    super(fixture);
+  }
+}
+
+@Component({
+  template: `
+    <agari-header></agari-header>
+  `
+})
+class TestHostComponent {}

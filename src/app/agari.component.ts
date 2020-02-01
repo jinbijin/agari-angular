@@ -5,6 +5,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './agari.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgariComponent {
-  public title = 'agari-angular';
-}
+export class AgariComponent {}
