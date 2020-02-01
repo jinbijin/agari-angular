@@ -1,4 +1,5 @@
 import { async, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AgariComponent } from './agari.component';
@@ -7,7 +8,7 @@ import { PageModule } from './page/page.module';
 describe('AgariComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, PageModule],
+      imports: [NoopAnimationsModule, RouterTestingModule, PageModule],
       declarations: [AgariComponent]
     }).compileComponents();
   }));
