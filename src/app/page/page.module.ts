@@ -4,12 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent],
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, FooterComponent],
   providers: []
 })
 export class PageModule {}
