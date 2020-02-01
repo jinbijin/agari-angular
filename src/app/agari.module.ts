@@ -7,10 +7,18 @@ import { AgariComponent } from './agari.component';
 import { agariRoutes } from './agari.routes';
 import { CoreModule } from './core/core.module';
 import { GraphQLModule } from './graphql/graphql.module';
+import { PageModule } from './page/page.module';
 
 @NgModule({
   declarations: [AgariComponent],
-  imports: [BrowserModule, HttpClientModule, CoreModule, RouterModule.forRoot(agariRoutes), GraphQLModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(agariRoutes),
+    CoreModule,
+    HttpClientModule,
+    GraphQLModule,
+    PageModule
+  ],
   providers: [],
   bootstrap: [AgariComponent]
 })

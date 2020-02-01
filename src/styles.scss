@@ -1,4 +1,33 @@
+@import '~@angular/material/theming';
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,900&display=swap&subset=japanese');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "Noto Serif JP", serif; }
+$agari-typography: mat-typography-config(
+  $font-family: '"Noto Serif JP", serif'
+);
+
+$agari-primary: mat-palette($mat-indigo);
+$agari-accent: mat-palette($mat-pink, A200, A100, A400);
+$agari-warn: mat-palette($mat-orange);
+$agari-theme: mat-light-theme($agari-primary, $agari-accent, $agari-warn);
+
+@include mat-core($agari-typography);
+@include angular-material-theme($agari-theme);
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.agari-brand {
+  font-size: x-large !important;
+  font-weight: 900;
+}
+
+.agari-spacer {
+  flex: 1 1 auto;
+}

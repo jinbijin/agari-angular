@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'agari-root',
-  templateUrl: './agari.component.html'
+  templateUrl: './agari.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgariComponent {
   public title = 'agari-angular';
