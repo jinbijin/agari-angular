@@ -1,5 +1,5 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { FooterComponent } from './footer.component';
@@ -8,12 +8,12 @@ describe('FooterComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let page: Page;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    return await TestBed.configureTestingModule({
       declarations: [TestHostComponent, FooterComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
