@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { agariRoutes } from 'src/app/agari.routes';
+import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
 
 @Component({
   selector: 'agari-header',
@@ -7,6 +9,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public brand: string = 'アガリ';
+
+  public routes: AgariRoutes = agariRoutes.filter(r => r.display);
 
   constructor() {}
 

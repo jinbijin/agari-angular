@@ -1,5 +1,6 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatMenuModule } from '@angular/material/menu';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { HeaderComponent } from './header.component';
@@ -11,6 +12,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
       declarations: [TestHostComponent, HeaderComponent],
+      imports: [MatMenuModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
