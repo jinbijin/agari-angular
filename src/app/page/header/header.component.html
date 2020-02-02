@@ -1,0 +1,19 @@
+<header>
+  <mat-toolbar color="primary" class="mat-elevation-z6">
+    <a mat-button routerLink="/" class="agari-brand">{{ brand }}</a>
+    <span class="agari-spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="rootMenu"
+      aria-label="Menu button"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+
+<mat-menu #rootMenu="matMenu">
+  <a *ngFor="let route of routes" mat-menu-item [routerLink]="route.path!">{{
+    route.label
+  }}</a>
+</mat-menu>
