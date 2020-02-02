@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
-import { LandingComponent } from './landing.component';
+import { ScheduleGeneratorComponent } from './schedule-generator.component';
 
-describe('LandingComponent', () => {
-  let fixture: ComponentFixture<LandingComponent>;
+describe('ScheduleGeneratorComponent', () => {
+  let fixture: ComponentFixture<ScheduleGeneratorComponent>;
   let page: Page;
 
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
-      declarations: [LandingComponent]
+      declarations: [ScheduleGeneratorComponent]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(ScheduleGeneratorComponent);
     page = new Page(fixture);
     fixture.detectChanges();
   });
@@ -24,12 +24,12 @@ describe('LandingComponent', () => {
   });
 });
 
-class Page extends PageBase<LandingComponent> {
-  get root(): LandingComponent {
+class Page extends PageBase<ScheduleGeneratorComponent> {
+  get root(): ScheduleGeneratorComponent {
     return this.fixture.debugElement.componentInstance;
   }
 
-  constructor(fixture: ComponentFixture<LandingComponent>) {
+  constructor(fixture: ComponentFixture<ScheduleGeneratorComponent>) {
     super(fixture);
   }
 }
