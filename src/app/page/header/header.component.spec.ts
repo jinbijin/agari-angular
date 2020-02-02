@@ -1,12 +1,11 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { MatMenuModule } from '@angular/material/menu';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
   let page: Page;
 
   beforeEach(async () => {
@@ -18,9 +17,7 @@ describe('HeaderComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
-    page = new Page(fixture);
-    fixture.detectChanges();
+    page = new Page(TestBed.createComponent(TestHostComponent));
   });
 
   it('should create', () => {
@@ -48,10 +45,6 @@ class Page extends PageBase<TestHostComponent> {
 
   get menuButton(): HTMLButtonElement {
     return this.query<HTMLButtonElement>('button');
-  }
-
-  constructor(fixture: ComponentFixture<TestHostComponent>) {
-    super(fixture);
   }
 }
 

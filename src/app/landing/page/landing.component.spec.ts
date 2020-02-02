@@ -1,35 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { LandingComponent } from './landing.component';
 
 describe('LandingComponent', () => {
-  let fixture: ComponentFixture<LandingComponent>;
   let page: Page;
 
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
-      declarations: [LandingComponent]
+      declarations: [LandingComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
-    page = new Page(fixture);
-    fixture.detectChanges();
+    page = new Page(TestBed.createComponent(LandingComponent));
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.component).toBeTruthy();
+  });
+
+  it('should use the standard layout', () => {
+    expect(page.agariLayout).toBeTruthy();
   });
 });
 
 class Page extends PageBase<LandingComponent> {
-  get root(): LandingComponent {
-    return this.fixture.debugElement.componentInstance;
-  }
-
-  constructor(fixture: ComponentFixture<LandingComponent>) {
-    super(fixture);
+  get agariLayout(): HTMLElement {
+    return this.query('agari-layout');
   }
 }

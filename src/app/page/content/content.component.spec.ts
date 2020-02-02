@@ -1,11 +1,10 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { ContentComponent } from './content.component';
 
 describe('ContentComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
   let page: Page;
 
   beforeEach(async () => {
@@ -16,9 +15,7 @@ describe('ContentComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
-    page = new Page(fixture);
-    fixture.detectChanges();
+    page = new Page(TestBed.createComponent(TestHostComponent));
   });
 
   it('should create', () => {
@@ -53,10 +50,6 @@ class Page extends PageBase<TestHostComponent> {
 
   get routerOutlet(): HTMLElement {
     return this.query<HTMLElement>('router-outlet');
-  }
-
-  constructor(fixture: ComponentFixture<TestHostComponent>) {
-    super(fixture);
   }
 }
 

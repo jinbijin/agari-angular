@@ -1,16 +1,15 @@
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
-import { FooterComponent } from './footer.component';
+import { LayoutComponent } from './layout.component';
 
-describe('FooterComponent', () => {
+describe('LayoutComponent', () => {
   let page: Page;
 
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
-      declarations: [TestHostComponent, FooterComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [TestHostComponent, LayoutComponent]
     }).compileComponents();
   });
 
@@ -21,17 +20,25 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(page.root).toBeTruthy();
   });
+
+  it('should take parameter as title', () => {
+    expect(page.title.textContent).toEqual('Title');
+  });
 });
 
 class Page extends PageBase<TestHostComponent> {
   get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-footer');
+    return this.query<HTMLElement>('agari-layout');
+  }
+
+  get title(): HTMLElement {
+    return this.query<HTMLElement>('h2');
   }
 }
 
 @Component({
   template: `
-    <agari-footer></agari-footer>
+    <agari-layout title="Title"></agari-layout>
   `
 })
 class TestHostComponent {}

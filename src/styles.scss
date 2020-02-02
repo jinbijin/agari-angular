@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,900&display=swap&subset=japanese');
 
 $agari-typography: mat-typography-config(
-  $font-family: '"Noto Serif JP", serif',
-  $body-1: mat-typography-level(16px, 24px, 400)
+  $font-family: '"Noto Serif JP", serif'
 );
 
 $agari-primary: mat-palette($mat-indigo);
@@ -23,36 +22,5 @@ body {
 body {
   margin: 0;
   font-family: 'Noto Serif JP', serif;
-}
-
-.agari-brand {
-  font-size: x-large !important;
-  font-weight: 900;
-}
-
-.agari-content {
-  box-sizing: border-box;
-  flex: 1 1 auto;
-  overflow-y: auto;
-}
-
-.agari-page {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.agari-sidenav-container {
-  height: 100%;
-  z-index: 0;
-}
-
-.agari-sidenav {
-  width: 320px;
-}
-
-.agari-spacer {
-  flex: 1 1 auto;
+  font-size: small;
 }
