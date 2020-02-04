@@ -1,3 +1,4 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
   declarations: [HeaderComponent, FooterComponent, ContentComponent],
   imports: [
     CommonModule,
+    LayoutModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
