@@ -7,6 +7,9 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
+import { Store } from '@ngxs/store';
+
+import { GenerateSchedule } from '../../store/schedule-generator.action';
 
 @Component({
   selector: 'agari-schedule-generator-request',
@@ -15,7 +18,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleGeneratorRequestComponent implements OnInit {
-  constructor(private readonly builder: FormBuilder) {
+  constructor(
+    private readonly builder: FormBuilder,
+    private readonly store: Store
+  ) {
     this.formGroup = this.builder.group({
       roundCount: [undefined, [Validators.required, Validators.min(1)]],
       participantCount: [
@@ -49,5 +55,14 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
 
   public ngOnInit(): void {}
 
-  public generateSchedule(): void {}
+  public onSubmit(): void {
+    this.store
+      .dispatch(
+        new GenerateSchedule({
+          roundCount: this.roundCount.value,
+          participantCount: this.participantCount.value
+        })
+      )
+      .subscribe();
+  }
 }
