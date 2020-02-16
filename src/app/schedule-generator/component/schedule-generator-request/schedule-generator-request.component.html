@@ -1,0 +1,37 @@
+<form class="agari-form" [formGroup]="formGroup">
+  <mat-form-field [formControl]="roundCount" ngDefaultControl>
+    <mat-label>Number of rounds</mat-label>
+    <input matInput type="number" [formControl]="roundCount" required />
+    <mat-error *ngIf="roundCount.errors?.required">
+      This field is required.
+    </mat-error>
+    <mat-error *ngIf="roundCount.errors?.min">
+      Number of rounds must be greater than 0.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field [formControl]="participantCount" ngDefaultControl>
+    <mat-label>Number of participants</mat-label>
+    <input matInput type="number" [formControl]="participantCount" required />
+    <mat-error *ngIf="participantCount.errors?.required">
+      This field is required.
+    </mat-error>
+    <mat-error *ngIf="participantCount.errors?.min">
+      Number of participants must be greater than 0.
+    </mat-error>
+    <mat-error *ngIf="participantCount.errors?.mod">
+      Number of participants must be divisible by 4.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="agari-spacer"></div>
+
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="generateSchedule()"
+    [disabled]="formGroup.invalid"
+  >
+    Generate
+  </button>
+</form>
