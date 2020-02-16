@@ -8,6 +8,9 @@ import {
   Validators
 } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Status } from 'src/app/instrumentation/enum/status.enum';
+import { ObservableHelper } from 'src/app/instrumentation/observable/observable.helper';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 
@@ -37,6 +40,10 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
 
   public formGroup: FormGroup;
 
+  private statusSubject: Subject<Status> = new BehaviorSubject(Status.Idle);
+
+  public status$: Observable<Status> = this.statusSubject.asObservable();
+
   public get roundCount(): FormControl {
     return this.formGroup.controls.roundCount as FormControl;
   }
@@ -56,13 +63,14 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
   public ngOnInit(): void {}
 
   public onSubmit(): void {
-    this.store
-      .dispatch(
+    ObservableHelper.setStatus(
+      this.store.dispatch(
         new GenerateSchedule({
           roundCount: this.roundCount.value,
           participantCount: this.participantCount.value
         })
-      )
-      .subscribe();
+      ),
+      value => this.statusSubject.next(value)
+    ).subscribe();
   }
 }

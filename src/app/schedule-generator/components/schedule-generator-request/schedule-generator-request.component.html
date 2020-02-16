@@ -30,7 +30,7 @@
     mat-flat-button
     color="accent"
     (click)="onSubmit()"
-    [disabled]="formGroup.invalid"
+    [disabled]="formGroup.invalid || (status$ | async) === 'IN_PROGRESS'"
   >
     Generate
   </button>

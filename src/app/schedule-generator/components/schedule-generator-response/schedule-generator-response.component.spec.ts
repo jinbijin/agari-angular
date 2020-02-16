@@ -1,5 +1,6 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
 import { GenerateScheduleGQL } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
@@ -11,6 +12,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ScheduleGeneratorResponseComponent],
+      imports: [NgxsModule.forRoot([])],
       providers: [{ provide: GenerateScheduleGQL, useFactory: () => {} }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
