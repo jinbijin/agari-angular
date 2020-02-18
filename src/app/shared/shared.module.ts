@@ -4,8 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { LayoutComponent } from './layout/layout.component';
@@ -14,8 +15,9 @@ const materialModules: Type<any>[] = [
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
-  MatGridListModule,
   MatInputModule,
+  MatListModule,
+  MatTableModule,
   MatToolbarModule
 ];
 

@@ -1,5 +1,9 @@
 <form class="agari-form" [formGroup]="formGroup">
-  <mat-form-field [formControl]="roundCount" ngDefaultControl>
+  <mat-form-field
+    [formControl]="roundCount"
+    ngDefaultControl
+    class="agari-form-item"
+  >
     <mat-label>Number of rounds</mat-label>
     <input matInput type="number" [formControl]="roundCount" required />
     <mat-error *ngIf="roundCount.errors?.required">
@@ -10,7 +14,11 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field [formControl]="participantCount" ngDefaultControl>
+  <mat-form-field
+    [formControl]="participantCount"
+    ngDefaultControl
+    class="agari-form-item"
+  >
     <mat-label>Number of participants</mat-label>
     <input matInput type="number" [formControl]="participantCount" required />
     <mat-error *ngIf="participantCount.errors?.required">
@@ -31,6 +39,7 @@
     color="accent"
     (click)="onSubmit()"
     [disabled]="formGroup.invalid || (status$ | async) === 'IN_PROGRESS'"
+    class="agari-form-item"
   >
     Generate
   </button>

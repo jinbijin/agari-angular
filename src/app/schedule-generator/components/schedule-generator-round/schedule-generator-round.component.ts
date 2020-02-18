@@ -4,7 +4,7 @@ import {
   Input,
   OnInit
 } from '@angular/core';
-import { ScheduleRound } from 'src/app/graphql/generated/types';
+import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 
 @Component({
   selector: 'agari-schedule-generator-round-card',
@@ -19,7 +19,20 @@ export class ScheduleGeneratorRoundComponent implements OnInit {
   @Input()
   public roundNumber: number;
 
+  public dataSource: [number, ScheduleGame][];
+
+  public displayedColumns: string[] = [
+    'table',
+    'tableNumber',
+    'participant1',
+    'participant2',
+    'participant3',
+    'participant4'
+  ];
+
   constructor() {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.dataSource = [...this.scheduleRound.games.entries()];
+  }
 }
