@@ -13,6 +13,10 @@ $agari-theme: mat-light-theme($agari-primary, $agari-accent, $agari-warn);
 @include mat-core($agari-typography);
 @include angular-material-theme($agari-theme);
 
+$break-xs: 320px;
+$break-sm: 600px;
+$break-md: 880px;
+
 html,
 body {
   height: 100%;

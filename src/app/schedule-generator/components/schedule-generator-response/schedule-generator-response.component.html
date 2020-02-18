@@ -1,1 +1,16 @@
-<p>schedule-generator-response works!</p>
+<div class="agari-grid">
+  <div
+    class="agari-grid-item"
+    *ngFor="
+      let item of (result$ | async)?.data?.generateSchedule?.rounds?.entries()
+    "
+  >
+    <agari-schedule-generator-round-card
+      *ngIf="item[1]"
+      [scheduleRound]="item[1]"
+      [roundNumber]="item[0] + 1"
+    ></agari-schedule-generator-round-card>
+  </div>
+  <div class="agari-horizontal-filler"></div>
+  <div class="agari-horizontal-filler"></div>
+</div>

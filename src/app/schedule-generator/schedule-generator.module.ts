@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ScheduleGeneratorRequestComponent } from './components/schedule-generator-request/schedule-generator-request.component';
 import { ScheduleGeneratorResponseComponent } from './components/schedule-generator-response/schedule-generator-response.component';
+import { ScheduleGeneratorRoundComponent } from './components/schedule-generator-round/schedule-generator-round.component';
 import { ScheduleGeneratorComponent } from './page/schedule-generator.component';
 import { scheduleGeneratorRoutes } from './schedule-generator.routes';
 import { ScheduleGeneratorState } from './store/schedule-generator.state';
@@ -15,7 +16,8 @@ import { ScheduleGeneratorState } from './store/schedule-generator.state';
   declarations: [
     ScheduleGeneratorComponent,
     ScheduleGeneratorRequestComponent,
-    ScheduleGeneratorResponseComponent
+    ScheduleGeneratorResponseComponent,
+    ScheduleGeneratorRoundComponent
   ],
   imports: [
     CommonModule,

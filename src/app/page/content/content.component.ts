@@ -1,9 +1,9 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const largeBreakpoint: string = '(min-width: 1280px)';
+const largeBreakpoint: string = '(min-width: 1200px)';
 
 @Component({
   selector: 'agari-content',
@@ -15,7 +15,7 @@ export class ContentComponent implements OnInit {
   public sidenavOpened: Observable<boolean>;
 
   constructor(private readonly breakpointObserver: BreakpointObserver) {
-    this.sidenavOpened = breakpointObserver
+    this.sidenavOpened = this.breakpointObserver
       .observe(largeBreakpoint)
       .pipe(map(state => state.breakpoints[largeBreakpoint]));
   }

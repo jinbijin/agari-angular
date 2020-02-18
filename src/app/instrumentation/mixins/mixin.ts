@@ -5,7 +5,7 @@ import { Constructor } from './types/constructor';
 
 export class Mixin {
   public static Reactive<T extends Constructor<any>>(Base: T) {
-    return class extends Base implements OnDestroy {
+    return class Reactive extends Base implements OnDestroy {
       protected readonly subscription: Subscription;
 
       public constructor(...args: any[]) {
