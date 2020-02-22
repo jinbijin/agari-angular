@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
 
 const materialModules: Type<any>[] = [
@@ -22,8 +23,13 @@ const materialModules: Type<any>[] = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, RoundParticipantCountInputComponent],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
-  exports: [LayoutComponent, ReactiveFormsModule, ...materialModules]
+  exports: [
+    LayoutComponent,
+    ReactiveFormsModule,
+    ...materialModules,
+    RoundParticipantCountInputComponent
+  ]
 })
 export class SharedModule {}

@@ -1,51 +1,7 @@
 <form class="agari-form" [formGroup]="formGroup">
-  <mat-form-field
-    [formControl]="controls.roundCount"
-    ngDefaultControl
-    class="agari-form-item"
-  >
-    <mat-label>Number of rounds</mat-label>
-    <input
-      matInput
-      type="number"
-      [formControl]="controls.roundCount"
-      required
-    />
-    <mat-error *ngIf="controls.roundCount.errors?.required">
-      This field is required.
-    </mat-error>
-    <mat-error *ngIf="controls.roundCount.errors?.min">
-      Number of rounds must be greater than 0.
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field
-    [formControl]="controls.participantCount"
-    ngDefaultControl
-    class="agari-form-item"
-  >
-    <mat-label>Number of participants</mat-label>
-    <input
-      matInput
-      type="number"
-      [formControl]="controls.participantCount"
-      required
-    />
-    <mat-error *ngIf="controls.participantCount.errors?.required">
-      This field is required.
-    </mat-error>
-    <mat-error *ngIf="controls.participantCount.errors?.min">
-      Number of participants must be greater than 0.
-    </mat-error>
-    <mat-error *ngIf="controls.participantCount.errors?.mod">
-      Number of participants must be divisible by 4.
-    </mat-error>
-    <mat-error
-      *ngIf="controls.participantCount.errors?.minParticipant as minParticipant"
-    >
-      Number of participants must be at least {{ minParticipant.min }}.
-    </mat-error>
-  </mat-form-field>
+  <agari-round-participant-count-input
+    [formControl]="controls.roundParticipantCount"
+  ></agari-round-participant-count-input>
 
   <div class="agari-spacer"></div>
 
