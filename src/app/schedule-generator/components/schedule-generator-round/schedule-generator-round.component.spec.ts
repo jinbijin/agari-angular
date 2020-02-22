@@ -25,13 +25,13 @@ describe('ScheduleGeneratorRoundCardComponent', () => {
 
 class Page extends PageBase<TestHostComponent> {
   get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-schedule-generator-round-card');
+    return this.query<HTMLElement>('agari-schedule-generator-round');
   }
 }
 
 @Component({
   template: `
-    <agari-schedule-generator-round-card></agari-schedule-generator-round-card>
+    <agari-schedule-generator-round></agari-schedule-generator-round>
   `
 })
 class TestHostComponent {}
