@@ -43,8 +43,8 @@ export function RoundParticipantValueAccessor<T extends Constructor<any>>(
     public onTouched: () => void = () => {};
 
     public writeValue(obj: any): void {
-      this.controls.roundCount.setValue(obj.roundCount);
-      this.controls.participantCount.setValue(obj.participantCount);
+      this.controls.roundCount.setValue(obj?.roundCount);
+      this.controls.participantCount.setValue(obj?.participantCount);
     }
 
     public registerOnChange(fn: any): void {

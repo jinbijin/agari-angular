@@ -112,10 +112,6 @@ class Page extends PageBase<TestHostComponent> {
     return this.query<HTMLElement>('router-outlet');
   }
 
-  get breakpointObserver(): Partial<BreakpointObserver> {
-    return this.injector.get(BreakpointObserver);
-  }
-
   get sidenavComponent(): MatSidenavStubComponent {
     return this.fixture.debugElement.query(
       By.directive(MatSidenavStubComponent)

@@ -3,9 +3,9 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 export class AgariValidators {
   public static mod(modulus: number, remainder: number): ValidatorFn {
     return (control: AbstractControl) => {
-      return control.value % modulus === remainder
+      return !control.value || control.value % modulus === remainder
         ? null
-        : { mod: { modulus, remainder } };
+        : { mod: { modulus, remainder, actual: control.value % modulus } };
     };
   }
 
@@ -13,7 +13,7 @@ export class AgariValidators {
     roundCountControl: AbstractControl
   ): ValidatorFn {
     return (control: AbstractControl) => {
-      if (!roundCountControl || !control) {
+      if (!roundCountControl.value || !control.value) {
         return null; // Some other validation should fail.
       }
       const roundCount = +roundCountControl.value;
@@ -21,7 +21,12 @@ export class AgariValidators {
       const roundCountOddCeiling = roundCount + ((roundCount + 1) % 2);
       return participantCount >= 4 * roundCountOddCeiling
         ? null
-        : { minParticipant: { min: 4 * roundCountOddCeiling } };
+        : {
+            minParticipant: {
+              min: 4 * roundCountOddCeiling,
+              actual: participantCount
+            }
+          };
     };
   }
 }

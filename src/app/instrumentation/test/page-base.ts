@@ -1,15 +1,22 @@
-import { Injector } from '@angular/core';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { Injector, Type } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 export abstract class PageBase<TComponent> {
   constructor(public fixture: ComponentFixture<TComponent>) {}
 
-  public get component(): TComponent {
-    return this.fixture.debugElement.componentInstance;
+  public get loader(): HarnessLoader {
+    return TestbedHarnessEnvironment.loader(this.fixture);
   }
 
-  public get injector(): Injector {
-    return this.fixture.debugElement.injector;
+  public component(type?: Type<any>): any {
+    let debugElement = this.fixture.debugElement;
+    if (type) {
+      debugElement = debugElement.query(By.directive(type));
+    }
+    return debugElement.componentInstance;
   }
 
   public detectChanges(): void {

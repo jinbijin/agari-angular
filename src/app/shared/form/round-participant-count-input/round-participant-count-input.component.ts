@@ -67,27 +67,23 @@ export class RoundParticipantCountInputComponent
 
   public ngOnInit(): void {}
 
-  public roundCountErrorMessage(errors: any): string | null {
-    if (errors?.required) {
+  public roundCountErrorMessage(errors: any): string | undefined {
+    if (errors.required) {
       return 'This field is required.';
-    } else if (errors?.min) {
+    } else if (errors.min) {
       return 'Number of rounds must be greater than 0.';
-    } else {
-      return null;
     }
   }
 
-  public participantCountErrorMessage(errors: any): string | null {
-    if (errors?.required) {
+  public participantCountErrorMessage(errors: any): string | undefined {
+    if (errors.required) {
       return 'This field is required.';
-    } else if (errors?.min) {
+    } else if (errors.min) {
       return 'Number of participants must be greater than 0.';
-    } else if (errors?.mod) {
+    } else if (errors.mod) {
       return 'Number of participants must be divisible by 4.';
-    } else if (errors?.minParticipant) {
-      return `Number of participants must be at least ${errors?.minParticipant.min}`;
-    } else {
-      return null;
+    } else if (errors.minParticipant) {
+      return `Number of participants must be at least ${errors.minParticipant.min}`;
     }
   }
 

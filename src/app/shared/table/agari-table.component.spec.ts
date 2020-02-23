@@ -29,7 +29,7 @@ describe('AgariTableComponent', () => {
   });
 
   it('should create', () => {
-    page.component.tableConfiguration = {
+    page.component().tableConfiguration = {
       dataSource: new MatTableDataSource<any>(),
       columns: []
     };
@@ -39,7 +39,7 @@ describe('AgariTableComponent', () => {
   });
 
   it('should have default settings', async () => {
-    page.component.tableConfiguration = {
+    page.component().tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       columns: [{ id: 'test', header: 'Test', cell: element => element.name }]
     };
@@ -54,7 +54,7 @@ describe('AgariTableComponent', () => {
   });
 
   it('should have optional headers', async () => {
-    page.component.tableConfiguration = {
+    page.component().tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       headers: false,
       columns: [{ id: 'test', cell: element => element.name }]
@@ -70,7 +70,7 @@ describe('AgariTableComponent', () => {
   });
 
   it('should have optional columns', async () => {
-    page.component.tableConfiguration = {
+    page.component().tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       columns: [
         {
@@ -93,14 +93,6 @@ describe('AgariTableComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  constructor(fixture: ComponentFixture<TestHostComponent>) {
-    super(fixture);
-
-    this.loader = TestbedHarnessEnvironment.loader(fixture);
-  }
-
-  public loader: HarnessLoader;
-
   get root(): HTMLElement {
     return this.query<HTMLElement>('agari-table');
   }
