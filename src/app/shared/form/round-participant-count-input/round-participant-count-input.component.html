@@ -11,11 +11,8 @@
     required
     (blur)="onTouched()"
   />
-  <mat-error *ngIf="controls.roundCount.errors?.required">
-    This field is required.
-  </mat-error>
-  <mat-error *ngIf="controls.roundCount.errors?.min">
-    Number of rounds must be greater than 0.
+  <mat-error *ngIf="controls.roundCount.errors as errors">
+    {{ roundCountErrorMessage(errors) }}
   </mat-error>
 </mat-form-field>
 
@@ -32,18 +29,7 @@
     required
     (blur)="onTouched()"
   />
-  <mat-error *ngIf="controls.participantCount.errors?.required">
-    This field is required.
-  </mat-error>
-  <mat-error *ngIf="controls.participantCount.errors?.min">
-    Number of participants must be greater than 0.
-  </mat-error>
-  <mat-error *ngIf="controls.participantCount.errors?.mod">
-    Number of participants must be divisible by 4.
-  </mat-error>
-  <mat-error
-    *ngIf="controls.participantCount.errors?.minParticipant as minParticipant"
-  >
-    Number of participants must be at least {{ minParticipant.min }}.
+  <mat-error *ngIf="controls.participantCount.errors as errors">
+    {{ participantCountErrorMessage(errors) }}
   </mat-error>
 </mat-form-field>
