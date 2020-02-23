@@ -1,0 +1,26 @@
+<table
+  mat-table
+  [dataSource]="tableConfiguration.dataSource"
+  class="agari-table"
+>
+  <ng-container
+    *ngFor="let column of tableConfiguration.columns"
+    [matColumnDef]="column.id"
+  >
+    <ng-container *ngIf="tableConfiguration.headers !== false">
+      <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+    </ng-container>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [class]="column.classes ? column.classes.join(' ') : ''"
+    >
+      {{ column.cell(element) }}
+    </td>
+  </ng-container>
+
+  <ng-container *ngIf="tableConfiguration.headers !== false">
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  </ng-container>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

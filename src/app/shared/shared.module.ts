@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AgariTableComponent } from './table/agari-table.component';
 
 const materialModules: Type<any>[] = [
   MatButtonModule,
@@ -23,13 +24,18 @@ const materialModules: Type<any>[] = [
 ];
 
 @NgModule({
-  declarations: [LayoutComponent, RoundParticipantCountInputComponent],
+  declarations: [
+    LayoutComponent,
+    RoundParticipantCountInputComponent,
+    AgariTableComponent
+  ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
     LayoutComponent,
     ReactiveFormsModule,
     ...materialModules,
-    RoundParticipantCountInputComponent
+    RoundParticipantCountInputComponent,
+    AgariTableComponent
   ]
 })
 export class SharedModule {}
