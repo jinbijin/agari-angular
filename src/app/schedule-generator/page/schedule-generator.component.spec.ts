@@ -16,6 +16,7 @@ describe('ScheduleGeneratorComponent', () => {
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(ScheduleGeneratorComponent));
+    page.detectChanges();
   });
 
   it('should create', () => {

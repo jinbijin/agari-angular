@@ -18,6 +18,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
   });
 
   it('should create', () => {

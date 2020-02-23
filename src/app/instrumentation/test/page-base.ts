@@ -1,11 +1,8 @@
-import { Injector, Type } from '@angular/core';
+import { Injector } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 export abstract class PageBase<TComponent> {
-  constructor(public fixture: ComponentFixture<TComponent>) {
-    fixture.detectChanges();
-  }
+  constructor(public fixture: ComponentFixture<TComponent>) {}
 
   public get component(): TComponent {
     return this.fixture.debugElement.componentInstance;
@@ -13,6 +10,10 @@ export abstract class PageBase<TComponent> {
 
   public get injector(): Injector {
     return this.fixture.debugElement.injector;
+  }
+
+  public detectChanges(): void {
+    this.fixture.detectChanges();
   }
 
   protected query<T>(selector: string): T {

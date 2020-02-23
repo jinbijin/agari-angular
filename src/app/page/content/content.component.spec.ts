@@ -37,6 +37,8 @@ describe('ContentComponent', () => {
       observe: query => EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
+
     expect(page.root).toBeTruthy();
   });
 
@@ -45,6 +47,8 @@ describe('ContentComponent', () => {
       observe: query => EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
+
     expect(page.sidenavContainer).toBeTruthy();
     expect(page.sidenav).toBeTruthy();
     expect(page.sidenavContent).toBeTruthy();
@@ -55,6 +59,8 @@ describe('ContentComponent', () => {
       observe: query => EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
+
     expect(page.routerOutlet).toBeTruthy();
   });
 
@@ -66,6 +72,8 @@ describe('ContentComponent', () => {
           : EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
+
     expect(page.sidenavComponent.opened).toBeTruthy();
   });
 
@@ -77,6 +85,8 @@ describe('ContentComponent', () => {
           : EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
+
     expect(page.sidenavComponent.opened).toBeFalsy();
   });
 });

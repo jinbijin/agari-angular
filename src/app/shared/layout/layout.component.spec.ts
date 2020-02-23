@@ -15,6 +15,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
   });
 
   it('should create', () => {

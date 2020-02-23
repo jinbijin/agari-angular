@@ -5,7 +5,6 @@ import { AgariComponent } from './agari.component';
 import { PageBase } from './instrumentation/test/page-base';
 
 describe('AgariComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
   let page: Page;
 
   beforeEach(async () => {
@@ -16,9 +15,8 @@ describe('AgariComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
-    page = new Page(fixture);
-    fixture.detectChanges();
+    page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
   });
 
   it('should create the app', () => {

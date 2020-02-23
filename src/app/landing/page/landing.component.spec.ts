@@ -16,6 +16,7 @@ describe('LandingComponent', () => {
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(LandingComponent));
+    page.detectChanges();
   });
 
   it('should create', () => {

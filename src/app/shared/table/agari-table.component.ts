@@ -13,8 +13,6 @@ import { TableConfiguration } from 'src/app/instrumentation/data/table-configura
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgariTableComponent implements OnInit {
-  @Input() public headers: boolean = true;
-
   @Input() public tableConfiguration: TableConfiguration<any>;
 
   public displayedColumns: string[];
