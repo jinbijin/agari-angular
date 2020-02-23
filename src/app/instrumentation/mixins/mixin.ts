@@ -1,13 +1,11 @@
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { EmptyBase } from './base-class/empty-base';
 import { Constructor } from './types/constructor';
 
 export class Mixin {
-  public static Reactive<T extends Constructor<any>>(Base?: T) {
-    const BaseClass = Base || EmptyBase;
-    return class Reactive extends BaseClass implements OnDestroy {
+  public static Reactive<T extends Constructor<any>>(Base: T) {
+    return class Reactive extends Base implements OnDestroy {
       protected readonly subscription: Subscription;
 
       public constructor(...args: any[]) {

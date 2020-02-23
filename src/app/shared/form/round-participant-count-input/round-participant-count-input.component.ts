@@ -7,18 +7,17 @@ import {
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormControl,
-  FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator,
-  Validators
+  Validator
 } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
-import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
+
+import { RoundParticipantValueAccessor } from './mixins/round-participant-value-accessor.mixin';
 
 @Component({
   selector: 'agari-round-participant-count-input',
@@ -38,26 +37,13 @@ import { AgariValidators } from 'src/app/instrumentation/validators/agari-valida
     }
   ]
 })
-export class RoundParticipantCountInputComponent extends Mixin.Reactive()
+export class RoundParticipantCountInputComponent
+  extends RoundParticipantValueAccessor(Mixin.Reactive(EmptyBase))
   implements OnInit, ControlValueAccessor, Validator {
   constructor() {
     super();
-    const roundCount: FormControl = new FormControl(undefined, [
-      Validators.required,
-      Validators.min(1)
-    ]);
-    this.controls = {
-      roundCount,
-      participantCount: new FormControl(undefined, [
-        Validators.required,
-        Validators.min(1),
-        AgariValidators.mod(4, 0),
-        AgariValidators.minParticipant(roundCount)
-      ])
-    };
-    this.formGroup = new FormGroup(this.controls);
     this.subscription.add(
-      roundCount.valueChanges
+      this.controls.roundCount.valueChanges
         .pipe(
           tap(value => this.controls.participantCount.updateValueAndValidity())
         )
@@ -78,13 +64,6 @@ export class RoundParticipantCountInputComponent extends Mixin.Reactive()
         .subscribe()
     );
   }
-
-  public formGroup: FormGroup;
-
-  public controls: {
-    roundCount: FormControl;
-    participantCount: FormControl;
-  };
 
   public ngOnInit(): void {}
 
@@ -109,33 +88,6 @@ export class RoundParticipantCountInputComponent extends Mixin.Reactive()
       return `Number of participants must be at least ${errors?.minParticipant.min}`;
     } else {
       return null;
-    }
-  }
-
-  public onChange: (event: any) => void = event => {};
-
-  public onTouched: () => void = () => {};
-
-  public writeValue(obj: any): void {
-    this.controls.roundCount.setValue(obj.roundCount);
-    this.controls.participantCount.setValue(obj.participantCount);
-  }
-
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.controls.roundCount.disable();
-      this.controls.participantCount.disable();
-    } else {
-      this.controls.roundCount.enable();
-      this.controls.participantCount.enable();
     }
   }
 
