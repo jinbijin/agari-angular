@@ -23,13 +23,19 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-schedule-generator-round-table');
+  public get rootComponent(): ScheduleGeneratorRoundTableComponent {
+    return this.component(
+      ScheduleGeneratorRoundTableComponent
+    ) as ScheduleGeneratorRoundTableComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 }
 

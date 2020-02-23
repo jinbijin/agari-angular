@@ -1,7 +1,5 @@
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   MatHeaderCellHarness,
@@ -29,32 +27,32 @@ describe('AgariTableComponent', () => {
   });
 
   it('should create', () => {
-    page.component().tableConfiguration = {
+    page.hostComponent.tableConfiguration = {
       dataSource: new MatTableDataSource<any>(),
       columns: []
     };
     page.detectChanges();
 
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should have default settings', async () => {
-    page.component().tableConfiguration = {
+    page.hostComponent.tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       columns: [{ id: 'test', header: 'Test', cell: element => element.name }]
     };
     page.detectChanges();
 
     const headerRows = await page.loader.getAllHarnesses(MatHeaderRowHarness);
-    expect(headerRows.length).toBe(1);
+    expect(headerRows.length).toEqual(1);
     const headerCells = await page.loader.getAllHarnesses(MatHeaderCellHarness);
-    expect(headerCells.length).toBe(1);
+    expect(headerCells.length).toEqual(1);
     const rows = await page.loader.getAllHarnesses(MatRowHarness);
-    expect(rows.length).toBe(1);
+    expect(rows.length).toEqual(1);
   });
 
   it('should have optional headers', async () => {
-    page.component().tableConfiguration = {
+    page.hostComponent.tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       headers: false,
       columns: [{ id: 'test', cell: element => element.name }]
@@ -62,15 +60,15 @@ describe('AgariTableComponent', () => {
     page.detectChanges();
 
     const headerRows = await page.loader.getAllHarnesses(MatHeaderRowHarness);
-    expect(headerRows.length).toBe(0);
+    expect(headerRows.length).toEqual(0);
     const headerCells = await page.loader.getAllHarnesses(MatHeaderCellHarness);
-    expect(headerCells.length).toBe(0);
+    expect(headerCells.length).toEqual(0);
     const rows = await page.loader.getAllHarnesses(MatRowHarness);
-    expect(rows.length).toBe(1);
+    expect(rows.length).toEqual(1);
   });
 
   it('should have optional columns', async () => {
-    page.component().tableConfiguration = {
+    page.hostComponent.tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
       columns: [
         {
@@ -84,17 +82,21 @@ describe('AgariTableComponent', () => {
     page.detectChanges();
 
     const headerRows = await page.loader.getAllHarnesses(MatHeaderRowHarness);
-    expect(headerRows.length).toBe(1);
+    expect(headerRows.length).toEqual(1);
     const headerCells = await page.loader.getAllHarnesses(MatHeaderCellHarness);
-    expect(headerCells.length).toBe(0);
+    expect(headerCells.length).toEqual(0);
     const rows = await page.loader.getAllHarnesses(MatRowHarness);
-    expect(rows.length).toBe(1);
+    expect(rows.length).toEqual(1);
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-table');
+  public get rootComponent(): AgariTableComponent {
+    return this.component(AgariTableComponent) as AgariTableComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 }
 

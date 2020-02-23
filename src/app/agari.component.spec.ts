@@ -1,5 +1,5 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { AgariComponent } from './agari.component';
 import { PageBase } from './instrumentation/test/page-base';
@@ -20,7 +20,7 @@ describe('AgariComponent', () => {
   });
 
   it('should create the app', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should have a header', () => {
@@ -37,8 +37,12 @@ describe('AgariComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root() {
-    return this.query<HTMLElement>('agari-root');
+  public get rootComponent(): AgariComponent {
+    return this.component(AgariComponent) as AgariComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 
   get header() {
@@ -51,10 +55,6 @@ class Page extends PageBase<TestHostComponent> {
 
   get footer() {
     return this.query<HTMLElement>('agari-footer');
-  }
-
-  constructor(fixture: ComponentFixture<TestHostComponent>) {
-    super(fixture);
   }
 }
 

@@ -39,7 +39,7 @@ describe('ContentComponent', () => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
 
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should have a sidenav', () => {
@@ -92,8 +92,12 @@ describe('ContentComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-content');
+  public get rootComponent(): ContentComponent {
+    return this.component(ContentComponent) as ContentComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 
   get sidenavContainer(): HTMLElement {

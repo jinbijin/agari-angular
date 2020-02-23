@@ -20,7 +20,7 @@ describe('ScheduleGeneratorComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.component).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should use the standard page layout', () => {
@@ -30,14 +30,26 @@ describe('ScheduleGeneratorComponent', () => {
   it('should contain the request form', () => {
     expect(page.agariScheduleGeneratorRequest).toBeTruthy();
   });
+
+  it('should contain the response page', () => {
+    expect(page.agariScheduleGeneratorResponse).toBeTruthy();
+  });
 });
 
 class Page extends PageBase<ScheduleGeneratorComponent> {
+  public get rootComponent(): ScheduleGeneratorComponent {
+    return this.component() as ScheduleGeneratorComponent;
+  }
+
   get agariLayout(): HTMLElement {
     return this.query<HTMLElement>('agari-layout');
   }
 
   get agariScheduleGeneratorRequest(): HTMLElement {
     return this.query<HTMLElement>('agari-schedule-generator-request');
+  }
+
+  get agariScheduleGeneratorResponse(): HTMLElement {
+    return this.query<HTMLElement>('agari-schedule-generator-response');
   }
 }

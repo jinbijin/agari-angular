@@ -19,7 +19,7 @@ describe('LayoutComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should take parameter as title', () => {
@@ -28,8 +28,12 @@ describe('LayoutComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-layout');
+  public get rootComponent(): LayoutComponent {
+    return this.component(LayoutComponent) as LayoutComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 
   get title(): HTMLElement {

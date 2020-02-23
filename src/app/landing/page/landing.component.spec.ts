@@ -20,7 +20,7 @@ describe('LandingComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.component).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it('should use the standard layout', () => {
@@ -29,6 +29,10 @@ describe('LandingComponent', () => {
 });
 
 class Page extends PageBase<LandingComponent> {
+  public get rootComponent(): LandingComponent {
+    return this.component() as LandingComponent;
+  }
+
   get agariLayout(): HTMLElement {
     return this.query('agari-layout');
   }

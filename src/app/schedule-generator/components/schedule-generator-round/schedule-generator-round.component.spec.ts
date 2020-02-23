@@ -20,13 +20,19 @@ describe('ScheduleGeneratorRoundCardComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-schedule-generator-round');
+  public get rootComponent(): ScheduleGeneratorRoundComponent {
+    return this.component(
+      ScheduleGeneratorRoundComponent
+    ) as ScheduleGeneratorRoundComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 }
 

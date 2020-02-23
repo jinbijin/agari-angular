@@ -22,7 +22,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 
   it(`should have brand 'アガリ'`, () => {
@@ -36,8 +36,12 @@ describe('HeaderComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-header');
+  public get rootComponent(): HeaderComponent {
+    return this.component(HeaderComponent) as HeaderComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 
   get brand(): HTMLElement {

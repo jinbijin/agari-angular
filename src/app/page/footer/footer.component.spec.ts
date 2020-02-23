@@ -20,13 +20,17 @@ describe('FooterComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-footer');
+  public get rootComponent(): FooterComponent {
+    return this.component(FooterComponent) as FooterComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 }
 

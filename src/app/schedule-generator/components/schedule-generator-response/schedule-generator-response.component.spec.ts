@@ -24,13 +24,19 @@ describe('ScheduleGeneratorResponseComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.root).toBeTruthy();
+    expect(page.rootComponent).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-schedule-generator-response');
+  public get rootComponent(): ScheduleGeneratorResponseComponent {
+    return this.component(
+      ScheduleGeneratorResponseComponent
+    ) as ScheduleGeneratorResponseComponent;
+  }
+
+  public get hostComponent(): TestHostComponent {
+    return this.component() as TestHostComponent;
   }
 }
 
