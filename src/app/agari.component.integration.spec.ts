@@ -1,10 +1,11 @@
 import { Component, Directive, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AgariComponent } from 'src/app/agari.component';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
-import { ContentComponent } from 'src/app/page/content/content.component';
-import { FooterComponent } from 'src/app/page/footer/footer.component';
-import { HeaderComponent } from 'src/app/page/header/header.component';
+
+import { AgariComponent } from './agari.component';
+import { ContentComponent } from './page/content/content.component';
+import { FooterComponent } from './page/footer/footer.component';
+import { HeaderComponent } from './page/header/header.component';
 
 describe('AgariComponent integration', () => {
   let page: Page;

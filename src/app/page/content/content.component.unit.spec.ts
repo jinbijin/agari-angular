@@ -1,7 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { EMPTY, of } from 'rxjs';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
@@ -12,7 +11,7 @@ describe('ContentComponent', () => {
   let breakpointObserverStub: Partial<BreakpointObserver>;
 
   beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [
         TestHostComponent,
         MatSidenavStubComponent,
@@ -39,29 +38,7 @@ describe('ContentComponent', () => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
 
-    expect(page.rootComponent).toBeTruthy();
-  });
-
-  it('should have a sidenav', () => {
-    breakpointObserverStub = {
-      observe: query => EMPTY
-    };
-    page = new Page(TestBed.createComponent(TestHostComponent));
-    page.detectChanges();
-
-    expect(page.sidenavContainer).toBeTruthy();
-    expect(page.sidenav).toBeTruthy();
-    expect(page.sidenavContent).toBeTruthy();
-  });
-
-  it('should contain the router outlet', () => {
-    breakpointObserverStub = {
-      observe: query => EMPTY
-    };
-    page = new Page(TestBed.createComponent(TestHostComponent));
-    page.detectChanges();
-
-    expect(page.routerOutlet).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 
   it('should open sidenav for larger screens', () => {
@@ -74,7 +51,7 @@ describe('ContentComponent', () => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
 
-    expect(page.sidenavComponent.opened).toBeTruthy();
+    expect(page.sidenav.opened).toBeTruthy();
   });
 
   it('should close sidenav for smaller screens', () => {
@@ -87,39 +64,21 @@ describe('ContentComponent', () => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
 
-    expect(page.sidenavComponent.opened).toBeFalsy();
+    expect(page.sidenav.opened).toBeFalsy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get rootComponent(): ContentComponent {
+  public get root(): ContentComponent {
     return this.component(ContentComponent) as ContentComponent;
   }
 
-  public get hostComponent(): TestHostComponent {
+  public get host(): TestHostComponent {
     return this.component() as TestHostComponent;
   }
 
-  get sidenavContainer(): HTMLElement {
-    return this.query<HTMLElement>('mat-sidenav-container');
-  }
-
-  get sidenavContent(): HTMLElement {
-    return this.query<HTMLElement>('mat-sidenav-content');
-  }
-
-  get sidenav(): HTMLElement {
-    return this.query<HTMLElement>('mat-sidenav');
-  }
-
-  get routerOutlet(): HTMLElement {
-    return this.query<HTMLElement>('router-outlet');
-  }
-
-  get sidenavComponent(): MatSidenavStubComponent {
-    return this.fixture.debugElement.query(
-      By.directive(MatSidenavStubComponent)
-    ).componentInstance;
+  get sidenav(): MatSidenavStubComponent {
+    return this.component(MatSidenavStubComponent);
   }
 }
 

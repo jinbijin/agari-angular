@@ -1,7 +1,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
-import { LandingComponent } from 'src/app/landing/page/landing.component';
+
+import { LandingComponent } from './landing.component';
 
 describe('LandingComponent', () => {
   let page: Page;

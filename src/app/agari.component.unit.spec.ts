@@ -1,7 +1,8 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AgariComponent } from 'src/app/agari.component';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+
+import { AgariComponent } from './agari.component';
 
 describe('AgariComponent', () => {
   let page: Page;
