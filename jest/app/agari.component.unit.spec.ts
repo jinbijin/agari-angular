@@ -7,13 +7,11 @@ describe('AgariComponent', () => {
   let page: Page;
 
   beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [TestHostComponent, AgariComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
   });

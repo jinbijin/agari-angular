@@ -6,10 +6,10 @@ import { ContentComponent } from 'src/app/page/content/content.component';
 import { FooterComponent } from 'src/app/page/footer/footer.component';
 import { HeaderComponent } from 'src/app/page/header/header.component';
 
-describe('AgariComponent', () => {
+describe('AgariComponent integration', () => {
   let page: Page;
 
-  describe('-> HeaderComponent', () => {
+  describe('with HeaderComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [
@@ -30,7 +30,7 @@ describe('AgariComponent', () => {
     });
   });
 
-  describe('-> ContentComponent', () => {
+  describe('with ContentComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [TestHostComponent, AgariComponent, ContentComponent],
@@ -46,7 +46,7 @@ describe('AgariComponent', () => {
     });
   });
 
-  describe('-> FooterComponent', () => {
+  describe('with FooterComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [TestHostComponent, AgariComponent, FooterComponent],
