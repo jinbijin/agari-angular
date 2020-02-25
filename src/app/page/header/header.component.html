@@ -13,7 +13,10 @@
 </header>
 
 <mat-menu #rootMenu="matMenu">
-  <a *ngFor="let route of routes" mat-menu-item [routerLink]="route.path!">{{
-    route.label
-  }}</a>
+  <a
+    *ngFor="let route of displayedRoutes"
+    mat-menu-item
+    [routerLink]="route.path!"
+    >{{ route.label }}</a
+  >
 </mat-menu>

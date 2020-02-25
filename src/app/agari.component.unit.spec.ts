@@ -20,6 +20,10 @@ describe('AgariComponent', () => {
   it('should create the app', () => {
     expect(page.root).toBeTruthy();
   });
+
+  it('should include the header with default routes', () => {
+    expect(page.header.attributes['ng-reflect-routes']).toBeUndefined();
+  });
 });
 
 class Page extends PageBase<TestHostComponent> {
@@ -29,6 +33,10 @@ class Page extends PageBase<TestHostComponent> {
 
   public get host(): TestHostComponent {
     return this.component();
+  }
+
+  public get header(): HTMLElement {
+    return this.query<HTMLElement>('agari-header');
   }
 }
 
