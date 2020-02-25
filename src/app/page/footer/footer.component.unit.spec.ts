@@ -8,28 +8,26 @@ describe('FooterComponent', () => {
   let page: Page;
 
   beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [TestHostComponent, FooterComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
   });
 
   it('should create', () => {
-    expect(page.rootComponent).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get rootComponent(): FooterComponent {
+  public get root(): FooterComponent {
     return this.component(FooterComponent) as FooterComponent;
   }
 
-  public get hostComponent(): TestHostComponent {
+  public get host(): TestHostComponent {
     return this.component() as TestHostComponent;
   }
 }
