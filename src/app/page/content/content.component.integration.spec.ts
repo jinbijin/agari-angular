@@ -32,7 +32,7 @@ describe('ContentComponent integration', () => {
       breakpointObserverStub = {};
     });
 
-    it('should create', async () => {
+    it('should open sidenav for larger screens', async () => {
       breakpointObserverStub = {
         observe: query =>
           typeof query === 'string'
@@ -46,6 +46,24 @@ describe('ContentComponent integration', () => {
       expect(sidenav).toBeTruthy();
       expect(await sidenav.getMode()).toEqual('side');
       expect(await sidenav.isOpen()).toEqual(true);
+      expect(await sidenav.getPosition()).toEqual('start');
+      expect(await sidenav.isFixedInViewport()).toEqual(false);
+    });
+
+    it('should close sidenav for smaller screens', async () => {
+      breakpointObserverStub = {
+        observe: query =>
+          typeof query === 'string'
+            ? of({ breakpoints: { [query]: false }, matches: false })
+            : EMPTY
+      };
+      page = new Page(TestBed.createComponent(TestHostComponent));
+      page.detectChanges();
+
+      const sidenav = await page.loader.getHarness(MatSidenavHarness);
+      expect(sidenav).toBeTruthy();
+      expect(await sidenav.getMode()).toEqual('side');
+      expect(await sidenav.isOpen()).toEqual(false);
       expect(await sidenav.getPosition()).toEqual('start');
       expect(await sidenav.isFixedInViewport()).toEqual(false);
     });

@@ -6,7 +6,10 @@ Object.defineProperty(window, 'getComputedStyle', {
   value: () => {
     return {
       display: 'none',
-      appearance: ['-webkit-appearance']
+      appearance: ['-webkit-appearance'],
+      getPropertyValue: prop => {
+        return '';
+      }
     };
   }
 });
