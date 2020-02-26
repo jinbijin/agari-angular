@@ -26,4 +26,8 @@ export abstract class PageBase<TComponent> {
   protected query<T>(selector: string): T {
     return this.fixture.nativeElement.querySelector(selector);
   }
+
+  protected queryAll<T>(selector: string): T[] {
+    return this.fixture.nativeElement.querySelectorAll(selector);
+  }
 }

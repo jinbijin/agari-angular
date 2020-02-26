@@ -9,7 +9,6 @@ import { TableConfiguration } from 'src/app/instrumentation/data/table-configura
 @Component({
   selector: 'agari-table',
   templateUrl: './agari-table.component.html',
-  styleUrls: ['./agari-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgariTableComponent implements OnInit {

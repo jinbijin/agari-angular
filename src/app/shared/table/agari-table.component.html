@@ -8,7 +8,9 @@
     [matColumnDef]="column.id"
   >
     <ng-container *ngIf="tableConfiguration.headers !== false">
-      <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+      <th mat-header-cell *matHeaderCellDef>
+        {{ column.header }}
+      </th>
     </ng-container>
     <td
       mat-cell
