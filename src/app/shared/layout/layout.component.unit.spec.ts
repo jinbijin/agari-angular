@@ -19,31 +19,39 @@ describe('LayoutComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.rootComponent).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 
   it('should take parameter as title', () => {
     expect(page.title.textContent).toEqual('Title');
   });
+
+  it('should take inner content', () => {
+    expect(page.innerContent.textContent).toEqual('Inner content');
+  });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get rootComponent(): LayoutComponent {
+  public get root(): LayoutComponent {
     return this.component(LayoutComponent) as LayoutComponent;
   }
 
-  public get hostComponent(): TestHostComponent {
+  public get host(): TestHostComponent {
     return this.component() as TestHostComponent;
   }
 
   get title(): HTMLElement {
     return this.query<HTMLElement>('h2');
   }
+
+  get innerContent(): HTMLElement {
+    return this.query<HTMLElement>('p');
+  }
 }
 
 @Component({
   template: `
-    <agari-layout title="Title"></agari-layout>
+    <agari-layout title="Title"><p>Inner content</p></agari-layout>
   `
 })
 class TestHostComponent {}
