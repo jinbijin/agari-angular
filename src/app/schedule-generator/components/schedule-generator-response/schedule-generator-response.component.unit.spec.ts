@@ -4,6 +4,8 @@ import { NgxsModule } from '@ngxs/store';
 import { GenerateScheduleGQL } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
+import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
+
 import { ScheduleGeneratorResponseComponent } from './schedule-generator-response.component';
 
 describe('ScheduleGeneratorResponseComponent', () => {
@@ -12,13 +14,11 @@ describe('ScheduleGeneratorResponseComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ScheduleGeneratorResponseComponent],
-      imports: [NgxsModule.forRoot([])],
+      imports: [NgxsModule.forRoot([ScheduleGeneratorState])],
       providers: [{ provide: GenerateScheduleGQL, useFactory: () => {} }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
   });

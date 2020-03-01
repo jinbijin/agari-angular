@@ -48,7 +48,9 @@ export class ScheduleGeneratorState {
     { patchState }: StateContext<ScheduleGeneratorStateModel>,
     { payload }: GenerateSchedule
   ): Observable<ApolloQueryResult<GenerateScheduleQuery>> {
-    const observable = this.generateScheduleGql.fetch(payload);
+    const observable = this.generateScheduleGql.fetch(payload, {
+      fetchPolicy: 'network-only'
+    });
     return ObservableHelper.setStatus(observable, value =>
       patchState({ status: value })
     ).pipe(finalize(() => patchState({ payload })));

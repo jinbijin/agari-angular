@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Store } from '@ngxs/store';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
-import { ObservableHelper } from 'src/app/instrumentation/observable/observable.helper';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
+import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
 
 @Component({
   selector: 'agari-schedule-generator-request',
@@ -14,7 +14,18 @@ import { GenerateSchedule } from '../../store/schedule-generator.action';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleGeneratorRequestComponent implements OnInit {
-  constructor(private readonly store: Store) {
+  @Select(ScheduleGeneratorState.status)
+  public status$: Observable<Status>;
+
+  public formGroup: FormGroup;
+
+  public controls: {
+    roundParticipantCount: FormControl;
+  };
+
+  constructor(private readonly store: Store) {}
+
+  public ngOnInit(): void {
     this.controls = {
       roundParticipantCount: new FormControl({
         roundCount: undefined,
@@ -24,24 +35,9 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
     this.formGroup = new FormGroup(this.controls);
   }
 
-  public formGroup: FormGroup;
-
-  public controls: {
-    roundParticipantCount: FormControl;
-  };
-
-  private statusSubject: Subject<Status> = new BehaviorSubject(Status.Idle);
-
-  public status$: Observable<Status> = this.statusSubject.asObservable();
-
-  public ngOnInit(): void {}
-
   public onSubmit(): void {
-    ObservableHelper.setStatus(
-      this.store.dispatch(
-        new GenerateSchedule(this.controls.roundParticipantCount.value)
-      ),
-      value => this.statusSubject.next(value)
-    ).subscribe();
+    this.store.dispatch(
+      new GenerateSchedule(this.controls.roundParticipantCount.value)
+    );
   }
 }
