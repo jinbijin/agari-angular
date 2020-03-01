@@ -5,8 +5,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   constructor() {}
-
-  public ngOnInit(): void {}
 }

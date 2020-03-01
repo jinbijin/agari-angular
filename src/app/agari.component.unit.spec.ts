@@ -22,7 +22,7 @@ describe('AgariComponent', () => {
   });
 
   it('should include the header with default routes', () => {
-    expect(page.header.attributes['ng-reflect-routes']).toBeUndefined();
+    expect((page.header.attributes as any).routes).toBeUndefined();
   });
 });
 

@@ -23,16 +23,6 @@ describe('AgariTableComponent integration', () => {
       page = new Page(TestBed.createComponent(TestHostComponent));
     });
 
-    it('should create', () => {
-      page.host.tableConfiguration = {
-        dataSource: new MatTableDataSource<any>(),
-        columns: []
-      };
-      page.detectChanges();
-
-      expect(page.root).toBeTruthy();
-    });
-
     it('should have default settings', async () => {
       page.host.tableConfiguration = {
         dataSource: new MatTableDataSource<any>([{ name: 'test' }]),

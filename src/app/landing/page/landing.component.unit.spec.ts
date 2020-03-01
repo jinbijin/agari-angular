@@ -20,10 +20,20 @@ describe('LandingComponent', () => {
   it('should create', () => {
     expect(page.root).toBeTruthy();
   });
+
+  it('should pass a title to agari-layout', () => {
+    expect((page.layout.attributes as any).title.value).toEqual(
+      'Welcome to Agari!'
+    );
+  });
 });
 
 class Page extends PageBase<LandingComponent> {
   public get root(): LandingComponent {
     return this.component();
+  }
+
+  public get layout(): HTMLElement {
+    return this.query<HTMLElement>('agari-layout');
   }
 }

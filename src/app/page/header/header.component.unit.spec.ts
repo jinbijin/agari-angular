@@ -28,7 +28,7 @@ describe('HeaderComponent', () => {
     page.host.routes = [];
     page.detectChanges();
 
-    expect(page.brand).toBeTruthy();
+    expect(page.root.brand).toEqual('アガリ');
     expect(page.brand.textContent).toEqual('アガリ');
   });
 
@@ -43,6 +43,7 @@ describe('HeaderComponent', () => {
     page.host.routes = [{ label: 'Test', display: true }];
     page.detectChanges();
 
+    expect(page.root.displayedRoutes.length).toEqual(1);
     expect(page.matMenu.querySelectorAll('a').length).toEqual(1);
   });
 
@@ -71,6 +72,7 @@ describe('HeaderComponent', () => {
     ];
     page.detectChanges();
 
+    expect(page.root.displayedRoutes.length).toEqual(0);
     expect(page.matMenu.querySelectorAll('a').length).toEqual(0);
   });
 });

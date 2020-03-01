@@ -14,7 +14,7 @@ import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-  public brand: string = 'アガリ';
+  public readonly brand: string = 'アガリ';
 
   @Input()
   public routes: AgariRoutes = agariRoutes;
