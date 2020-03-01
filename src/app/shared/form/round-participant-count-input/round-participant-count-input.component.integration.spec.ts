@@ -64,13 +64,11 @@ describe('RoundParticipantCountInputComponent integration', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): RoundParticipantCountInputComponent {
-    return this.component(
-      RoundParticipantCountInputComponent
-    ) as RoundParticipantCountInputComponent;
+    return this.component(RoundParticipantCountInputComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 }
 

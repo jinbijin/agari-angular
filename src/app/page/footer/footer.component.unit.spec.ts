@@ -24,11 +24,11 @@ describe('FooterComponent', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): FooterComponent {
-    return this.component(FooterComponent) as FooterComponent;
+    return this.component(FooterComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 }
 

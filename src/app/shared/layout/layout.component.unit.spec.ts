@@ -33,11 +33,11 @@ describe('LayoutComponent', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): LayoutComponent {
-    return this.component(LayoutComponent) as LayoutComponent;
+    return this.component(LayoutComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 
   get title(): HTMLElement {

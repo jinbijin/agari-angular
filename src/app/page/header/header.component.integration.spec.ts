@@ -56,11 +56,11 @@ describe('HeaderComponent integration', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): HeaderComponent {
-    return this.component(HeaderComponent) as HeaderComponent;
+    return this.component(HeaderComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 }
 

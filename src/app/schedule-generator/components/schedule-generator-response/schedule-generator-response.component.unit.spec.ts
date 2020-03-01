@@ -24,19 +24,17 @@ describe('ScheduleGeneratorResponseComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.rootComponent).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get rootComponent(): ScheduleGeneratorResponseComponent {
-    return this.component(
-      ScheduleGeneratorResponseComponent
-    ) as ScheduleGeneratorResponseComponent;
+  public get root(): ScheduleGeneratorResponseComponent {
+    return this.component(ScheduleGeneratorResponseComponent);
   }
 
-  public get hostComponent(): TestHostComponent {
-    return this.component() as TestHostComponent;
+  public get host(): TestHostComponent {
+    return this.component();
   }
 }
 

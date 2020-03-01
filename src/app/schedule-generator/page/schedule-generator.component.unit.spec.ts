@@ -20,11 +20,13 @@ describe('ScheduleGeneratorComponent', () => {
   });
 
   it('should create', () => {
-    expect(page.rootComponent).toBeTruthy();
+    expect(page.root).toBeTruthy();
   });
 
   it('should use the standard page layout', () => {
-    expect(page.agariLayout).toBeTruthy();
+    expect((page.agariLayout.attributes as any).title.value).toEqual(
+      'Schedule generator'
+    );
   });
 
   it('should contain the request form', () => {
@@ -37,8 +39,8 @@ describe('ScheduleGeneratorComponent', () => {
 });
 
 class Page extends PageBase<ScheduleGeneratorComponent> {
-  public get rootComponent(): ScheduleGeneratorComponent {
-    return this.component() as ScheduleGeneratorComponent;
+  public get root(): ScheduleGeneratorComponent {
+    return this.component();
   }
 
   get agariLayout(): HTMLElement {

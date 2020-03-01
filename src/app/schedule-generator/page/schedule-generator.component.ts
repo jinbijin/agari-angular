@@ -5,8 +5,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./schedule-generator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduleGeneratorComponent implements OnInit {
+export class ScheduleGeneratorComponent {
   constructor() {}
-
-  public ngOnInit(): void {}
 }

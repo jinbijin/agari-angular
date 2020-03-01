@@ -70,11 +70,11 @@ describe('ContentComponent', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): ContentComponent {
-    return this.component(ContentComponent) as ContentComponent;
+    return this.component(ContentComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 
   get sidenav(): MatSidenavStubComponent {

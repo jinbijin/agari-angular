@@ -12,7 +12,7 @@ import { ScheduleRound } from 'src/app/graphql/generated/types';
   styleUrls: ['./schedule-generator-round.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduleGeneratorRoundComponent implements OnInit {
+export class ScheduleGeneratorRoundComponent {
   @Input()
   public scheduleRound: ScheduleRound;
 
@@ -20,6 +20,4 @@ export class ScheduleGeneratorRoundComponent implements OnInit {
   public roundNumber: number;
 
   constructor() {}
-
-  public ngOnInit(): void {}
 }

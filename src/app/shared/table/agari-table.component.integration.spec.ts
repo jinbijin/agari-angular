@@ -84,11 +84,11 @@ describe('AgariTableComponent integration', () => {
 
 class Page extends PageBase<TestHostComponent> {
   public get root(): AgariTableComponent {
-    return this.component(AgariTableComponent) as AgariTableComponent;
+    return this.component(AgariTableComponent);
   }
 
   public get host(): TestHostComponent {
-    return this.component() as TestHostComponent;
+    return this.component();
   }
 }
 
