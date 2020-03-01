@@ -1,6 +1,6 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Injector, Type } from '@angular/core';
+import { Type } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -25,5 +25,9 @@ export abstract class PageBase<TComponent> {
 
   protected query<T>(selector: string): T {
     return this.fixture.nativeElement.querySelector(selector);
+  }
+
+  protected queryAll<T>(selector: string): T[] {
+    return this.fixture.nativeElement.querySelectorAll(selector);
   }
 }

@@ -34,7 +34,8 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
       filter(payload => !!payload),
       switchMap(payload =>
         this.generateScheduleGql.fetch(
-          payload as GenerateScheduleQueryVariables // payload is not null because of filter
+          payload as GenerateScheduleQueryVariables, // payload is not null because of filter
+          { fetchPolicy: 'cache-only' }
         )
       )
     );
