@@ -83,7 +83,7 @@ export class RoundParticipantCountInputComponent
     } else if (errors.mod) {
       return 'Number of participants must be divisible by 4.';
     } else if (errors.minParticipant) {
-      return `Number of participants must be at least ${errors.minParticipant.min}`;
+      return `Number of participants must be at least ${errors.minParticipant.min}.`;
     }
   }
 
