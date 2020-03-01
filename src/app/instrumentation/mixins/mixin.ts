@@ -15,6 +15,7 @@ export class Mixin {
 
       public ngOnDestroy(): void {
         if (super.ngOnDestroy !== undefined) {
+          // Not covered as this function is never applied to an implementation of `ngOnDestroy`
           super.ngOnDestroy();
         }
         this.subscription.unsubscribe();
