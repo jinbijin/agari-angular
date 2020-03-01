@@ -5,6 +5,7 @@ import { NgxsModule } from '@ngxs/store';
 import { QueryOptionsAlone } from 'apollo-angular/types';
 import { ApolloQueryResult, NetworkStatus } from 'apollo-client';
 import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
@@ -65,6 +66,30 @@ describe('ScheduleGeneratorRequestComponent', () => {
         { fetchPolicy: 'network-only' }
       ]
     ]);
+  });
+
+  it('should throw on network error on click', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const generateScheduleMock = jest.fn((v, o) =>
+      of({
+        data: { generateSchedule: { rounds: [] } },
+        loading: false,
+        networkStatus: NetworkStatus.ready,
+        stale: false
+      }).pipe(
+        tap(data => {
+          throw { message: 'test' };
+        })
+      )
+    );
+    generateScheduleGql.fetch = generateScheduleMock;
+    page.detectChanges();
+
+    page.button.triggerEventHandler('click', {});
+    page.detectChanges();
+
+    expect(errorSpy.mock.calls).toEqual([['ERROR', { message: 'test' }]]);
   });
 });
 

@@ -5,6 +5,7 @@ import { ApolloTestingModule } from 'apollo-angular/testing';
 import { QueryOptionsAlone } from 'apollo-angular/types';
 import { ApolloQueryResult, NetworkStatus } from 'apollo-client';
 import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
@@ -77,6 +78,34 @@ describe('ScheduleGeneratorResponseComponent', () => {
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
     ]);
     expect(page.scheduleGeneratorRounds.length).toEqual(2);
+  });
+
+  it('should throw on network error', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const generateScheduleMock = jest.fn((v, o) =>
+      of({
+        data: { generateSchedule: { rounds: [] } },
+        loading: false,
+        networkStatus: NetworkStatus.ready,
+        stale: false
+      }).pipe(
+        tap(data => {
+          throw { message: 'test' };
+        })
+      )
+    );
+    generateScheduleGql.fetch = generateScheduleMock;
+
+    page.detectChanges();
+
+    store.dispatch(
+      new GenerateSchedule({ roundCount: 4, participantCount: 20 })
+    );
+    await page.fixture.whenStable();
+    page.detectChanges();
+
+    expect(errorSpy.mock.calls).toEqual([['ERROR', { message: 'test' }]]);
   });
 });
 
