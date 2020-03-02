@@ -1,0 +1,19 @@
+<form class="agari-form" [formGroup]="formGroup">
+  <agari-round-participant-count-input
+    [formControl]="controls.roundParticipantCount"
+    class="agari-form-item"
+  ></agari-round-participant-count-input>
+
+  <div class="agari-spacer"></div>
+
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="onSubmit()"
+    [disabled]="formGroup.invalid || (status$ | async) === 'IN_PROGRESS'"
+    class="agari-form-item"
+    data-test-id="request-button"
+  >
+    Generate
+  </button>
+</form>

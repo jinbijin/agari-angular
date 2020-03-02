@@ -1,0 +1,17 @@
+.agari-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
+
+.agari-form-item {
+  margin: 5px;
+}
+
+@media (min-width: 600px) {
+  .agari-form {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}

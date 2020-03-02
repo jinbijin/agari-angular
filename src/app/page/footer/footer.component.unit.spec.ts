@@ -1,24 +1,20 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
   let page: Page;
 
   beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [TestHostComponent, FooterComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TestHostComponent);
-    page = new Page(fixture);
-    fixture.detectChanges();
+    page = new Page(TestBed.createComponent(TestHostComponent));
+    page.detectChanges();
   });
 
   it('should create', () => {
@@ -27,12 +23,12 @@ describe('FooterComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  get root(): HTMLElement {
-    return this.query<HTMLElement>('agari-footer');
+  public get root(): FooterComponent {
+    return this.component(FooterComponent);
   }
 
-  constructor(fixture: ComponentFixture<TestHostComponent>) {
-    super(fixture);
+  public get host(): TestHostComponent {
+    return this.component();
   }
 }
 

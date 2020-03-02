@@ -4,6 +4,9 @@
     "tslint-plugin-prettier",
     "tslint-config-prettier"
   ],
+  "linterOptions": {
+    "exclude": ["**/generated/*.ts"]
+  },
   "rules": {
     "array-type": false,
     "arrow-parens": false,

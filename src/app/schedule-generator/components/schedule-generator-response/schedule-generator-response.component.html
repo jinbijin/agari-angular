@@ -1,0 +1,17 @@
+<div class="agari-grid">
+  <div
+    class="agari-grid-item"
+    *ngFor="
+      let item of (result$ | async)?.data?.generateSchedule?.rounds?.entries()
+    "
+  >
+    <agari-schedule-generator-round
+      *ngIf="item[1]"
+      [scheduleRound]="item[1]"
+      [roundNumber]="item[0] + 1"
+      data-test-id="schedule-round"
+    ></agari-schedule-generator-round>
+  </div>
+  <div class="agari-horizontal-filler"></div>
+  <div class="agari-horizontal-filler"></div>
+</div>

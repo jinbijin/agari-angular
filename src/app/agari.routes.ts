@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { AgariRoutes } from './instrumentation/routes/agari-routes.type';
 
 export const agariRoutes: AgariRoutes = [

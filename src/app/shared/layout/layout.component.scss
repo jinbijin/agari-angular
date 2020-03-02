@@ -1,0 +1,13 @@
+.agari-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 850px;
+  margin: 0 15px;
+}
+
+.agari-layout-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}

@@ -1,0 +1,12 @@
+query generateSchedule($roundCount: Int!, $participantCount: Int!) {
+  generateSchedule(
+    roundCount: $roundCount
+    participantCount: $participantCount
+  ) {
+    rounds {
+      games {
+        participantNrs
+      }
+    }
+  }
+}

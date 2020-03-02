@@ -4,8 +4,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   templateUrl: './landing.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent {
   constructor() {}
-
-  public ngOnInit(): void {}
 }
