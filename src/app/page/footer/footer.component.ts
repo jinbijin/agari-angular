@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'agari-footer',
@@ -6,5 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
+  @Input() public version: string = environment.version;
+
   constructor() {}
 }
