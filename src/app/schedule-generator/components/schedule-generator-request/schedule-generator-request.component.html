@@ -12,6 +12,7 @@
     (click)="onSubmit()"
     [disabled]="formGroup.invalid || (status$ | async) === 'IN_PROGRESS'"
     class="agari-form-item"
+    data-test-id="request-button"
   >
     Generate
   </button>

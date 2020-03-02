@@ -6,6 +6,7 @@
     [formControl]="controls.roundCount"
     required
     (blur)="onTouched()"
+    data-test-id="round-input"
   />
   <mat-error *ngIf="controls.roundCount.errors as errors">
     {{ roundCountErrorMessage(errors) }}
@@ -24,6 +25,7 @@
     [formControl]="controls.participantCount"
     required
     (blur)="onTouched()"
+    data-test-id="participant-input"
   />
   <mat-error *ngIf="controls.participantCount.errors as errors">
     {{ participantCountErrorMessage(errors) }}
