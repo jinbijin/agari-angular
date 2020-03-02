@@ -24,6 +24,10 @@ describe('AgariComponent', () => {
   it('should include the header with default routes', () => {
     expect((page.header.attributes as any).routes).toBeUndefined();
   });
+
+  it('should include the footer with default version', () => {
+    expect((page.footer.attributes as any).version).toBeUndefined();
+  });
 });
 
 class Page extends PageBase<TestHostComponent> {
@@ -37,6 +41,10 @@ class Page extends PageBase<TestHostComponent> {
 
   public get header(): HTMLElement {
     return this.query<HTMLElement>('agari-header');
+  }
+
+  public get footer(): HTMLElement {
+    return this.query<HTMLElement>('agari-footer');
   }
 }
 

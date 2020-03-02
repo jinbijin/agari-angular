@@ -20,6 +20,10 @@ describe('FooterComponent', () => {
   it('should create', () => {
     expect(page.root).toBeTruthy();
   });
+
+  it('should display version', () => {
+    expect(page.matToolbar.textContent).toEqual('Agari v1.0.0');
+  });
 });
 
 class Page extends PageBase<TestHostComponent> {
@@ -30,11 +34,15 @@ class Page extends PageBase<TestHostComponent> {
   public get host(): TestHostComponent {
     return this.component();
   }
+
+  public get matToolbar(): HTMLElement {
+    return this.query<HTMLElement>('mat-toolbar');
+  }
 }
 
 @Component({
   template: `
-    <agari-footer></agari-footer>
+    <agari-footer version="1.0.0"></agari-footer>
   `
 })
 class TestHostComponent {}
