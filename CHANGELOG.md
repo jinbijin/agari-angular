@@ -1,4 +1,10 @@
-# 1.1.0
+# 1.1.1 (2020-03-05)
+
+### Bug fixes
+
+- Make result invisible on error
+
+# 1.1.0 (2020-03-05)
 
 ### Features
 
