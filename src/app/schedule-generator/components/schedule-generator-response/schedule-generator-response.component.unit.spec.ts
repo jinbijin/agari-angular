@@ -75,6 +75,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
         { participantCount: 20, roundCount: 4 },
         { fetchPolicy: 'network-only' }
       ],
+      [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
     ]);
     expect(page.scheduleGeneratorRounds.length).toEqual(2);
