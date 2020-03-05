@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
