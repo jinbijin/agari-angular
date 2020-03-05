@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { ExcelExportDirective } from './directives/excel-export.directive';
 import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AgariTableComponent } from './table/agari-table.component';
@@ -27,7 +28,8 @@ const materialModules: Type<any>[] = [
   declarations: [
     LayoutComponent,
     RoundParticipantCountInputComponent,
-    AgariTableComponent
+    AgariTableComponent,
+    ExcelExportDirective
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
@@ -35,7 +37,8 @@ const materialModules: Type<any>[] = [
     ReactiveFormsModule,
     ...materialModules,
     RoundParticipantCountInputComponent,
-    AgariTableComponent
+    AgariTableComponent,
+    ExcelExportDirective
   ]
 })
 export class SharedModule {}

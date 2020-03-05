@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { ApolloQueryResult } from 'apollo-client';
 import { Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
+import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 
 import {
   GenerateScheduleGQL,
@@ -27,6 +28,8 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
 
   public result$: Observable<ApolloQueryResult<GenerateScheduleQuery>>;
 
+  public export$: Observable<ExcelExportConfiguration>;
+
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   public ngOnInit(): void {
@@ -38,6 +41,20 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
           { fetchPolicy: 'cache-only' }
         )
       )
+    );
+    this.export$ = this.result$.pipe(
+      map(result => ({
+        data: result.data.generateSchedule.rounds.map(r =>
+          r.games.flatMap(g => g.participantNrs)
+        ),
+        filename: [
+          'schedule',
+          result.data.generateSchedule.rounds.length,
+          result.data.generateSchedule.rounds[0].games.length,
+          new Date().toISOString()
+        ].join('_'),
+        sheetname: 'Schedule'
+      }))
     );
   }
 }
