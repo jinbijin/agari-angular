@@ -9,7 +9,7 @@ export class ExcelExportService {
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   private readonly fileExtension = '.xlsx';
 
-  public exportExcel<T = any>(config: ExcelExportConfiguration<T>) {
+  public exportExcel<T = any>(config: ExcelExportConfiguration<T>): void {
     const worksheet: Xlsx.WorkSheet = Xlsx.utils.aoa_to_sheet(config.data);
     const workbook: Xlsx.WorkBook = {
       Sheets: { [config.sheetname]: worksheet },
