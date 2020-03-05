@@ -28,7 +28,7 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
 
   public result$: Observable<ApolloQueryResult<GenerateScheduleQuery>>;
 
-  public export$: Observable<ExcelExportConfiguration>;
+  public export$: Observable<ExcelExportConfiguration | undefined>;
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
@@ -43,18 +43,22 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
       )
     );
     this.export$ = this.result$.pipe(
-      map(result => ({
-        data: result.data.generateSchedule.rounds.map(r =>
-          r.games.flatMap(g => g.participantNrs)
-        ),
-        filename: [
-          'schedule',
-          result.data.generateSchedule.rounds.length,
-          result.data.generateSchedule.rounds[0].games.length,
-          new Date().toISOString()
-        ].join('_'),
-        sheetname: 'Schedule'
-      }))
+      map(result =>
+        result.data.generateSchedule
+          ? {
+              data: result.data.generateSchedule.rounds.map(r =>
+                r.games.flatMap(g => g.participantNrs)
+              ),
+              filename: [
+                'schedule',
+                result.data.generateSchedule.rounds.length,
+                result.data.generateSchedule.rounds[0].games.length,
+                new Date().toISOString()
+              ].join('_'),
+              sheetname: 'Schedule'
+            }
+          : undefined
+      )
     );
   }
 }
