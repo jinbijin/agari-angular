@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port=4242",
     "start:ci": "ng serve --port=4242",
+    "start:serve": "http-server -p 8080 -c-1 dist/agari-angular",
     "build": "ng build",
     "cy": "cypress open",
     "cy:verify": "cypress verify",
