@@ -1,3 +1,9 @@
+# 1.1.2
+
+### Features
+
+- Add caching of app
+
 # 1.1.1 (2020-03-05)
 
 ### Bug fixes
