@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 
 const uri = `${environment.apiBaseUrl}/graphql`;
 export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
-  const error = onError(({ graphQLErrors }) => {
+  const error = onError(({ graphQLErrors, networkError }) => {
     let message: string = 'An unknown error has occurred';
     if (graphQLErrors) {
       const errorCode = graphQLErrors[0].extensions?.code;
@@ -19,6 +19,11 @@ export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
           message = 'Timed out while generating a random schedule.';
           break;
       }
+    }
+    const netError = networkError as any;
+    if (netError?.status === 504) {
+      message =
+        'The server cannot be reached at this moment. Please try again later.';
     }
     snackBar.open(message, undefined, {
       duration: 5000
