@@ -1,3 +1,9 @@
+# 1.2.0
+
+### Planned features
+
+- Manage events in offline (mostly) mode
+
 # 1.1.2 (2020-03-09)
 
 ### Features
