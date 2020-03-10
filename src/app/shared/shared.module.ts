@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -20,6 +21,7 @@ const materialModules: Type<any>[] = [
   MatFormFieldModule,
   MatInputModule,
   MatListModule,
+  MatStepperModule,
   MatTableModule,
   MatToolbarModule
 ];
