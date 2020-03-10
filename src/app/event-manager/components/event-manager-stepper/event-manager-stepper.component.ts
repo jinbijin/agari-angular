@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'agari-event-manager-stepper',
@@ -6,5 +7,36 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventManagerStepperComponent implements OnInit {
-  public ngOnInit(): void {}
+  public form: FormGroup & {
+    controls: {
+      config: FormGroup & {
+        controls: { check: FormControl };
+      };
+      registration: FormGroup & {
+        controls: { check: FormControl };
+      };
+    };
+  };
+
+  public configFinalized: boolean;
+  public registrationFinalized: boolean;
+
+  public ngOnInit(): void {
+    this.form = new FormGroup({
+      config: new FormGroup({
+        check: new FormControl(false, Validators.requiredTrue)
+      }),
+      registration: new FormGroup({
+        check: new FormControl(false, Validators.requiredTrue)
+      })
+    }) as any;
+  }
+
+  public clickFinalizeConfig() {
+    this.configFinalized = true;
+  }
+
+  public clickFinalizeRegistration() {
+    this.registrationFinalized = true;
+  }
 }

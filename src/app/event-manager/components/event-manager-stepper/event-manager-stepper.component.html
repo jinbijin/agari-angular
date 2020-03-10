@@ -1,8 +1,62 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step>
-    <ng-template matStepLabel>Configuration and registration</ng-template>
+  <mat-step [stepControl]="form.controls.config">
+    <form [formGroup]="form.controls.config">
+      <ng-template matStepLabel>Configuration</ng-template>
+      <mat-checkbox
+        [formControl]="form.controls.config.controls.check"
+        [disabled]="form.controls.config.controls.check.value"
+      >
+        Test
+      </mat-checkbox>
+      <div class="agari-flex-row">
+        <div class="agari-spacer"></div>
+        <button mat-button *ngIf="configFinalized" matStepperNext>Next</button>
+        <button
+          mat-flat-button
+          *ngIf="!configFinalized"
+          matStepperNext
+          color="accent"
+          [disabled]="form.controls.config.invalid"
+          (click)="clickFinalizeConfig()"
+        >
+          Finalize
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="form.controls.registration">
+    <form [formGroup]="form.controls.registration">
+      <ng-template matStepLabel>Registration</ng-template>
+      <mat-checkbox
+        [formControl]="form.controls.registration.controls.check"
+        [disabled]="form.controls.registration.controls.check.value"
+      >
+        Test
+      </mat-checkbox>
+      <div class="agari-flex-row">
+        <div class="agari-spacer"></div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button *ngIf="registrationFinalized" matStepperNext>
+          Next
+        </button>
+        <button
+          mat-flat-button
+          *ngIf="!registrationFinalized"
+          matStepperNext
+          color="accent"
+          [disabled]="form.controls.registration.invalid"
+          (click)="clickFinalizeRegistration()"
+        >
+          Finalize
+        </button>
+      </div>
+    </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
+    <div class="agari-flex-row">
+      <div class="agari-spacer"></div>
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
   </mat-step>
 </mat-vertical-stepper>

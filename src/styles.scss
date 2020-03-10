@@ -33,6 +33,11 @@ footer .mat-toolbar {
   font-size: medium;
 }
 
+.agari-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .agari-spacer {
   flex: 1 1 auto;
 }
