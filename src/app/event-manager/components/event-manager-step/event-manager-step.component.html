@@ -1,0 +1,15 @@
+<ng-content></ng-content>
+<div class="agari-flex-row">
+  <div class="agari-spacer"></div>
+  <button mat-button *ngIf="!isFirstStep" matStepperPrevious>Previous</button>
+  <button mat-button *ngIf="!isLastStep && (finalized$ | async)" matStepperNext>Next</button>
+  <button
+    mat-flat-button
+    *ngIf="!isLastStep && !(finalized$ | async)"
+    color="accent"
+    [disabled]="stepControl.invalid"
+    (click)="finalize()"
+  >
+    Finalize
+  </button>
+</div>

@@ -9,12 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class EventManagerStepperComponent implements OnInit {
   public form: FormGroup & {
     controls: {
-      config: FormGroup & {
-        controls: { check: FormControl };
-      };
-      registration: FormGroup & {
-        controls: { check: FormControl };
-      };
+      config: FormControl;
+      registration: FormControl;
     };
   };
 
@@ -23,12 +19,8 @@ export class EventManagerStepperComponent implements OnInit {
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      config: new FormGroup({
-        check: new FormControl(false, Validators.requiredTrue)
-      }),
-      registration: new FormGroup({
-        check: new FormControl(false, Validators.requiredTrue)
-      })
+      config: new FormControl(undefined),
+      registration: new FormControl(undefined)
     }) as any;
   }
 
