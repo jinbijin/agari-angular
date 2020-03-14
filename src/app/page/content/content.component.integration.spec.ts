@@ -35,9 +35,7 @@ describe('ContentComponent integration', () => {
     it('should open sidenav for larger screens', async () => {
       breakpointObserverStub = {
         observe: query =>
-          typeof query === 'string'
-            ? of({ breakpoints: { [query]: true }, matches: true })
-            : EMPTY
+          typeof query === 'string' ? of({ breakpoints: { [query]: true }, matches: true }) : EMPTY
       };
       page = new Page(TestBed.createComponent(TestHostComponent));
       page.detectChanges();
@@ -53,9 +51,7 @@ describe('ContentComponent integration', () => {
     it('should close sidenav for smaller screens', async () => {
       breakpointObserverStub = {
         observe: query =>
-          typeof query === 'string'
-            ? of({ breakpoints: { [query]: false }, matches: false })
-            : EMPTY
+          typeof query === 'string' ? of({ breakpoints: { [query]: false }, matches: false }) : EMPTY
       };
       page = new Page(TestBed.createComponent(TestHostComponent));
       page.detectChanges();

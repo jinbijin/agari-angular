@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -44,16 +39,11 @@ export class RoundParticipantCountInputComponent
     super();
     this.subscription.add(
       this.controls.roundCount.valueChanges
-        .pipe(
-          tap(value => this.controls.participantCount.updateValueAndValidity())
-        )
+        .pipe(tap(value => this.controls.participantCount.updateValueAndValidity()))
         .subscribe()
     );
     this.subscription.add(
-      combineLatest([
-        this.controls.roundCount.valueChanges,
-        this.controls.participantCount.valueChanges
-      ])
+      combineLatest([this.controls.roundCount.valueChanges, this.controls.participantCount.valueChanges])
         .pipe(
           map(value => ({
             roundCount: value[0] ? +value[0] : value[0],

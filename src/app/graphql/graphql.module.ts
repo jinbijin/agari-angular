@@ -22,8 +22,7 @@ export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
     }
     const netError = networkError as any;
     if (netError?.status === 504) {
-      message =
-        'The server cannot be reached at this moment. Please try again later.';
+      message = 'The server cannot be reached at this moment. Please try again later.';
     }
     snackBar.open(message, undefined, {
       duration: 5000

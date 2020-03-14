@@ -31,10 +31,7 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
           ScheduleGeneratorResponseComponent,
           ScheduleGeneratorRoundComponent
         ],
-        imports: [
-          NgxsModule.forRoot([ScheduleGeneratorState]),
-          ApolloTestingModule
-        ],
+        imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
         providers: [
           {
             provide: GenerateScheduleGQL,
@@ -67,21 +64,13 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
 
       page.detectChanges();
 
-      store.dispatch(
-        new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-      );
+      store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
       await page.fixture.whenStable();
       page.detectChanges();
 
       expect(generateScheduleMock.mock.calls).toEqual([
-        [
-          { participantCount: 20, roundCount: 4 },
-          { fetchPolicy: 'network-only' }
-        ],
-        [
-          { participantCount: 20, roundCount: 4 },
-          { fetchPolicy: 'cache-only' }
-        ],
+        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
+        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
       ]);
       expect(page.scheduleGeneratorRound.roundNumber).toEqual(1);

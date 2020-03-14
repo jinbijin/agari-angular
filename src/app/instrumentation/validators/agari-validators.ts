@@ -9,9 +9,7 @@ export class AgariValidators {
     };
   }
 
-  public static minParticipant(
-    roundCountControl: AbstractControl
-  ): ValidatorFn {
+  public static minParticipant(roundCountControl: AbstractControl): ValidatorFn {
     return (control: AbstractControl) => {
       if (!roundCountControl.value || !control.value) {
         return null; // Some other validation should fail.

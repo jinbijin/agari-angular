@@ -24,9 +24,7 @@ describe('ScheduleGeneratorComponent', () => {
   });
 
   it('should use the standard page layout', () => {
-    expect((page.agariLayout.attributes as any).title.value).toEqual(
-      'Schedule generator'
-    );
+    expect((page.agariLayout.attributes as any).title.value).toEqual('Schedule generator');
   });
 
   it('should contain the request form', () => {

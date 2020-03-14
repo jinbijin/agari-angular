@@ -1,11 +1,7 @@
 describe('Schedule generator', () => {
   it('should generate a schedule', () => {
     cy.server();
-    cy.route(
-      'POST',
-      'http://localhost:5001/graphql',
-      'fixture:generate-schedule/response-success.json'
-    );
+    cy.route('POST', 'http://localhost:5001/graphql', 'fixture:generate-schedule/response-success.json');
 
     cy.visit('http://localhost:4242/schedule-generator');
 

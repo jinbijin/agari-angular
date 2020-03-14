@@ -12,11 +12,7 @@ describe('ContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        TestHostComponent,
-        MatSidenavStubComponent,
-        ContentComponent
-      ],
+      declarations: [TestHostComponent, MatSidenavStubComponent, ContentComponent],
       providers: [
         {
           provide: BreakpointObserver,
@@ -44,9 +40,7 @@ describe('ContentComponent', () => {
   it('should open sidenav for larger screens', () => {
     breakpointObserverStub = {
       observe: query =>
-        typeof query === 'string'
-          ? of({ breakpoints: { [query]: true }, matches: true })
-          : EMPTY
+        typeof query === 'string' ? of({ breakpoints: { [query]: true }, matches: true }) : EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
@@ -57,9 +51,7 @@ describe('ContentComponent', () => {
   it('should close sidenav for smaller screens', () => {
     breakpointObserverStub = {
       observe: query =>
-        typeof query === 'string'
-          ? of({ breakpoints: { [query]: false }, matches: false })
-          : EMPTY
+        typeof query === 'string' ? of({ breakpoints: { [query]: false }, matches: false }) : EMPTY
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();

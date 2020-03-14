@@ -26,10 +26,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ScheduleGeneratorResponseComponent],
-      imports: [
-        NgxsModule.forRoot([ScheduleGeneratorState]),
-        ApolloTestingModule
-      ],
+      imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
       providers: [
         {
           provide: GenerateScheduleGQL,
@@ -64,17 +61,12 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
     page.detectChanges();
 
-    store.dispatch(
-      new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-    );
+    store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
     await page.fixture.whenStable();
     page.detectChanges();
 
     expect(generateScheduleMock.mock.calls).toEqual([
-      [
-        { participantCount: 20, roundCount: 4 },
-        { fetchPolicy: 'network-only' }
-      ],
+      [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
     ]);
@@ -100,9 +92,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
     page.detectChanges();
 
-    store.dispatch(
-      new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-    );
+    store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
     await page.fixture.whenStable();
     page.detectChanges();
 

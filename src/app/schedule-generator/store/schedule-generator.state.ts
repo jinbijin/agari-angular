@@ -33,15 +33,11 @@ export class ScheduleGeneratorState {
   }
 
   @Selector()
-  public static payload(
-    state: ScheduleGeneratorStateModel
-  ): GenerateScheduleQueryVariables | null {
+  public static payload(state: ScheduleGeneratorStateModel): GenerateScheduleQueryVariables | null {
     return state.payload;
   }
 
-  public constructor(
-    private readonly generateScheduleGql: GenerateScheduleGQL
-  ) {}
+  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   @Action(GenerateSchedule)
   public generateSchedule(
@@ -51,8 +47,8 @@ export class ScheduleGeneratorState {
     const observable = this.generateScheduleGql.fetch(payload, {
       fetchPolicy: 'network-only'
     });
-    return ObservableHelper.setStatus(observable, value =>
-      patchState({ status: value })
-    ).pipe(finalize(() => patchState({ payload })));
+    return ObservableHelper.setStatus(observable, value => patchState({ status: value })).pipe(
+      finalize(() => patchState({ payload }))
+    );
   }
 }

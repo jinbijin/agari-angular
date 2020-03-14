@@ -46,9 +46,7 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
       map(result =>
         result.data.generateSchedule
           ? {
-              data: result.data.generateSchedule.rounds.map(r =>
-                r.games.flatMap(g => g.participantNrs)
-              ),
+              data: result.data.generateSchedule.rounds.map(r => r.games.flatMap(g => g.participantNrs)),
               filename: [
                 'schedule',
                 result.data.generateSchedule.rounds.length,

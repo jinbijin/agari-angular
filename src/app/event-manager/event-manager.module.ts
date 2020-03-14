@@ -10,11 +10,7 @@ import { EventManagerComponent } from './page/event-manager.component';
 
 @NgModule({
   declarations: [EventManagerComponent, EventManagerStepperComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(eventManagerRoutes)
-  ],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(eventManagerRoutes)],
   exports: [],
   providers: []
 })

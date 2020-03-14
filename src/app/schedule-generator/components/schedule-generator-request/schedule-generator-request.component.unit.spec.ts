@@ -61,10 +61,7 @@ describe('ScheduleGeneratorRequestComponent', () => {
     page.detectChanges();
 
     expect(generateScheduleMock.mock.calls).toEqual([
-      [
-        { participantCount: undefined, roundCount: undefined },
-        { fetchPolicy: 'network-only' }
-      ]
+      [{ participantCount: undefined, roundCount: undefined }, { fetchPolicy: 'network-only' }]
     ]);
   });
 

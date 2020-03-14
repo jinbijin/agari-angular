@@ -29,16 +29,11 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 
     it('should compute the correct table configuration', () => {
       page.host.scheduleRound = {
-        games: [
-          { participantNrs: [1, 2, 3, 4] },
-          { participantNrs: [5, 6, 7, 8] }
-        ]
+        games: [{ participantNrs: [1, 2, 3, 4] }, { participantNrs: [5, 6, 7, 8] }]
       };
       page.detectChanges();
 
-      expect(page.agariTable.tableConfiguration.dataSource.data.length).toEqual(
-        2
-      );
+      expect(page.agariTable.tableConfiguration.dataSource.data.length).toEqual(2);
     });
 
     it('should compute the correct column configuration', () => {
