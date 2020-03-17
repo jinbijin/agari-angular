@@ -21,11 +21,11 @@ export class EventManagerStepperComponent implements AfterViewInit {
   public ngAfterViewInit(): void {
     for (const [index, step] of this.steps.toArray().entries()) {
       const rank = index + 1;
+      step.rank = rank;
       this.subscriptions.add(
         this.currentStep
           .pipe(
             filter(current => current === rank),
-            tap(current => (step.rank = current)),
             tap(() => step.panel.open())
           )
           .subscribe()

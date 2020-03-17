@@ -12,4 +12,6 @@ export class EventManagerStepComponent {
   @ViewChild(MatExpansionPanel) public panel: MatExpansionPanel;
 
   @ContentChild('header') public header: TemplateRef<any>;
+
+  @ContentChild('content') public content: TemplateRef<any>;
 }

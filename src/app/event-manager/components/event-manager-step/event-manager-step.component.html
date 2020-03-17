@@ -3,6 +3,10 @@
     <strong>{{ rank }}.&nbsp;</strong>
     <ng-container *ngTemplateOutlet="header || defaultHeader"></ng-container>
   </mat-expansion-panel-header>
+
+  <ng-template matExpansionPanelContent>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </ng-template>
   <ng-content></ng-content>
 </mat-expansion-panel>
 
