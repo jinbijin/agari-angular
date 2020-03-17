@@ -1,34 +1,36 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'agari-event-manager-stepper',
   templateUrl: './event-manager-stepper.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventManagerStepperComponent implements OnInit {
-  public form: FormGroup & {
-    controls: {
-      config: FormControl;
-      registration: FormControl;
-    };
-  };
+export class EventManagerStepperComponent implements AfterViewInit {
+  private readonly subscriptions: Subscription = new Subscription();
 
-  public configFinalized: boolean;
-  public registrationFinalized: boolean;
+  @ViewChildren(MatExpansionPanel) public panels: QueryList<MatExpansionPanel>;
 
-  public ngOnInit(): void {
-    this.form = new FormGroup({
-      config: new FormControl(undefined),
-      registration: new FormControl(undefined)
-    }) as any;
+  private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+
+  public ngAfterViewInit(): void {
+    for (const [index, panel] of this.panels.toArray().entries()) {
+      const rank = index + 1;
+      this.subscriptions.add(
+        this.currentStep
+          .pipe(
+            filter(step => step === rank),
+            tap(() => panel.open())
+          )
+          .subscribe()
+      );
+      this.subscriptions.add(panel.opened.pipe(tap(() => this.setStep(index + 1))).subscribe());
+    }
   }
 
-  public clickFinalizeConfig() {
-    this.configFinalized = true;
-  }
-
-  public clickFinalizeRegistration() {
-    this.registrationFinalized = true;
+  private setStep(step: number): void {
+    this.currentStep.next(step);
   }
 }

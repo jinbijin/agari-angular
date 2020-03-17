@@ -1,18 +1,5 @@
-<mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="form.controls.config">
-    <agari-event-manager-step [stepControl]="form.controls.config" [isFirstStep]="true">
-      <ng-template matStepLabel>Configuration</ng-template>
-      <agari-configuration-step [formControl]="form.controls.config"></agari-configuration-step>
-    </agari-event-manager-step>
-  </mat-step>
-  <mat-step [stepControl]="form.controls.registration">
-    <agari-event-manager-step [stepControl]="form.controls.registration">
-      <ng-template matStepLabel>Registration</ng-template>
-    </agari-event-manager-step>
-  </mat-step>
-  <mat-step>
-    <agari-event-manager-step [isLastStep]="true">
-      <ng-template matStepLabel>Done</ng-template>
-    </agari-event-manager-step>
-  </mat-step>
-</mat-vertical-stepper>
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header> <strong>1.&nbsp;</strong> Configuration </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion>
