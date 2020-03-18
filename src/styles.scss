@@ -35,7 +35,8 @@ footer .mat-toolbar {
 
 .agari-flex-row {
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
+  align-items: flex-start;
 }
 
 .agari-spacer {
@@ -57,4 +58,23 @@ footer .mat-toolbar {
 
 .agari-cell-text {
   padding-right: 4px !important;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-icon {
+  padding-right: 4px;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.mat-action-row {
+  border-top-style: none !important;
 }
