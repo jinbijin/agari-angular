@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
 
+import { RoundParticipantDialogComponent } from './components/dialogs/round-participant-dialog.component';
 import { EventManagerStepComponent } from './components/event-manager-step/event-manager-step.component';
 import { EventManagerStepperComponent } from './components/event-manager-stepper/event-manager-stepper.component';
 import { EventConfigurationStepComponent } from './components/steps/event-configuration-step.component';
@@ -15,7 +16,8 @@ import { EventManagerComponent } from './page/event-manager.component';
     EventManagerComponent,
     EventManagerStepperComponent,
     EventManagerStepComponent,
-    EventConfigurationStepComponent
+    EventConfigurationStepComponent,
+    RoundParticipantDialogComponent
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(eventManagerRoutes)],
   exports: [],

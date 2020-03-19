@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Configuration</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup" ngDefaultControl>
+    <agari-round-participant-count-input
+      [formControl]="formGroup.controls.roundParticipantCount"
+    ></agari-round-participant-count-input>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="accent"
+    [mat-dialog-close]="formGroup.controls.roundParticipantCount.value"
+    [disabled]="formGroup.invalid"
+  >
+    <mat-icon>add_box</mat-icon>
+    <span>Save</span>
+  </button>
+</mat-dialog-actions>
