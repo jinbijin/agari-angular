@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable, Subject } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { Schedule } from 'src/app/graphql/generated/types';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 
+import {
+  FinalizeConfiguration,
+  GenerateSchedule,
+  SetRoundParticipantCount,
+  UnsetSchedule
+} from '../../store/event-manager.actions';
+import { EventManagerState } from '../../store/event-manager.state';
 import { RoundParticipantDialogComponent } from '../dialogs/round-participant-dialog.component';
 
 @Component({
@@ -13,19 +21,21 @@ import { RoundParticipantDialogComponent } from '../dialogs/round-participant-di
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventConfigurationStepComponent {
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
 
-  private readonly roundParticipantCountSubject: Subject<RoundParticipantCount> = new Subject<
-    RoundParticipantCount
-  >();
-  public readonly roundParticipantCount$: Observable<
-    RoundParticipantCount
-  > = this.roundParticipantCountSubject.asObservable();
+  @Select(EventManagerState.roundParticipantCount)
+  public readonly roundParticipantCount$: Observable<RoundParticipantCount | undefined>;
 
-  private readonly roundParticipantSetSubject: Subject<boolean> = new Subject<boolean>();
-  public readonly roundParticipantSet$: Observable<boolean> = this.roundParticipantSetSubject.asObservable();
+  @Select(EventManagerState.roundParticipantFlag)
+  public readonly roundParticipantSet$: Observable<boolean>;
 
-  public schedule: Schedule;
+  @Select(EventManagerState.schedule)
+  public readonly schedule$: Observable<Schedule | undefined>;
+
+  @Select(EventManagerState.configurationFlag)
+  public readonly finalized$: Observable<boolean>;
+
+  @Output() public readonly next: EventEmitter<void> = new EventEmitter();
 
   public setNumber(roundParticipantCount?: RoundParticipantCount): void {
     const dialogRef = this.dialog.open(RoundParticipantDialogComponent, { data: roundParticipantCount });
@@ -33,7 +43,24 @@ export class EventConfigurationStepComponent {
   }
 
   public unsetNumber(): void {
-    this.roundParticipantCountSubject.next(undefined);
+    this.store.dispatch(new SetRoundParticipantCount(undefined));
+  }
+
+  public generateSchedule(): void {
+    this.store.dispatch(new GenerateSchedule());
+  }
+
+  public unsetSchedule(): void {
+    this.store.dispatch(new UnsetSchedule());
+  }
+
+  public goToNext(): void {
+    this.next.emit();
+  }
+
+  public finalize(): void {
+    this.store.dispatch(new FinalizeConfiguration());
+    this.goToNext();
   }
 
   private setRoundParticipantCountOnClose(dialogRef: MatDialogRef<RoundParticipantDialogComponent>) {
@@ -41,8 +68,7 @@ export class EventConfigurationStepComponent {
       .afterClosed()
       .pipe(
         filter(value => !!value),
-        tap(value => this.roundParticipantCountSubject.next(value)),
-        tap(value => this.roundParticipantSetSubject.next(true))
+        tap(value => this.store.dispatch(new SetRoundParticipantCount(value)))
       )
       .subscribe();
   }

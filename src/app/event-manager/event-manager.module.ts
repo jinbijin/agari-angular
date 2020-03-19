@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -10,6 +11,7 @@ import { EventManagerStepperComponent } from './components/event-manager-stepper
 import { EventConfigurationStepComponent } from './components/steps/event-configuration-step.component';
 import { eventManagerRoutes } from './event-manager.routes';
 import { EventManagerComponent } from './page/event-manager.component';
+import { EventManagerState } from './store/event-manager.state';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,12 @@ import { EventManagerComponent } from './page/event-manager.component';
     EventConfigurationStepComponent,
     RoundParticipantDialogComponent
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(eventManagerRoutes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(eventManagerRoutes),
+    NgxsModule.forFeature([EventManagerState])
+  ],
   exports: [],
   providers: []
 })

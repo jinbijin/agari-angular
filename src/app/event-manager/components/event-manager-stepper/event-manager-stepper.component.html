@@ -2,7 +2,7 @@
   <agari-event-manager-step>
     <ng-template #header>Configuration</ng-template>
     <ng-template #content>
-      <agari-event-configuration-step></agari-event-configuration-step>
+      <agari-event-configuration-step (next)="nextStep()"></agari-event-configuration-step>
     </ng-template>
   </agari-event-manager-step>
   <agari-event-manager-step>

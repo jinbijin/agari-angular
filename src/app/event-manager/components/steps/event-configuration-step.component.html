@@ -5,7 +5,7 @@
   <p>
     Number of participants: <strong>{{ roundParticipantCount.participantCount }}</strong>
   </p>
-  <mat-action-row>
+  <mat-action-row *ngIf="!(finalized$ | async)">
     <button
       mat-icon-button
       matTooltip="Edit round and participant numbers"
@@ -20,18 +20,30 @@
 </ng-container>
 <ng-container *ngIf="roundParticipantSet$ | async">
   <mat-divider></mat-divider>
-  <ng-container *ngIf="schedule; else scheduleEmpty">
-    <p>Schedule generated</p>
+  <ng-container *ngIf="schedule$ | async as schedule; else scheduleEmpty">
+    <p>Schedule generated!</p>
     <mat-action-row>
       <button mat-icon-button matTooltip="View schedule"><mat-icon>visibility</mat-icon></button>
-      <button mat-icon-button matTooltip="Replace schedule"><mat-icon>create</mat-icon></button>
-      <button mat-icon-button matTooltip="Delete schedule"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button matTooltip="Replace schedule" (click)="generateSchedule()">
+        <mat-icon>create</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Delete schedule"
+        *ngIf="!(finalized$ | async)"
+        (click)="unsetSchedule()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-action-row>
   </ng-container>
 </ng-container>
-<ng-container *ngIf="(roundParticipantCount$ | async) && schedule">
+<ng-container *ngIf="(roundParticipantCount$ | async) && (schedule$ | async)">
   <mat-action-row>
-    <button mat-flat-button color="accent">Finalize</button>
+    <button mat-flat-button *ngIf="finalized$ | async" color="primary" (click)="goToNext()">Next</button>
+    <button mat-flat-button *ngIf="!(finalized$ | async)" color="accent" (click)="finalize()">
+      Finalize
+    </button>
   </mat-action-row>
 </ng-container>
 <ng-template #numberEmpty>
@@ -46,7 +58,7 @@
 <ng-template #scheduleEmpty>
   <p>Schedule hasn't been generated yet</p>
   <mat-action-row>
-    <button mat-flat-button color="primary">
+    <button mat-flat-button color="primary" (click)="generateSchedule()">
       <mat-icon>add_box</mat-icon>
       <span>Generate</span>
     </button>

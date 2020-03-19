@@ -34,6 +34,11 @@ export class EventManagerStepperComponent implements AfterViewInit {
     }
   }
 
+  public nextStep(): void {
+    const current = this.currentStep.value;
+    this.currentStep.next(current + 1);
+  }
+
   private setStep(step: number): void {
     this.currentStep.next(step);
   }
