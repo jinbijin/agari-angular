@@ -11,10 +11,10 @@ import {
   GenerateScheduleQueryVariables
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { ScheduleRoundComponent } from 'src/app/shared/components/schedule-round/schedule-round.component';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
-import { ScheduleGeneratorRoundComponent } from '../schedule-generator-round/schedule-generator-round.component';
 
 import { ScheduleGeneratorResponseComponent } from './schedule-generator-response.component';
 
@@ -26,11 +26,7 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
   describe('with ScheduleGeneratorRoundComponent', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
-        declarations: [
-          TestHostComponent,
-          ScheduleGeneratorResponseComponent,
-          ScheduleGeneratorRoundComponent
-        ],
+        declarations: [TestHostComponent, ScheduleGeneratorResponseComponent, ScheduleRoundComponent],
         imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
         providers: [
           {
@@ -73,8 +69,8 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
       ]);
-      expect(page.scheduleGeneratorRound.roundNumber).toEqual(1);
-      expect(page.scheduleGeneratorRound.scheduleRound).toEqual({
+      expect(page.scheduleRound.roundNumber).toEqual(1);
+      expect(page.scheduleRound.scheduleRound).toEqual({
         games: [{ participantNrs: [1, 2, 3, 4] }]
       });
     });
@@ -90,8 +86,8 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  public get scheduleGeneratorRound(): ScheduleGeneratorRoundComponent {
-    return this.component(ScheduleGeneratorRoundComponent);
+  public get scheduleRound(): ScheduleRoundComponent {
+    return this.component(ScheduleRoundComponent);
   }
 }
 

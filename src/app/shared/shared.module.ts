@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { ScheduleRoundTableComponent } from './components/schedule-round-table/schedule-round-table.component';
+import { ScheduleRoundComponent } from './components/schedule-round/schedule-round.component';
 import { ExcelExportDirective } from './directives/excel-export.directive';
 import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -42,6 +44,8 @@ const materialModules: Type<any>[] = [
   declarations: [
     LayoutComponent,
     RoundParticipantCountInputComponent,
+    ScheduleRoundComponent,
+    ScheduleRoundTableComponent,
     AgariTableComponent,
     ExcelExportDirective
   ],

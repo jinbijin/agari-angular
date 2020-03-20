@@ -70,7 +70,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
     ]);
-    expect(page.scheduleGeneratorRounds.length).toEqual(2);
+    expect(page.scheduleRounds.length).toEqual(2);
   });
 
   it('should throw on network error', async () => {
@@ -109,8 +109,8 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  public get scheduleGeneratorRounds(): HTMLElement[] {
-    return this.queryAll('agari-schedule-generator-round');
+  public get scheduleRounds(): HTMLElement[] {
+    return this.queryAll('agari-schedule-round');
   }
 }
 

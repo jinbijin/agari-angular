@@ -4,7 +4,7 @@ import { ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 import { AgariTableComponent } from 'src/app/shared/table/agari-table.component';
 
-import { ScheduleGeneratorRoundTableComponent } from './schedule-generator-round-table.component';
+import { ScheduleRoundTableComponent } from './schedule-round-table.component';
 
 describe('ScheduleGeneratorRoundTableComponent integration', () => {
   let page: Page;
@@ -14,7 +14,7 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
       TestBed.configureTestingModule({
         declarations: [
           TestHostComponent,
-          ScheduleGeneratorRoundTableComponent,
+          ScheduleRoundTableComponent,
           AgariTableComponent,
           MatHeaderRowDefStubDirective,
           MatRowDefStubDirective
@@ -48,8 +48,8 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get root(): ScheduleGeneratorRoundTableComponent {
-    return this.component(ScheduleGeneratorRoundTableComponent);
+  public get root(): ScheduleRoundTableComponent {
+    return this.component(ScheduleRoundTableComponent);
   }
 
   public get host(): TestHostComponent {
@@ -63,9 +63,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-schedule-generator-round-table
-      [scheduleRound]="scheduleRound"
-    ></agari-schedule-generator-round-table>
+    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
   `
 })
 class TestHostComponent {

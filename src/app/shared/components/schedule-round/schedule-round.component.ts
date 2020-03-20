@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { ScheduleRound } from 'src/app/graphql/generated/types';
 
 @Component({
-  selector: 'agari-schedule-generator-round',
-  templateUrl: './schedule-generator-round.component.html',
-  styleUrls: ['./schedule-generator-round.component.scss'],
+  selector: 'agari-schedule-round',
+  templateUrl: './schedule-round.component.html',
+  styleUrls: ['./schedule-round.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduleGeneratorRoundComponent {
+export class ScheduleRoundComponent {
   @Input()
   public scheduleRound: ScheduleRound;
 

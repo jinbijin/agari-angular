@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
-import { ScheduleGeneratorRoundTableComponent } from './schedule-generator-round-table.component';
+import { ScheduleRoundTableComponent } from './schedule-round-table.component';
 
 describe('ScheduleGeneratorRoundTableComponent', () => {
   let page: Page;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, ScheduleGeneratorRoundTableComponent],
+      declarations: [TestHostComponent, ScheduleRoundTableComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
@@ -69,8 +69,8 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get root(): ScheduleGeneratorRoundTableComponent {
-    return this.component(ScheduleGeneratorRoundTableComponent);
+  public get root(): ScheduleRoundTableComponent {
+    return this.component(ScheduleRoundTableComponent);
   }
 
   public get host(): TestHostComponent {
@@ -84,9 +84,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-schedule-generator-round-table
-      [scheduleRound]="scheduleRound"
-    ></agari-schedule-generator-round-table>
+    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
   `
 })
 class TestHostComponent {

@@ -4,12 +4,12 @@ import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { TableConfiguration } from 'src/app/instrumentation/data/table-configuration.type';
 
 @Component({
-  selector: 'agari-schedule-generator-round-table',
-  templateUrl: './schedule-generator-round-table.component.html',
-  styleUrls: ['./schedule-generator-round-table.component.scss'],
+  selector: 'agari-schedule-round-table',
+  templateUrl: './schedule-round-table.component.html',
+  styleUrls: ['./schedule-round-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduleGeneratorRoundTableComponent implements OnInit {
+export class ScheduleRoundTableComponent implements OnInit {
   @Input()
   public scheduleRound: ScheduleRound;
 
