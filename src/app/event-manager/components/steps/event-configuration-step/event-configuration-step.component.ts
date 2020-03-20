@@ -11,9 +11,9 @@ import {
   GenerateSchedule,
   SetRoundParticipantCount,
   UnsetSchedule
-} from '../../store/event-manager.actions';
-import { EventManagerState } from '../../store/event-manager.state';
-import { RoundParticipantDialogComponent } from '../dialogs/round-participant-dialog.component';
+} from '../../../store/event-manager.actions';
+import { EventManagerState } from '../../../store/event-manager.state';
+import { RoundParticipantDialogComponent } from '../../dialogs/round-participant-dialog/round-participant-dialog.component';
 
 @Component({
   selector: 'agari-event-configuration-step',

@@ -55,6 +55,8 @@ const materialModules: Type<any>[] = [
     ReactiveFormsModule,
     ...materialModules,
     RoundParticipantCountInputComponent,
+    ScheduleRoundComponent,
+    ScheduleRoundTableComponent,
     AgariTableComponent,
     ExcelExportDirective
   ]

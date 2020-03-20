@@ -5,10 +5,10 @@ import { NgxsModule } from '@ngxs/store';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { RoundParticipantDialogComponent } from './components/dialogs/round-participant-dialog.component';
+import { RoundParticipantDialogComponent } from './components/dialogs/round-participant-dialog/round-participant-dialog.component';
 import { EventManagerStepComponent } from './components/event-manager-step/event-manager-step.component';
 import { EventManagerStepperComponent } from './components/event-manager-stepper/event-manager-stepper.component';
-import { EventConfigurationStepComponent } from './components/steps/event-configuration-step.component';
+import { EventConfigurationStepComponent } from './components/steps/event-configuration-step/event-configuration-step.component';
 import { eventManagerRoutes } from './event-manager.routes';
 import { EventManagerComponent } from './page/event-manager.component';
 import { EventManagerState } from './store/event-manager.state';
