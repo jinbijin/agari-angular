@@ -62,6 +62,11 @@ export class EventManagerState {
     return state.registrationFlag;
   }
 
+  @Selector()
+  public static registrationReady(state: EventManagerStateModel): boolean {
+    return state.participants?.every(p => !!p) || false;
+  }
+
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   @Action(SetRoundParticipantCount)

@@ -24,6 +24,9 @@ export class EventRegistrationStepComponent {
   @Select(EventManagerState.registrationFlag)
   public readonly finalized$: Observable<boolean>;
 
+  @Select(EventManagerState.registrationReady)
+  public readonly ready$: Observable<boolean>;
+
   @Output() public readonly previous: EventEmitter<void> = new EventEmitter();
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
 
