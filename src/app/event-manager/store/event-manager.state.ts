@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { GenerateScheduleGQL, Schedule } from 'src/app/graphql/generated/types';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
+import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
 import {
   FinalizeConfiguration,
@@ -20,6 +21,7 @@ export interface EventManagerStateModel {
   roundParticipantCount?: RoundParticipantCount;
   schedule?: Schedule;
   participants?: (Participant | undefined)[];
+  results?: (RoundResult | undefined)[];
 
   roundParticipantFlag: boolean;
   configurationFlag: boolean;
@@ -45,6 +47,11 @@ export class EventManagerState {
   @Selector()
   public static participants(state: EventManagerStateModel): (Participant | undefined)[] | undefined {
     return state.participants;
+  }
+
+  @Selector()
+  public static results(state: EventManagerStateModel): (RoundResult | undefined)[] | undefined {
+    return state.results;
   }
 
   @Selector()
@@ -95,9 +102,11 @@ export class EventManagerState {
 
   @Action(FinalizeConfiguration)
   public finalizeConfiguration(ctx: StateContext<EventManagerStateModel>): void {
+    const roundParticipantCount = ctx.getState().roundParticipantCount;
     ctx.patchState({
       configurationFlag: true,
-      participants: [...new Array(ctx.getState().roundParticipantCount?.participantCount)]
+      participants: [...new Array(roundParticipantCount?.participantCount)],
+      results: [...new Array(roundParticipantCount?.roundCount)]
     });
   }
 
@@ -110,6 +119,16 @@ export class EventManagerState {
 
   @Action(FinalizeRegistration)
   public finalizeRegistration(ctx: StateContext<EventManagerStateModel>): void {
-    ctx.patchState({ registrationFlag: true });
+    ctx.patchState({
+      registrationFlag: true,
+      results: ctx.getState().schedule?.rounds.map(r => ({
+        games: r.games.map(g => ({
+          [g.participantNrs[0]]: undefined,
+          [g.participantNrs[1]]: undefined,
+          [g.participantNrs[2]]: undefined,
+          [g.participantNrs[3]]: undefined
+        }))
+      }))
+    });
   }
 }

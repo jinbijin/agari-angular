@@ -1,4 +1,6 @@
 export interface ParticipantResult {
   basicScoreTimesSixty: number;
-  bonusScoreTimesSixty: number;
+  placementScoreTimesSixty: number;
+  finalScoreTimesSixty: number;
+  bonusScoreTimesSixty?: number;
 }
