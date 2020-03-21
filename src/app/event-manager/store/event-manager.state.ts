@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -46,7 +47,10 @@ export class EventManagerState {
     return state.configurationFlag;
   }
 
-  constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  constructor(
+    private readonly dialog: MatDialog,
+    private readonly generateScheduleGql: GenerateScheduleGQL
+  ) {}
 
   @Action(SetRoundParticipantCount)
   public setRoundParticipantCount(

@@ -14,6 +14,7 @@ import {
 } from '../../../store/event-manager.actions';
 import { EventManagerState } from '../../../store/event-manager.state';
 import { RoundParticipantDialogComponent } from '../../dialogs/round-participant-dialog/round-participant-dialog.component';
+import { ScheduleDialogComponent } from '../../dialogs/schedule-dialog/schedule-dialog.component';
 
 @Component({
   selector: 'agari-event-configuration-step',
@@ -44,6 +45,10 @@ export class EventConfigurationStepComponent {
 
   public unsetNumber(): void {
     this.store.dispatch(new SetRoundParticipantCount(undefined));
+  }
+
+  public viewSchedule(): void {
+    this.dialog.open(ScheduleDialogComponent);
   }
 
   public generateSchedule(): void {
