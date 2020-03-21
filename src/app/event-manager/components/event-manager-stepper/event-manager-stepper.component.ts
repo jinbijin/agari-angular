@@ -20,7 +20,7 @@ import { EventManagerStepComponent } from '../event-manager-step/event-manager-s
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
-  private readonly subscriptions: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription();
 
   @ViewChildren(EventManagerStepComponent) public steps: QueryList<EventManagerStepComponent>;
 
@@ -60,6 +60,7 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
 
   private resetSubscriptions(): void {
     this.subscriptions.unsubscribe();
+    this.subscriptions = new Subscription();
     for (const [index, step] of this.steps.toArray().entries()) {
       step.index = index;
       this.subscriptions.add(

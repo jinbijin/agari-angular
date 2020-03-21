@@ -60,6 +60,11 @@ export class EventManagerState implements NgxsOnInit {
   }
 
   @Selector()
+  public static result(state: EventManagerStateModel): (index: number) => RoundResult | undefined {
+    return (index: number) => (state.results ? state.results[index] : undefined);
+  }
+
+  @Selector()
   public static roundParticipantFlag(state: EventManagerStateModel): boolean {
     return state.roundParticipantFlag;
   }

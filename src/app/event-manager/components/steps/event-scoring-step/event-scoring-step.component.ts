@@ -8,5 +8,4 @@ import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 })
 export class EventScoringStepComponent {
   @Input() public index: number;
-  @Input() public roundResult: RoundResult;
 }

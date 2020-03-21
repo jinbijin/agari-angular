@@ -16,10 +16,12 @@
   </agari-event-manager-step>
   <ng-container *ngIf="results$ | async as results">
     <ng-container *ngFor="let round of results.entries(); trackBy: trackStepBy">
-      <agari-event-manager-step [disabled]="!(registrationFinalized$ | async)">
+      <agari-event-manager-step
+        [disabled]="!(registrationFinalized$ | async) || results[round[0] - 1]?.finalized === false"
+      >
         <ng-template #header>Round {{ round[0] | asOrdinal }}</ng-template>
         <ng-template #content>
-          <agari-event-scoring-step [index]="round[0]" [roundResult]="round[1]!"></agari-event-scoring-step>
+          <agari-event-scoring-step [index]="round[0]"></agari-event-scoring-step>
         </ng-template>
       </agari-event-manager-step>
     </ng-container>
