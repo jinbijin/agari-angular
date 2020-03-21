@@ -1,0 +1,38 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Serif JP', serif;
+  font-size: small;
+}
+
+footer .mat-toolbar {
+  font-size: medium;
+}
+
+.mat-icon {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.mat-icon-button {
+  width: 24px !important;
+  height: 24px !important;
+
+  & .mat-icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+.mat-list-item {
+  font-size: small !important;
+}
+
+.material-icons {
+  font-size: medium !important;
+}

@@ -1,3 +1,4 @@
+import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 
 export class SetRoundParticipantCount {
@@ -18,4 +19,9 @@ export class UnsetSchedule {
 export class FinalizeConfiguration {
   public static readonly type: string = '[EventManager] Finalize configuration';
   constructor() {}
+}
+
+export class SetParticipant {
+  public static readonly type: string = '[EventManager] Set participant';
+  constructor(public readonly payload: { participant?: Participant; key: number }) {}
 }

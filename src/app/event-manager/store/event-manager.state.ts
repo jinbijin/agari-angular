@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { patch, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GenerateScheduleGQL, Schedule } from 'src/app/graphql/generated/types';
@@ -9,6 +10,7 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
 import {
   FinalizeConfiguration,
   GenerateSchedule,
+  SetParticipant,
   SetRoundParticipantCount,
   UnsetSchedule
 } from './event-manager.actions';
@@ -85,5 +87,12 @@ export class EventManagerState {
       configurationFlag: true,
       participants: [...new Array(ctx.getState().roundParticipantCount?.participantCount)]
     });
+  }
+
+  @Action(SetParticipant)
+  public setParticipant(ctx: StateContext<EventManagerStateModel>, { payload }: SetParticipant): void {
+    ctx.setState(
+      patch({ participants: updateItem<Participant | undefined>(payload.key, payload.participant) })
+    );
   }
 }
