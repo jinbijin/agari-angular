@@ -1,26 +1,21 @@
 <mat-list *ngIf="participants$ | async as participants">
   <mat-list-item
-    *ngFor="let participant of participants.entries(); trackBy: trackEntryByIndex"
+    *ngFor="let participant of participants; trackBy: trackEntryByIndex; index as index"
     class="agari-flex-row"
   >
-    <strong class="agari-number">{{ participant[0] | asOrdinal }}.&nbsp;</strong>
-    <span class="agari-overflow agari-spacer">{{ participant[1]?.name }}</span>
-    <button mat-icon-button *ngIf="!participant[1]" color="primary" (click)="setParticipant(participant[0])">
+    <strong class="agari-number">{{ index | asOrdinal }}.&nbsp;</strong>
+    <span class="agari-overflow agari-spacer">{{ participant?.name }}</span>
+    <button mat-icon-button *ngIf="!participant" color="primary" (click)="setParticipant(index)">
       <mat-icon>add</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      *ngIf="participant[1]"
-      color="primary"
-      (click)="setParticipant(participant[0], participant[1])"
-    >
+    <button mat-icon-button *ngIf="participant" color="primary" (click)="setParticipant(index, participant)">
       <mat-icon>create</mat-icon>
     </button>
     <button
       mat-icon-button
-      *ngIf="participant[1] && !(finalized$ | async)"
+      *ngIf="participant && !(finalized$ | async)"
       color="primary"
-      (click)="unsetParticipant(participant[0])"
+      (click)="unsetParticipant(index)"
     >
       <mat-icon>delete</mat-icon>
     </button>

@@ -44,8 +44,8 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public trackStepBy(index: number, item: [number, RoundResult | undefined]): number {
-    return item[0];
+  public trackStepByIndex(index: number, item: RoundResult | undefined): number {
+    return index;
   }
 
   public previousStep(): void {

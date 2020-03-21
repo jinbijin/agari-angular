@@ -42,8 +42,8 @@ export class EventRegistrationStepComponent {
     this.store.dispatch(new SetParticipant({ index }));
   }
 
-  public trackEntryByIndex(index: number, item: [number, Participant]): number {
-    return item[0];
+  public trackEntryByIndex(index: number, item: Participant): number {
+    return index;
   }
 
   public goToPrevious(): void {

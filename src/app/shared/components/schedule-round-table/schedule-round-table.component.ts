@@ -33,7 +33,7 @@ export class ScheduleRoundTableComponent implements OnInit {
   public ngOnInit(): void {
     this.dataSource = [...this.scheduleRound.games.entries()];
     this.tableConfiguration = {
-      dataSource: new MatTableDataSource<[number, ScheduleGame]>([...this.scheduleRound.games.entries()]),
+      dataSource: new MatTableDataSource<[number, ScheduleGame]>(this.dataSource),
       headers: false,
       columns: [
         { id: 'table', cell: element => 'Table', classes: ['agari-cell-text'] },

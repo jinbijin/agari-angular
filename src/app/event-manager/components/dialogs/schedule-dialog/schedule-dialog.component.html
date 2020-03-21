@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Schedule</h2>
 <mat-dialog-content>
   <div class="agari-grid" *ngIf="schedule$ | async as schedule">
-    <div class="agari-grid-item" *ngFor="let item of schedule.rounds.entries()">
+    <div class="agari-grid-item" *ngFor="let round of schedule.rounds; index as index">
       <agari-schedule-round
-        *ngIf="item[1]"
-        [scheduleRound]="item[1]"
-        [roundNumber]="item[0] | asOrdinal"
+        *ngIf="round"
+        [scheduleRound]="round"
+        [roundNumber]="index | asOrdinal"
         data-test-id="schedule-round"
       ></agari-schedule-round>
     </div>
