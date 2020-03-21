@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GenerateScheduleGQL, Schedule } from 'src/app/graphql/generated/types';
+import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 
 import {
@@ -16,6 +16,7 @@ import {
 export interface EventManagerStateModel {
   roundParticipantCount?: RoundParticipantCount;
   schedule?: Schedule;
+  participants?: (Participant | undefined)[];
 
   roundParticipantFlag: boolean;
   configurationFlag: boolean;
@@ -38,6 +39,11 @@ export class EventManagerState {
   }
 
   @Selector()
+  public static participants(state: EventManagerStateModel): (Participant | undefined)[] | undefined {
+    return state.participants;
+  }
+
+  @Selector()
   public static roundParticipantFlag(state: EventManagerStateModel): boolean {
     return state.roundParticipantFlag;
   }
@@ -47,10 +53,7 @@ export class EventManagerState {
     return state.configurationFlag;
   }
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly generateScheduleGql: GenerateScheduleGQL
-  ) {}
+  constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   @Action(SetRoundParticipantCount)
   public setRoundParticipantCount(
@@ -78,6 +81,9 @@ export class EventManagerState {
 
   @Action(FinalizeConfiguration)
   public finalizeConfiguration(ctx: StateContext<EventManagerStateModel>): void {
-    ctx.patchState({ configurationFlag: true });
+    ctx.patchState({
+      configurationFlag: true,
+      participants: [...new Array(ctx.getState().roundParticipantCount?.participantCount)]
+    });
   }
 }

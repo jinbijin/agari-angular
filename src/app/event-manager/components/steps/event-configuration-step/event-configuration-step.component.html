@@ -8,12 +8,18 @@
   <mat-action-row *ngIf="!(finalized$ | async)">
     <button
       mat-icon-button
+      color="primary"
       matTooltip="Edit round and participant numbers"
       (click)="setNumber(roundParticipantCount)"
     >
       <mat-icon>create</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Unset round and participant numbers" (click)="unsetNumber()">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Unset round and participant numbers"
+      (click)="unsetNumber()"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </mat-action-row>
@@ -23,14 +29,15 @@
   <ng-container *ngIf="schedule$ | async as schedule; else scheduleEmpty">
     <p>Schedule generated!</p>
     <mat-action-row>
-      <button mat-icon-button matTooltip="View schedule" (click)="viewSchedule()">
+      <button mat-icon-button color="primary" matTooltip="View schedule" (click)="viewSchedule()">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Replace schedule" (click)="generateSchedule()">
+      <button mat-icon-button color="primary" matTooltip="Replace schedule" (click)="generateSchedule()">
         <mat-icon>create</mat-icon>
       </button>
       <button
         mat-icon-button
+        color="primary"
         matTooltip="Delete schedule"
         *ngIf="!(finalized$ | async)"
         (click)="unsetSchedule()"

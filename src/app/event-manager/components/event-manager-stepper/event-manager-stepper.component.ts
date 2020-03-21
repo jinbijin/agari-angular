@@ -1,4 +1,11 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -12,7 +19,7 @@ import { EventManagerStepComponent } from '../event-manager-step/event-manager-s
   templateUrl: './event-manager-stepper.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventManagerStepperComponent implements AfterViewInit {
+export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
   private readonly subscriptions: Subscription = new Subscription();
 
   @ViewChildren(EventManagerStepComponent) public steps: QueryList<EventManagerStepComponent>;
@@ -37,6 +44,10 @@ export class EventManagerStepperComponent implements AfterViewInit {
       );
       this.subscriptions.add(step.panel.opened.pipe(tap(() => this.setStep(index + 1))).subscribe());
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   public nextStep(): void {

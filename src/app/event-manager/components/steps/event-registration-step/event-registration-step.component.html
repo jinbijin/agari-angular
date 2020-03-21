@@ -1,1 +1,9 @@
-<p>It works!</p>
+<mat-list *ngIf="participants$ | async as participants">
+  <mat-list-item *ngFor="let participant of participants.entries()" class="agari-flex-row">
+    <strong class="agari-number">{{ participant[0] + 1 }}.&nbsp;</strong>
+    <span class="agari-spacer"></span>
+    <button mat-icon-button *ngIf="!participant[1]" color="primary"><mat-icon>add</mat-icon></button>
+    <button mat-icon-button *ngIf="participant[1]" color="primary"><mat-icon>create</mat-icon></button>
+    <button mat-icon-button *ngIf="participant[1]" color="primary"><mat-icon>delete</mat-icon></button>
+  </mat-list-item>
+</mat-list>
