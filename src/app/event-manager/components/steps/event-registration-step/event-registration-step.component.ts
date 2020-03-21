@@ -30,19 +30,19 @@ export class EventRegistrationStepComponent {
   @Output() public readonly previous: EventEmitter<void> = new EventEmitter();
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
 
-  public setParticipant(key: number, participant?: Participant): void {
-    const dialogRef = this.dialog.open(ParticipantDialogComponent, { data: { participant, key } });
+  public setParticipant(index: number, participant?: Participant): void {
+    const dialogRef = this.dialog.open(ParticipantDialogComponent, { data: { participant, index } });
     dialogRef
       .afterClosed()
-      .pipe(tap(value => this.store.dispatch(new SetParticipant({ participant: value, key }))))
+      .pipe(tap(value => this.store.dispatch(new SetParticipant({ participant: value, index }))))
       .subscribe();
   }
 
-  public unsetParticipant(key: number): void {
-    this.store.dispatch(new SetParticipant({ key }));
+  public unsetParticipant(index: number): void {
+    this.store.dispatch(new SetParticipant({ index }));
   }
 
-  public trackEntryByKey(index: number, item: [number, Participant]): number {
+  public trackEntryByIndex(index: number, item: [number, Participant]): number {
     return item[0];
   }
 

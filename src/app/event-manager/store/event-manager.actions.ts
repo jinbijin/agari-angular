@@ -23,7 +23,7 @@ export class FinalizeConfiguration {
 
 export class SetParticipant {
   public static readonly type: string = '[EventManager] Set participant';
-  constructor(public readonly payload: { participant?: Participant; key: number }) {}
+  constructor(public readonly payload: { participant?: Participant; index: number }) {}
 }
 
 export class FinalizeRegistration {

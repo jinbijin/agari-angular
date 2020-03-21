@@ -14,7 +14,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventManagerStepComponent {
-  public rank: number;
+  public index: number;
 
   @Input() public disabled: boolean;
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, createSelector, Selector, State, StateContext } from '@ngxs/store';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -47,6 +47,11 @@ export class EventManagerState {
   @Selector()
   public static participants(state: EventManagerStateModel): (Participant | undefined)[] | undefined {
     return state.participants;
+  }
+
+  @Selector()
+  public static participant(state: EventManagerStateModel): (index: number) => Participant | undefined {
+    return (index: number) => (state.participants ? state.participants[index] : undefined);
   }
 
   @Selector()
@@ -113,7 +118,7 @@ export class EventManagerState {
   @Action(SetParticipant)
   public setParticipant(ctx: StateContext<EventManagerStateModel>, { payload }: SetParticipant): void {
     ctx.setState(
-      patch({ participants: updateItem<Participant | undefined>(payload.key, payload.participant) })
+      patch({ participants: updateItem<Participant | undefined>(payload.index, payload.participant) })
     );
   }
 
@@ -122,6 +127,7 @@ export class EventManagerState {
     ctx.patchState({
       registrationFlag: true,
       results: ctx.getState().schedule?.rounds.map(r => ({
+        finalized: false,
         games: r.games.map(g => ({
           [g.participantNrs[0]]: undefined,
           [g.participantNrs[1]]: undefined,

@@ -1,6 +1,6 @@
 <mat-expansion-panel hideToggle [disabled]="disabled">
   <mat-expansion-panel-header>
-    <strong>{{ rank }}.&nbsp;</strong>
+    <strong>{{ index | asOrdinal }}.&nbsp;</strong>
     <ng-container *ngTemplateOutlet="header || defaultHeader"></ng-container>
   </mat-expansion-panel-header>
 

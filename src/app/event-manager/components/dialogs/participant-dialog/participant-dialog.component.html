@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Participant no. {{ data.key + 1 }}</h2>
+<h2 mat-dialog-title>Participant no. {{ data.index | asOrdinal }}</h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
     <mat-form-field [formControl]="formGroup.controls.name" ngDefaultControl>

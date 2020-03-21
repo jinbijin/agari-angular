@@ -1,9 +1,9 @@
 <mat-list *ngIf="participants$ | async as participants">
   <mat-list-item
-    *ngFor="let participant of participants.entries(); trackBy: trackEntryByKey"
+    *ngFor="let participant of participants.entries(); trackBy: trackEntryByIndex"
     class="agari-flex-row"
   >
-    <strong class="agari-number">{{ participant[0] + 1 }}.&nbsp;</strong>
+    <strong class="agari-number">{{ participant[0] | asOrdinal }}.&nbsp;</strong>
     <span class="agari-overflow agari-spacer">{{ participant[1]?.name }}</span>
     <button mat-icon-button *ngIf="!participant[1]" color="primary" (click)="setParticipant(participant[0])">
       <mat-icon>add</mat-icon>

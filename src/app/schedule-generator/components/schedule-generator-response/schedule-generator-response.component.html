@@ -12,7 +12,7 @@
           <agari-schedule-round
             *ngIf="item[1]"
             [scheduleRound]="item[1]"
-            [roundNumber]="item[0] + 1"
+            [roundNumber]="item[0] | asOrdinal"
             data-test-id="schedule-round"
           ></agari-schedule-round>
         </div>

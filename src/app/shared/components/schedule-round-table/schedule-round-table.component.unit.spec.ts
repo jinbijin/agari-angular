@@ -39,24 +39,24 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 
   it('should compute the correct table configuration', () => {
     page.host.scheduleRound = {
-      games: [{ participantNrs: [1, 2, 3, 4] }, { participantNrs: [5, 6, 7, 8] }]
+      games: [{ participantNrs: [0, 1, 2, 3] }, { participantNrs: [4, 5, 6, 7] }]
     };
     page.detectChanges();
 
     expect(page.root.tableConfiguration.headers).toEqual(false);
     expect(page.root.tableConfiguration.dataSource.data).toEqual([
-      [0, { participantNrs: [1, 2, 3, 4] }],
-      [1, { participantNrs: [5, 6, 7, 8] }]
+      [0, { participantNrs: [0, 1, 2, 3] }],
+      [1, { participantNrs: [4, 5, 6, 7] }]
     ]);
   });
 
   it('should compute the correct column configuration', () => {
     page.host.scheduleRound = {
-      games: [{ participantNrs: [1, 2, 3, 4] }]
+      games: [{ participantNrs: [0, 1, 2, 3] }]
     };
     page.detectChanges();
 
-    const element: [number, ScheduleGame] = [1, { participantNrs: [5, 6, 7, 8] }];
+    const element: [number, ScheduleGame] = [1, { participantNrs: [4, 5, 6, 7] }];
 
     expect(page.root.tableConfiguration.columns.length).toEqual(6);
     expect(page.root.tableConfiguration.columns[0].cell(element)).toEqual('Table');

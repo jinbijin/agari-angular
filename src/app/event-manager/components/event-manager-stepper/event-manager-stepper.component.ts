@@ -24,7 +24,7 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
 
   @ViewChildren(EventManagerStepComponent) public steps: QueryList<EventManagerStepComponent>;
 
-  private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Select(EventManagerState.configurationFlag)
   public readonly configFinalized$: Observable<boolean>;
@@ -61,17 +61,16 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
   private resetSubscriptions(): void {
     this.subscriptions.unsubscribe();
     for (const [index, step] of this.steps.toArray().entries()) {
-      const rank = index + 1;
-      step.rank = rank;
+      step.index = index;
       this.subscriptions.add(
         this.currentStep
           .pipe(
-            filter(current => current === rank),
+            filter(current => current === index),
             tap(() => step.panel.open())
           )
           .subscribe()
       );
-      this.subscriptions.add(step.panel.opened.pipe(tap(() => this.setStep(index + 1))).subscribe());
+      this.subscriptions.add(step.panel.opened.pipe(tap(() => this.setStep(index))).subscribe());
     }
   }
 

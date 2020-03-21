@@ -8,7 +8,7 @@ import { Participant } from 'src/app/instrumentation/types/participant.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: { participant?: Participant; key: number }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: { participant?: Participant; index: number }) {}
 
   public formGroup: FormGroup & { controls: Record<keyof Participant, FormControl> } = new FormGroup({
     id: new FormControl(this.data.participant?.id),
