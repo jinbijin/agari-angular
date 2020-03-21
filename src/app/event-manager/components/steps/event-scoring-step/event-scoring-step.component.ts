@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
 @Component({
   selector: 'agari-event-scoring-step',
@@ -7,4 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class EventScoringStepComponent {
   @Input() public index: number;
+  @Input() public roundResult: RoundResult;
 }
