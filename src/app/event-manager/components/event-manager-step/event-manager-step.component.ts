@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
@@ -8,6 +15,8 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 })
 export class EventManagerStepComponent {
   public rank: number;
+
+  @Input() public disabled: boolean;
 
   @ViewChild(MatExpansionPanel) public panel: MatExpansionPanel;
 

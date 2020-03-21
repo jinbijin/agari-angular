@@ -10,6 +10,7 @@ import { ScheduleDialogComponent } from './components/dialogs/schedule-dialog/sc
 import { EventManagerStepComponent } from './components/event-manager-step/event-manager-step.component';
 import { EventManagerStepperComponent } from './components/event-manager-stepper/event-manager-stepper.component';
 import { EventConfigurationStepComponent } from './components/steps/event-configuration-step/event-configuration-step.component';
+import { EventRegistrationStepComponent } from './components/steps/event-registration-step/event-registration-step.component';
 import { eventManagerRoutes } from './event-manager.routes';
 import { EventManagerComponent } from './page/event-manager.component';
 import { EventManagerState } from './store/event-manager.state';
@@ -20,6 +21,7 @@ import { EventManagerState } from './store/event-manager.state';
     EventManagerStepperComponent,
     EventManagerStepComponent,
     EventConfigurationStepComponent,
+    EventRegistrationStepComponent,
     RoundParticipantDialogComponent,
     ScheduleDialogComponent
   ],

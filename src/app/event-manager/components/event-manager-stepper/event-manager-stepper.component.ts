@@ -1,8 +1,10 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Select } from '@ngxs/store';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
+import { EventManagerState } from '../../store/event-manager.state';
 import { EventManagerStepComponent } from '../event-manager-step/event-manager-step.component';
 
 @Component({
@@ -17,6 +19,9 @@ export class EventManagerStepperComponent implements AfterViewInit {
   @ViewChildren(MatExpansionPanel) public panels: QueryList<MatExpansionPanel>;
 
   private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+
+  @Select(EventManagerState.configurationFlag)
+  public readonly configFinalized$: Observable<boolean>;
 
   public ngAfterViewInit(): void {
     for (const [index, step] of this.steps.toArray().entries()) {
