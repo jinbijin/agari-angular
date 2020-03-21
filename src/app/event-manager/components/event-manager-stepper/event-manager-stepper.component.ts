@@ -50,6 +50,11 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  public previousStep(): void {
+    const current = this.currentStep.value;
+    this.currentStep.next(current - 1);
+  }
+
   public nextStep(): void {
     const current = this.currentStep.value;
     this.currentStep.next(current + 1);

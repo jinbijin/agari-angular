@@ -36,6 +36,9 @@ export class EventConfigurationStepComponent {
   @Select(EventManagerState.configurationFlag)
   public readonly finalized$: Observable<boolean>;
 
+  @Select(EventManagerState.registrationFlag)
+  public readonly registrationFinalized$: Observable<boolean>;
+
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
 
   public setNumber(roundParticipantCount?: RoundParticipantCount): void {

@@ -25,3 +25,8 @@ export class SetParticipant {
   public static readonly type: string = '[EventManager] Set participant';
   constructor(public readonly payload: { participant?: Participant; key: number }) {}
 }
+
+export class FinalizeRegistration {
+  public static readonly type: string = '[EventManager] Finalize registration';
+  constructor() {}
+}

@@ -9,6 +9,7 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
 
 import {
   FinalizeConfiguration,
+  FinalizeRegistration,
   GenerateSchedule,
   SetParticipant,
   SetRoundParticipantCount,
@@ -22,11 +23,12 @@ export interface EventManagerStateModel {
 
   roundParticipantFlag: boolean;
   configurationFlag: boolean;
+  registrationFlag: boolean;
 }
 
 @State({
   name: 'eventManager',
-  defaults: { roundParticipantFlag: false, configurationFlag: false }
+  defaults: { roundParticipantFlag: false, configurationFlag: false, registrationFlag: false }
 })
 @Injectable()
 export class EventManagerState {
@@ -53,6 +55,11 @@ export class EventManagerState {
   @Selector()
   public static configurationFlag(state: EventManagerStateModel): boolean {
     return state.configurationFlag;
+  }
+
+  @Selector()
+  public static registrationFlag(state: EventManagerStateModel): boolean {
+    return state.registrationFlag;
   }
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
@@ -94,5 +101,10 @@ export class EventManagerState {
     ctx.setState(
       patch({ participants: updateItem<Participant | undefined>(payload.key, payload.participant) })
     );
+  }
+
+  @Action(FinalizeRegistration)
+  public finalizeRegistration(ctx: StateContext<EventManagerStateModel>): void {
+    ctx.patchState({ registrationFlag: true });
   }
 }

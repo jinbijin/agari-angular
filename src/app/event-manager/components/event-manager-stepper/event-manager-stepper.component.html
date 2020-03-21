@@ -8,7 +8,10 @@
   <agari-event-manager-step [disabled]="!(configFinalized$ | async)">
     <ng-template #header>Registration</ng-template>
     <ng-template #content>
-      <agari-event-registration-step></agari-event-registration-step>
+      <agari-event-registration-step
+        (previous)="previousStep()"
+        (next)="nextStep()"
+      ></agari-event-registration-step>
     </ng-template>
   </agari-event-manager-step>
 </mat-accordion>

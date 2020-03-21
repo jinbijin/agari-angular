@@ -32,7 +32,13 @@
       <button mat-icon-button color="primary" matTooltip="View schedule" (click)="viewSchedule()">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button color="primary" matTooltip="Replace schedule" (click)="generateSchedule()">
+      <button
+        mat-icon-button
+        color="primary"
+        matTooltip="Replace schedule"
+        *ngIf="!(registrationFinalized$ | async)"
+        (click)="generateSchedule()"
+      >
         <mat-icon>create</mat-icon>
       </button>
       <button
