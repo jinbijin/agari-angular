@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, createSelector, Selector, State, StateContext } from '@ngxs/store';
+import { Action, createSelector, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export interface EventManagerStateModel {
   defaults: { roundParticipantFlag: false, configurationFlag: false, registrationFlag: false }
 })
 @Injectable()
-export class EventManagerState {
+export class EventManagerState implements NgxsOnInit {
   @Selector()
   public static roundParticipantCount(state: EventManagerStateModel): RoundParticipantCount | undefined {
     return state.roundParticipantCount;
@@ -80,6 +80,80 @@ export class EventManagerState {
   }
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  public ngxsOnInit(ctx: StateContext<EventManagerStateModel>) {
+    ctx.setState({
+      roundParticipantCount: {
+        roundCount: 4,
+        participantCount: 20
+      },
+      schedule: {
+        rounds: [
+          {
+            games: [
+              { participantNrs: [0, 1, 2, 3] },
+              { participantNrs: [4, 5, 6, 7] },
+              { participantNrs: [8, 9, 10, 11] },
+              { participantNrs: [12, 13, 14, 15] },
+              { participantNrs: [16, 17, 18, 19] }
+            ]
+          },
+          {
+            games: [
+              { participantNrs: [1, 4, 10, 19] },
+              { participantNrs: [3, 5, 8, 14] },
+              { participantNrs: [7, 9, 12, 18] },
+              { participantNrs: [2, 11, 13, 16] },
+              { participantNrs: [0, 6, 15, 17] }
+            ]
+          },
+          {
+            games: [
+              { participantNrs: [6, 8, 13, 19] },
+              { participantNrs: [3, 10, 12, 17] },
+              { participantNrs: [1, 7, 14, 16] },
+              { participantNrs: [0, 5, 11, 18] },
+              { participantNrs: [2, 4, 9, 15] }
+            ]
+          },
+          {
+            games: [
+              { participantNrs: [1, 6, 11, 12] },
+              { participantNrs: [5, 10, 15, 16] },
+              { participantNrs: [0, 9, 14, 19] },
+              { participantNrs: [3, 4, 13, 18] },
+              { participantNrs: [2, 7, 8, 17] }
+            ]
+          }
+        ]
+      },
+      participants: [
+        { name: 'A' },
+        { name: 'B' },
+        { name: 'C' },
+        { name: 'D' },
+        { name: 'E' },
+        { name: 'F' },
+        { name: 'G' },
+        { name: 'H' },
+        { name: 'I' },
+        { name: 'J' },
+        { name: 'K' },
+        { name: 'L' },
+        { name: 'M' },
+        { name: 'N' },
+        { name: 'O' },
+        { name: 'P' },
+        { name: 'Q' },
+        { name: 'R' },
+        { name: 'S' },
+        { name: 'T' }
+      ],
+      results: [undefined, undefined, undefined, undefined],
+      roundParticipantFlag: true,
+      configurationFlag: true,
+      registrationFlag: false
+    });
+  }
 
   @Action(SetRoundParticipantCount)
   public setRoundParticipantCount(
