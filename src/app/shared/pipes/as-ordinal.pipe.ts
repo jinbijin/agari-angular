@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { Transforms } from '../transforms/as-ordinal.transform';
+import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 
 @Pipe({
   name: 'asOrdinal'

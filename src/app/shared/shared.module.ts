@@ -21,6 +21,7 @@ import { ScheduleRoundComponent } from './components/schedule-round/schedule-rou
 import { ExcelExportDirective } from './directives/excel-export.directive';
 import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AsNumberPipe } from './pipes/as-number.pipe';
 import { AsOrdinalPipe } from './pipes/as-ordinal.pipe';
 import { AgariTableComponent } from './table/agari-table.component';
 
@@ -49,6 +50,7 @@ const materialModules: Type<any>[] = [
     ScheduleRoundTableComponent,
     AgariTableComponent,
     ExcelExportDirective,
+    AsNumberPipe,
     AsOrdinalPipe
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
@@ -61,6 +63,7 @@ const materialModules: Type<any>[] = [
     ScheduleRoundTableComponent,
     AgariTableComponent,
     ExcelExportDirective,
+    AsNumberPipe,
     AsOrdinalPipe
   ]
 })

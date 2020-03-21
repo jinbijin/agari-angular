@@ -21,18 +21,16 @@
     </button>
   </mat-list-item>
 </mat-list>
-<ng-container>
-  <mat-action-row>
-    <button mat-button (click)="goToPrevious()">Previous</button>
-    <button mat-flat-button *ngIf="finalized$ | async" color="primary" (click)="goToNext()">Next</button>
-    <button
-      mat-flat-button
-      *ngIf="!(finalized$ | async)"
-      color="accent"
-      (click)="finalize()"
-      [disabled]="!(ready$ | async)"
-    >
-      Finalize
-    </button>
-  </mat-action-row>
-</ng-container>
+<mat-action-row>
+  <button mat-button (click)="goToPrevious()">Previous</button>
+  <button mat-flat-button *ngIf="finalized$ | async" color="primary" (click)="goToNext()">Next</button>
+  <button
+    mat-flat-button
+    *ngIf="!(finalized$ | async)"
+    color="accent"
+    (click)="finalize()"
+    [disabled]="!(ready$ | async)"
+  >
+    Finalize
+  </button>
+</mat-action-row>

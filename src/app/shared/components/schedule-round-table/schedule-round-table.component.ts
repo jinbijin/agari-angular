@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { MatTableDataSource } from '@angular/material/table';
 import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { TableConfiguration } from 'src/app/instrumentation/data/table-configuration.type';
-
-import { Transforms } from '../../transforms/as-ordinal.transform';
+import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 
 @Component({
   selector: 'agari-schedule-round-table',

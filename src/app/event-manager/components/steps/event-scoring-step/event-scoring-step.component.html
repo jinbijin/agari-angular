@@ -1,1 +1,31 @@
-<p>It works!</p>
+<ng-container *ngIf="(result$ | async)!(index) as result">
+  <mat-card *ngFor="let game of result.games; index as tableIndex">
+    <mat-card-header>
+      <mat-card-title>Table {{ tableIndex | asOrdinal }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngFor="let participantNr of Object.keys(game)">
+        <span>{{ participantNr | asNumber | asOrdinal }}.&nbsp;</span>
+        <span *ngIf="(participant$ | async)!(participantNr | asNumber) as participant">
+          {{ participant.name }}
+        </span>
+        <ng-container *ngIf="game[participantNr] as participantResult">
+          <span>{{ participantResult.finalScoreTimesSixty }}</span>
+          (
+          <span>{{ participantResult.basicScoreTimesSixty }}</span>
+          +
+          <span>{{ participantResult.placementScoreTimesSixty }}</span>
+          )
+          <span>{{ participantResult.bonusScoreTimesSixty }}</span>
+        </ng-container>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-action-row>
+        <button mat-icon-button color="primary" *ngIf="!isSet(game)"><mat-icon>add</mat-icon></button>
+        <button mat-icon-button color="primary" *ngIf="isSet(game)"><mat-icon>create</mat-icon></button>
+        <button mat-icon-button color="primary" *ngIf="isSet(game)"><mat-icon>delete</mat-icon></button>
+      </mat-action-row>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
