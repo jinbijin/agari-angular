@@ -13,7 +13,7 @@
     </button>
     <button
       mat-icon-button
-      *ngIf="participant && !(finalized$ | async)"
+      *ngIf="participant && (finalized$ | async) !== true"
       color="primary"
       (click)="unsetParticipant(index)"
     >
@@ -26,10 +26,10 @@
   <button mat-flat-button *ngIf="finalized$ | async" color="primary" (click)="goToNext()">Next</button>
   <button
     mat-flat-button
-    *ngIf="!(finalized$ | async)"
+    *ngIf="(finalized$ | async) !== true"
     color="accent"
     (click)="finalize()"
-    [disabled]="!(ready$ | async)"
+    [disabled]="(ready$ | async) !== true"
   >
     Finalize
   </button>
