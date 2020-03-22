@@ -58,7 +58,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-flat-button mat-dialog-close color="accent" [disabled]="formGroup.invalid">
+  <button mat-flat-button [mat-dialog-close]="formGroup.value" color="accent" [disabled]="formGroup.invalid">
     <mat-icon>add_box</mat-icon>
     Save
   </button>
