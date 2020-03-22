@@ -1,9 +1,14 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
+import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-index.type';
+import { AgariErrorStateMatcher } from 'src/app/instrumentation/validators/agari-error-state-matcher';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
 
 @Component({
@@ -15,7 +20,12 @@ export class ScoringDialogComponent {
     @Inject(MAT_DIALOG_DATA) public readonly data: { index: ScheduleGameIndex; game: GameResult }
   ) {}
 
-  private readonly scoreRegex = new RegExp(/^\d*\.?\d{0,1}$/);
+  @Select(EventManagerState.participant)
+  public readonly participant$: Observable<(index: number) => Participant | undefined>;
+
+  public matcher: AgariErrorStateMatcher = new AgariErrorStateMatcher();
+
+  private readonly scoreRegex = new RegExp(/^\-?\d*\.?\d{0,1}$/);
 
   public keys: string[] = Object.keys(this.data.game);
 
@@ -41,7 +51,7 @@ export class ScoringDialogComponent {
           [Validators.required, Validators.pattern(this.scoreRegex)]
         )
       },
-      [AgariValidators.zeroSum]
+      { validators: [AgariValidators.zeroSum] }
     ),
     bonusScore: new FormGroup({
       [this.keys[0]]: new FormControl(Transforms.asScore(this.data.game[this.keys[0]]?.bonusScore), [
@@ -58,4 +68,18 @@ export class ScoringDialogComponent {
       ])
     })
   }) as any;
+
+  public basicScoreErrorMessage(errors: any): string | undefined {
+    if (errors.required) {
+      return 'This field is required.';
+    } else if (errors.pattern) {
+      return 'Invalid input. Expected a number with at most one decimal (.).';
+    }
+  }
+
+  public zeroSumErrorMessage(errors: any): string | undefined {
+    if (errors.zeroSum) {
+      return `The scores must sum to zero. Actual sum: ${errors.zeroSum.actualSum.toFixed(1)}`;
+    }
+  }
 }
