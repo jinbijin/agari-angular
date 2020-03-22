@@ -42,3 +42,8 @@ export class UnsetGameResult {
   public static readonly type: string = '[EventManager] Unset game result';
   constructor(public readonly payload: { index: ScheduleGameIndex }) {}
 }
+
+export class FinalizeRoundResult {
+  public static readonly type: string = '[EventManager] Finalize round result';
+  constructor(public readonly payload: { index: number }) {}
+}

@@ -13,6 +13,7 @@ import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-i
 import {
   FinalizeConfiguration,
   FinalizeRegistration,
+  FinalizeRoundResult,
   GenerateSchedule,
   SetGameResult,
   SetParticipant,
@@ -96,6 +97,14 @@ export class EventManagerState implements NgxsOnInit {
   @Selector()
   public static registrationReady(state: EventManagerStateModel): boolean {
     return state.participants?.every(p => !!p) || false;
+  }
+
+  @Selector()
+  public static roundReady(state: EventManagerStateModel): (index: number) => boolean {
+    return (index: number) => {
+      const round = state.results ? state.results[index] : undefined;
+      return round?.gameSet?.every(s => s) || false;
+    };
   }
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
@@ -226,7 +235,8 @@ export class EventManagerState implements NgxsOnInit {
           [g.participantNrs[1]]: undefined,
           [g.participantNrs[2]]: undefined,
           [g.participantNrs[3]]: undefined
-        }))
+        })),
+        gameSet: r.games.map(g => false)
       }))
     });
   }
@@ -238,7 +248,8 @@ export class EventManagerState implements NgxsOnInit {
         results: updateItem<RoundResult | undefined>(
           payload.index.roundIndex,
           patch({
-            games: updateItem<GameResult>(payload.index.gameIndex, payload.game)
+            games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
+            gameSet: updateItem<boolean>(payload.index.gameIndex, true)
           })
         )
       })
@@ -262,9 +273,22 @@ export class EventManagerState implements NgxsOnInit {
         results: updateItem<RoundResult | undefined>(
           payload.index.roundIndex,
           patch({
-            games: updateItem<GameResult>(payload.index.gameIndex, emptyGame)
+            games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
+            gameSet: updateItem<boolean>(payload.index.gameIndex, false)
           })
         )
+      })
+    );
+  }
+
+  @Action(FinalizeRoundResult)
+  public finalizeRoundResult(
+    ctx: StateContext<EventManagerStateModel>,
+    { payload }: FinalizeRoundResult
+  ): void {
+    ctx.setState(
+      patch({
+        results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any)
       })
     );
   }

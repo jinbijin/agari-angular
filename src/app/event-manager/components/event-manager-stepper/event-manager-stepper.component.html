@@ -21,9 +21,21 @@
       >
         <ng-template #header>Round {{ index | asOrdinal }}</ng-template>
         <ng-template #content>
-          <agari-event-scoring-step [index]="index"></agari-event-scoring-step>
+          <agari-event-scoring-step
+            [index]="index"
+            (previous)="previousStep()"
+            (next)="nextStep()"
+          ></agari-event-scoring-step>
         </ng-template>
       </agari-event-manager-step>
     </ng-container>
+    <agari-event-manager-step
+      [disabled]="
+        (registrationFinalized$ | async) !== true || results[results.length - 1]?.finalized === false
+      "
+    >
+      <ng-template #header>Done</ng-template>
+      <ng-template #content>All done!</ng-template>
+    </agari-event-manager-step>
   </ng-container>
 </mat-accordion>

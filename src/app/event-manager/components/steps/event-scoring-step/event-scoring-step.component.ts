@@ -1,10 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ScoreConverterService } from 'src/app/event-manager/services/score-converter.service';
-import { SetGameResult, UnsetGameResult } from 'src/app/event-manager/store/event-manager.actions';
+import {
+  FinalizeRoundResult,
+  SetGameResult,
+  UnsetGameResult
+} from 'src/app/event-manager/store/event-manager.actions';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
@@ -35,6 +39,12 @@ export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
 
   @Select(EventManagerState.result)
   public result$: Observable<(index: number) => RoundResult | undefined>;
+
+  @Select(EventManagerState.roundReady)
+  public ready$: Observable<(index: number) => boolean>;
+
+  @Output() public previous: EventEmitter<void> = new EventEmitter();
+  @Output() public next: EventEmitter<void> = new EventEmitter();
 
   public Object = Object;
 
@@ -67,5 +77,18 @@ export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
 
   public unsetScore(gameIndex: number): void {
     this.store.dispatch(new UnsetGameResult({ index: { roundIndex: this.index, gameIndex } }));
+  }
+
+  public goToPrevious(): void {
+    this.previous.emit();
+  }
+
+  public goToNext(): void {
+    this.next.emit();
+  }
+
+  public finalize(): void {
+    this.store.dispatch(new FinalizeRoundResult({ index: this.index }));
+    this.goToNext();
   }
 }
