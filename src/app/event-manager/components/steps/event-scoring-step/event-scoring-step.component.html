@@ -22,9 +22,15 @@
     </mat-card-content>
     <mat-card-actions>
       <mat-action-row>
-        <button mat-icon-button color="primary" *ngIf="!isSet(game)"><mat-icon>add</mat-icon></button>
-        <button mat-icon-button color="primary" *ngIf="isSet(game)"><mat-icon>create</mat-icon></button>
-        <button mat-icon-button color="primary" *ngIf="isSet(game)"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button color="primary" *ngIf="!isSet(game)" (click)="setScore()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="setScore()">
+          <mat-icon>create</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="unsetScore()">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-action-row>
     </mat-card-actions>
   </mat-card>

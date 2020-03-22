@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
@@ -6,12 +7,16 @@ import { GameResult } from 'src/app/instrumentation/types/game-result.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
+import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dialog.component';
+
 @Component({
   selector: 'agari-event-scoring-step',
   templateUrl: './event-scoring-step.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventScoringStepComponent {
+  constructor(private readonly dialog: MatDialog) {}
+
   @Input() public index: number;
 
   @Select(EventManagerState.participant)
@@ -27,4 +32,10 @@ export class EventScoringStepComponent {
       .map(n => game[n])
       .every(p => !!p);
   }
+
+  public setScore(): void {
+    this.dialog.open(ScoringDialogComponent);
+  }
+
+  public unsetScore(): void {}
 }
