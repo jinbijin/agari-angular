@@ -1,5 +1,5 @@
 <ng-container *ngIf="(result$ | async)!(index) as result">
-  <mat-card *ngFor="let game of result.games; index as gameIndex; trackBy: trackGameByIndex">
+  <mat-card *ngFor="let game of result.games; index as gameIndex; trackBy: trackByIndex">
     <mat-card-header>
       <mat-card-title>Table {{ gameIndex | asOrdinal }}</mat-card-title>
     </mat-card-header>

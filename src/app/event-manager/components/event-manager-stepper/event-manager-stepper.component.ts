@@ -9,6 +9,8 @@ import {
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
+import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
+import { Mixin } from 'src/app/instrumentation/mixins/mixin';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
 import { EventManagerState } from '../../store/event-manager.state';
@@ -19,7 +21,8 @@ import { EventManagerStepComponent } from '../event-manager-step/event-manager-s
   templateUrl: './event-manager-stepper.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
+export class EventManagerStepperComponent extends Mixin.TrackByIndex(EmptyBase)
+  implements AfterViewInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   @ViewChildren(EventManagerStepComponent) public steps: QueryList<EventManagerStepComponent>;
@@ -42,10 +45,6 @@ export class EventManagerStepperComponent implements AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  public trackStepByIndex(index: number, item: RoundResult | undefined): number {
-    return index;
   }
 
   public previousStep(): void {

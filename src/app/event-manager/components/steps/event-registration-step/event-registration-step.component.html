@@ -1,6 +1,6 @@
 <mat-list *ngIf="participants$ | async as participants">
   <mat-list-item
-    *ngFor="let participant of participants; trackBy: trackEntryByIndex; index as index"
+    *ngFor="let participant of participants; trackBy: trackByIndex; index as index"
     class="agari-flex-row"
   >
     <strong class="agari-number">{{ index | asOrdinal }}.&nbsp;</strong>

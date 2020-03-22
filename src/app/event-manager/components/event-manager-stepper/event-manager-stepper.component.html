@@ -15,7 +15,7 @@
     </ng-template>
   </agari-event-manager-step>
   <ng-container *ngIf="results$ | async as results">
-    <ng-container *ngFor="let round of results; trackBy: trackStepByIndex; index as index">
+    <ng-container *ngFor="let round of results; trackBy: trackByIndex; index as index">
       <agari-event-manager-step
         [disabled]="(registrationFinalized$ | async) !== true || results[index - 1]?.finalized === false"
       >

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { FinalizeRegistration, SetParticipant } from 'src/app/event-manager/store/event-manager.actions';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
+import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
+import { Mixin } from 'src/app/instrumentation/mixins/mixin';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 
 import { ParticipantDialogComponent } from '../../dialogs/participant-dialog/participant-dialog.component';
@@ -15,8 +17,10 @@ import { ParticipantDialogComponent } from '../../dialogs/participant-dialog/par
   styleUrls: ['./event-registration-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventRegistrationStepComponent {
-  constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
+export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase) {
+  constructor(private readonly dialog: MatDialog, private readonly store: Store) {
+    super();
+  }
 
   @Select(EventManagerState.participants)
   public readonly participants$: Observable<(Participant | undefined)[] | undefined>;
@@ -40,10 +44,6 @@ export class EventRegistrationStepComponent {
 
   public unsetParticipant(index: number): void {
     this.store.dispatch(new SetParticipant({ index }));
-  }
-
-  public trackEntryByIndex(index: number, item: Participant): number {
-    return index;
   }
 
   public goToPrevious(): void {
