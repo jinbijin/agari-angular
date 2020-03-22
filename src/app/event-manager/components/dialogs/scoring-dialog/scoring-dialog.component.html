@@ -20,12 +20,12 @@
             <input matInput [formControl]="control" [errorStateMatcher]="matcher" required />
             <mat-error *ngIf="formGroup.controls.basicScore.invalid">
               <ng-container *ngIf="control.errors as errors; else basicValid">
-                {{ basicScoreErrorMessage(errors) }}
+                {{ errorMessage.display(errors, customMessages) }}
               </ng-container>
               <ng-template #basicValid>
                 <ng-container *ngIf="isLast">
                   <ng-container *ngIf="formGroup.controls.basicScore.errors as errors">
-                    {{ zeroSumErrorMessage(errors) }}
+                    {{ errorMessage.display(errors, customMessages) }}
                   </ng-container>
                 </ng-container>
               </ng-template>
@@ -48,7 +48,7 @@
             </mat-label>
             <input matInput [formControl]="control" />
             <mat-error *ngIf="control.errors as errors">
-              {{ basicScoreErrorMessage(errors) }}
+              {{ errorMessage.display(errors, customMessages) }}
             </mat-error>
           </mat-form-field>
         </ng-container>

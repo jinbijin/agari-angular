@@ -4,7 +4,9 @@
     <mat-form-field [formControl]="formGroup.controls.name" ngDefaultControl>
       <mat-label>Participant name</mat-label>
       <input matInput [formControl]="formGroup.controls.name" required />
-      <mat-error *ngIf="formGroup.controls.name.errors as errors">{{ nameErrorMessage(errors) }}</mat-error>
+      <mat-error *ngIf="formGroup.controls.name.errors as errors">{{
+        errorMessage.display(errors)
+      }}</mat-error>
     </mat-form-field>
     <mat-form-field [formControl]="formGroup.controls.id" ngDefaultControl>
       <mat-label>Participant ID</mat-label>

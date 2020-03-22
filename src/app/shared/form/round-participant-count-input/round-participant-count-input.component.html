@@ -9,15 +9,11 @@
     data-test-id="round-input"
   />
   <mat-error *ngIf="controls.roundCount.errors as errors">
-    {{ roundCountErrorMessage(errors) }}
+    {{ errorMessage.display(errors, roundCustomErrorMessages) }}
   </mat-error>
 </mat-form-field>
 
-<mat-form-field
-  [formControl]="controls.participantCount"
-  ngDefaultControl
-  class="agari-form-item"
->
+<mat-form-field [formControl]="controls.participantCount" ngDefaultControl class="agari-form-item">
   <mat-label>Number of participants</mat-label>
   <input
     matInput
@@ -28,6 +24,6 @@
     data-test-id="participant-input"
   />
   <mat-error *ngIf="controls.participantCount.errors as errors">
-    {{ participantCountErrorMessage(errors) }}
+    {{ errorMessage.display(errors, participantCustomErrorMessages) }}
   </mat-error>
 </mat-form-field>

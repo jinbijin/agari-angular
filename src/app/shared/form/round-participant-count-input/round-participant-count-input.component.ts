@@ -9,8 +9,10 @@ import {
 } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ErrorMessageService } from 'src/app/core/services/error-message.service';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
+import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
 
 import { RoundParticipantValueAccessor } from './mixins/round-participant-value-accessor.mixin';
 
@@ -35,7 +37,7 @@ import { RoundParticipantValueAccessor } from './mixins/round-participant-value-
 export class RoundParticipantCountInputComponent
   extends RoundParticipantValueAccessor(Mixin.Reactive(EmptyBase))
   implements OnInit, ControlValueAccessor, Validator {
-  constructor() {
+  constructor(public readonly errorMessage: ErrorMessageService) {
     super();
     this.subscription.add(
       this.controls.roundCount.valueChanges
@@ -55,27 +57,17 @@ export class RoundParticipantCountInputComponent
     );
   }
 
+  public roundCustomErrorMessages: KeyMessagePair[] = [
+    { key: 'min', message: error => 'Number of rounds must be greater than 0.' }
+  ];
+
+  public participantCustomErrorMessages: KeyMessagePair[] = [
+    { key: 'min', message: error => 'Number of participants must be greater than 0.' },
+    { key: 'mod', message: error => 'Number of participants must be divisible by 4.' },
+    { key: 'minParticipant', message: error => `Number of participants must be at least ${error.min}.` }
+  ];
+
   public ngOnInit(): void {}
-
-  public roundCountErrorMessage(errors: any): string | undefined {
-    if (errors.required) {
-      return 'This field is required.';
-    } else if (errors.min) {
-      return 'Number of rounds must be greater than 0.';
-    }
-  }
-
-  public participantCountErrorMessage(errors: any): string | undefined {
-    if (errors.required) {
-      return 'This field is required.';
-    } else if (errors.min) {
-      return 'Number of participants must be greater than 0.';
-    } else if (errors.mod) {
-      return 'Number of participants must be divisible by 4.';
-    } else if (errors.minParticipant) {
-      return `Number of participants must be at least ${errors.minParticipant.min}.`;
-    }
-  }
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.formGroup.valid ? null : { roundParticipantCount: {} };

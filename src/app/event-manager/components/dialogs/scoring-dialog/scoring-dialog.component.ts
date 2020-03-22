@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { ErrorMessageService } from 'src/app/core/services/error-message.service';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
+import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-index.type';
 import { AgariErrorStateMatcher } from 'src/app/instrumentation/validators/agari-error-state-matcher';
@@ -17,8 +19,17 @@ import { AgariValidators } from 'src/app/instrumentation/validators/agari-valida
 })
 export class ScoringDialogComponent {
   constructor(
+    public readonly errorMessage: ErrorMessageService,
     @Inject(MAT_DIALOG_DATA) public readonly data: { index: ScheduleGameIndex; game: GameResult }
   ) {}
+
+  public readonly customMessages: KeyMessagePair[] = [
+    { key: 'pattern', message: error => 'Invalid input. Expected a number with at most one decimal (.).' },
+    {
+      key: 'zeroSum',
+      message: error => `The scores must sum to zero. Actual sum: ${error.actualSum.toFixed(1)}`
+    }
+  ];
 
   @Select(EventManagerState.participant)
   public readonly participant$: Observable<(index: number) => Participant | undefined>;
@@ -72,18 +83,4 @@ export class ScoringDialogComponent {
       )
     })
   }) as any;
-
-  public basicScoreErrorMessage(errors: any): string | undefined {
-    if (errors.required) {
-      return 'This field is required.';
-    } else if (errors.pattern) {
-      return 'Invalid input. Expected a number with at most one decimal (.).';
-    }
-  }
-
-  public zeroSumErrorMessage(errors: any): string | undefined {
-    if (errors.zeroSum) {
-      return `The scores must sum to zero. Actual sum: ${errors.zeroSum.actualSum.toFixed(1)}`;
-    }
-  }
 }
