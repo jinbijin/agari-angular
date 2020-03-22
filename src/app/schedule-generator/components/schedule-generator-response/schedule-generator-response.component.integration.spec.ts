@@ -12,6 +12,7 @@ import {
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 import { ScheduleRoundComponent } from 'src/app/shared/components/schedule-round/schedule-round.component';
+import { AsOrdinalPipe } from 'src/app/shared/pipes/as-ordinal.pipe';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
@@ -26,7 +27,12 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
   describe('with ScheduleGeneratorRoundComponent', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
-        declarations: [TestHostComponent, ScheduleGeneratorResponseComponent, ScheduleRoundComponent],
+        declarations: [
+          TestHostComponent,
+          ScheduleGeneratorResponseComponent,
+          ScheduleRoundComponent,
+          AsOrdinalPipe
+        ],
         imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
         providers: [
           {

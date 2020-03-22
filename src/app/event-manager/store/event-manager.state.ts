@@ -4,9 +4,11 @@ import { patch, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GenerateScheduleGQL, Schedule } from 'src/app/graphql/generated/types';
+import { GameResult } from 'src/app/instrumentation/types/game-result.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
+import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-index.type';
 
 import {
   FinalizeConfiguration,
@@ -62,6 +64,16 @@ export class EventManagerState implements NgxsOnInit {
   @Selector()
   public static result(state: EventManagerStateModel): (index: number) => RoundResult | undefined {
     return (index: number) => (state.results ? state.results[index] : undefined);
+  }
+
+  @Selector()
+  public static gameResult(
+    state: EventManagerStateModel
+  ): (index: ScheduleGameIndex) => GameResult | undefined {
+    return (index: ScheduleGameIndex) => {
+      const roundResult = state.results ? state.results[index.roundIndex] : undefined;
+      return roundResult ? roundResult[index.gameIndex] : undefined;
+    };
   }
 
   @Selector()

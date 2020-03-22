@@ -1,7 +1,7 @@
 <ng-container *ngIf="(result$ | async)!(index) as result">
-  <mat-card *ngFor="let game of result.games; index as tableIndex">
+  <mat-card *ngFor="let game of result.games; index as gameIndex; trackBy: trackGameByIndex">
     <mat-card-header>
-      <mat-card-title>Table {{ tableIndex | asOrdinal }}</mat-card-title>
+      <mat-card-title>Table {{ gameIndex | asOrdinal }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <p *ngFor="let participantNr of Object.keys(game)">
@@ -22,13 +22,13 @@
     </mat-card-content>
     <mat-card-actions>
       <mat-action-row>
-        <button mat-icon-button color="primary" *ngIf="!isSet(game)" (click)="setScore()">
+        <button mat-icon-button color="primary" *ngIf="!isSet(game)" (click)="setScore(gameIndex, game)">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="setScore()">
+        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="setScore(gameIndex, game)">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="unsetScore()">
+        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="unsetScore(gameIndex)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-action-row>

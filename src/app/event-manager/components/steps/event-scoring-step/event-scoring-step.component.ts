@@ -33,9 +33,15 @@ export class EventScoringStepComponent {
       .every(p => !!p);
   }
 
-  public setScore(): void {
-    this.dialog.open(ScoringDialogComponent);
+  public setScore(gameIndex: number, game: GameResult): void {
+    this.dialog.open(ScoringDialogComponent, {
+      data: { index: { roundIndex: this.index, gameIndex }, game }
+    });
   }
 
-  public unsetScore(): void {}
+  public unsetScore(gameIndex: number): void {}
+
+  public trackGameByIndex(index: number, item: GameResult): number {
+    return index;
+  }
 }

@@ -12,6 +12,7 @@ import {
   GenerateScheduleQueryVariables
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { AsOrdinalPipe } from 'src/app/shared/pipes/as-ordinal.pipe';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
@@ -25,7 +26,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, ScheduleGeneratorResponseComponent],
+      declarations: [TestHostComponent, ScheduleGeneratorResponseComponent, AsOrdinalPipe],
       imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
       providers: [
         {
