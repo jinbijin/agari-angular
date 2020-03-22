@@ -10,13 +10,13 @@
           {{ participant.name }}
         </span>
         <ng-container *ngIf="game[participantNr] as participantResult">
-          <span>{{ participantResult.finalScoreTimesSixty }}</span>
+          <span>{{ participantResult.finalScoreTimesSixty | asScore }}</span>
           (
-          <span>{{ participantResult.basicScoreTimesSixty }}</span>
+          <span>{{ participantResult.basicScoreTimesSixty | asScore }}</span>
           +
-          <span>{{ participantResult.placementScoreTimesSixty }}</span>
+          <span>{{ participantResult.placementScoreTimesSixty | asScore }}</span>
           )
-          <span>{{ participantResult.bonusScoreTimesSixty }}</span>
+          <span>{{ participantResult.bonusScoreTimesSixty | hideZero | asScore }}</span>
         </ng-container>
       </p>
     </mat-card-content>

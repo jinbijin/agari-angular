@@ -54,18 +54,22 @@ export class ScoringDialogComponent {
       { validators: [AgariValidators.zeroSum] }
     ),
     bonusScore: new FormGroup({
-      [this.keys[0]]: new FormControl(Transforms.asScore(this.data.game[this.keys[0]]?.bonusScore), [
-        Validators.pattern(this.scoreRegex)
-      ]),
-      [this.keys[1]]: new FormControl(Transforms.asScore(this.data.game[this.keys[1]]?.bonusScore), [
-        Validators.pattern(this.scoreRegex)
-      ]),
-      [this.keys[2]]: new FormControl(Transforms.asScore(this.data.game[this.keys[2]]?.bonusScore), [
-        Validators.pattern(this.scoreRegex)
-      ]),
-      [this.keys[3]]: new FormControl(Transforms.asScore(this.data.game[this.keys[3]]?.bonusScore), [
-        Validators.pattern(this.scoreRegex)
-      ])
+      [this.keys[0]]: new FormControl(
+        Transforms.asScore(this.data.game[this.keys[0]]?.bonusScoreTimesSixty),
+        [Validators.pattern(this.scoreRegex)]
+      ),
+      [this.keys[1]]: new FormControl(
+        Transforms.asScore(this.data.game[this.keys[1]]?.bonusScoreTimesSixty),
+        [Validators.pattern(this.scoreRegex)]
+      ),
+      [this.keys[2]]: new FormControl(
+        Transforms.asScore(this.data.game[this.keys[2]]?.bonusScoreTimesSixty),
+        [Validators.pattern(this.scoreRegex)]
+      ),
+      [this.keys[3]]: new FormControl(
+        Transforms.asScore(this.data.game[this.keys[3]]?.bonusScoreTimesSixty),
+        [Validators.pattern(this.scoreRegex)]
+      )
     })
   }) as any;
 

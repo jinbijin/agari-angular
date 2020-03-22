@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { SetGameResult, UnsetGameResult } from 'src/app/event-manager/store/event-manager.actions';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
@@ -42,6 +42,7 @@ export class EventScoringStepComponent {
     dialogRef
       .afterClosed()
       .pipe(
+        filter(value => !!value),
         map(value => this.mapValues(value)),
         tap(value =>
           this.store.dispatch(

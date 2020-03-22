@@ -23,6 +23,8 @@ import { RoundParticipantCountInputComponent } from './form/round-participant-co
 import { LayoutComponent } from './layout/layout.component';
 import { AsNumberPipe } from './pipes/as-number.pipe';
 import { AsOrdinalPipe } from './pipes/as-ordinal.pipe';
+import { AsScorePipe } from './pipes/as-score.pipe';
+import { HideZeroPipe } from './pipes/hide-zero.pipe';
 import { AgariTableComponent } from './table/agari-table.component';
 
 const materialModules: Type<any>[] = [
@@ -51,7 +53,9 @@ const materialModules: Type<any>[] = [
     AgariTableComponent,
     ExcelExportDirective,
     AsNumberPipe,
-    AsOrdinalPipe
+    AsOrdinalPipe,
+    AsScorePipe,
+    HideZeroPipe
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
@@ -64,7 +68,9 @@ const materialModules: Type<any>[] = [
     AgariTableComponent,
     ExcelExportDirective,
     AsNumberPipe,
-    AsOrdinalPipe
+    AsOrdinalPipe,
+    AsScorePipe,
+    HideZeroPipe
   ]
 })
 export class SharedModule {}
