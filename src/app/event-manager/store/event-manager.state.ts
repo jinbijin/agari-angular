@@ -14,8 +14,10 @@ import {
   FinalizeConfiguration,
   FinalizeRegistration,
   GenerateSchedule,
+  SetGameResult,
   SetParticipant,
   SetRoundParticipantCount,
+  UnsetGameResult,
   UnsetSchedule
 } from './event-manager.actions';
 
@@ -227,5 +229,43 @@ export class EventManagerState implements NgxsOnInit {
         }))
       }))
     });
+  }
+
+  @Action(SetGameResult)
+  public setGameResult(ctx: StateContext<EventManagerStateModel>, { payload }: SetGameResult): void {
+    ctx.setState(
+      patch({
+        results: updateItem<RoundResult | undefined>(
+          payload.index.roundIndex,
+          patch({
+            games: updateItem<GameResult>(payload.index.gameIndex, payload.game)
+          })
+        )
+      })
+    );
+  }
+
+  @Action(UnsetGameResult)
+  public unsetGameResult(ctx: StateContext<EventManagerStateModel>, { payload }: UnsetGameResult): void {
+    const results = ctx.getState().results;
+    const round = results ? results[payload.index.roundIndex] : undefined;
+    const game = round?.games ? round.games[payload.index.gameIndex] : undefined;
+    const keys = Object.keys(game as GameResult);
+    const emptyGame = {
+      [keys[0]]: undefined,
+      [keys[1]]: undefined,
+      [keys[2]]: undefined,
+      [keys[3]]: undefined
+    };
+    ctx.setState(
+      patch({
+        results: updateItem<RoundResult | undefined>(
+          payload.index.roundIndex,
+          patch({
+            games: updateItem<GameResult>(payload.index.gameIndex, emptyGame)
+          })
+        )
+      })
+    );
   }
 }

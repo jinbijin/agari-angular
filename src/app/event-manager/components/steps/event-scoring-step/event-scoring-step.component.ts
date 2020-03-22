@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { SetGameResult, UnsetGameResult } from 'src/app/event-manager/store/event-manager.actions';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
-import { ParticipantResult } from 'src/app/instrumentation/types/participant-result.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
@@ -17,7 +17,7 @@ import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dia
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventScoringStepComponent {
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
 
   @Input() public index: number;
 
@@ -43,12 +43,21 @@ export class EventScoringStepComponent {
       .afterClosed()
       .pipe(
         map(value => this.mapValues(value)),
-        tap(value => console.log(value))
+        tap(value =>
+          this.store.dispatch(
+            new SetGameResult({
+              index: { roundIndex: this.index, gameIndex },
+              game: value
+            })
+          )
+        )
       )
       .subscribe();
   }
 
-  public unsetScore(gameIndex: number): void {}
+  public unsetScore(gameIndex: number): void {
+    this.store.dispatch(new UnsetGameResult({ index: { roundIndex: this.index, gameIndex } }));
+  }
 
   public trackGameByIndex(index: number, item: GameResult): number {
     return index;
