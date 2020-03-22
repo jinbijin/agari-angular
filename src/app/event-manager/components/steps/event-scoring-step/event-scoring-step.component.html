@@ -25,7 +25,12 @@
         <button mat-icon-button color="primary" *ngIf="!isSet(game)" (click)="setScore(gameIndex, game)">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button color="primary" *ngIf="isSet(game)" (click)="setScore(gameIndex, game)">
+        <button
+          mat-icon-button
+          color="primary"
+          *ngIf="isSet(game) && (eventFinalized$ | async) === false"
+          (click)="setScore(gameIndex, game)"
+        >
           <mat-icon>create</mat-icon>
         </button>
         <button

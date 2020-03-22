@@ -31,6 +31,9 @@ export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase
   @Select(EventManagerState.registrationReady)
   public readonly ready$: Observable<boolean>;
 
+  @Select(EventManagerState.eventFlag)
+  public readonly eventFinalized$: Observable<boolean>;
+
   @Output() public readonly previous: EventEmitter<void> = new EventEmitter();
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
 

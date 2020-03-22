@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, createSelector, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-i
 
 import {
   FinalizeConfiguration,
+  FinalizeEvent,
   FinalizeRegistration,
   FinalizeRoundResult,
   GenerateSchedule,
@@ -31,11 +32,17 @@ export interface EventManagerStateModel {
   roundParticipantFlag: boolean;
   configurationFlag: boolean;
   registrationFlag: boolean;
+  eventFlag: boolean;
 }
 
 @State({
   name: 'eventManager',
-  defaults: { roundParticipantFlag: false, configurationFlag: false, registrationFlag: false }
+  defaults: {
+    roundParticipantFlag: false,
+    configurationFlag: false,
+    registrationFlag: false,
+    eventFlag: false
+  }
 })
 @Injectable()
 export class EventManagerState implements NgxsOnInit {
@@ -105,6 +112,11 @@ export class EventManagerState implements NgxsOnInit {
       const round = state.results ? state.results[index] : undefined;
       return round?.gameSet?.every(s => s) || false;
     };
+  }
+
+  @Selector()
+  public static eventFlag(state: EventManagerStateModel): boolean {
+    return state.eventFlag;
   }
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
@@ -179,7 +191,8 @@ export class EventManagerState implements NgxsOnInit {
       results: [undefined, undefined, undefined, undefined],
       roundParticipantFlag: true,
       configurationFlag: true,
-      registrationFlag: false
+      registrationFlag: false,
+      eventFlag: false
     });
   }
 
@@ -291,5 +304,10 @@ export class EventManagerState implements NgxsOnInit {
         results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any)
       })
     );
+  }
+
+  @Action(FinalizeEvent)
+  public finalizeEvent(ctx: StateContext<EventManagerStateModel>): void {
+    ctx.patchState({ eventFlag: true });
   }
 }

@@ -12,6 +12,7 @@ import { ScoringDialogComponent } from './components/dialogs/scoring-dialog/scor
 import { EventManagerStepComponent } from './components/event-manager-step/event-manager-step.component';
 import { EventManagerStepperComponent } from './components/event-manager-stepper/event-manager-stepper.component';
 import { EventConfigurationStepComponent } from './components/steps/event-configuration-step/event-configuration-step.component';
+import { EventFinalizationStepComponent } from './components/steps/event-finalization-step/event-finalization-step.component';
 import { EventRegistrationStepComponent } from './components/steps/event-registration-step/event-registration-step.component';
 import { EventScoringStepComponent } from './components/steps/event-scoring-step/event-scoring-step.component';
 import { eventManagerRoutes } from './event-manager.routes';
@@ -27,6 +28,7 @@ import { EventManagerState } from './store/event-manager.state';
     EventConfigurationStepComponent,
     EventRegistrationStepComponent,
     EventScoringStepComponent,
+    EventFinalizationStepComponent,
     RoundParticipantDialogComponent,
     ScheduleDialogComponent,
     ParticipantDialogComponent,

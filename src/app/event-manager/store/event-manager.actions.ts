@@ -47,3 +47,8 @@ export class FinalizeRoundResult {
   public static readonly type: string = '[EventManager] Finalize round result';
   constructor(public readonly payload: { index: number }) {}
 }
+
+export class FinalizeEvent {
+  public static readonly type: string = '[EventManager] Finalize event';
+  constructor() {}
+}

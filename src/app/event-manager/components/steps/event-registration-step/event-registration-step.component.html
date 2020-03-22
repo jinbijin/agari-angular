@@ -8,7 +8,12 @@
     <button mat-icon-button *ngIf="!participant" color="primary" (click)="setParticipant(index)">
       <mat-icon>add</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="participant" color="primary" (click)="setParticipant(index, participant)">
+    <button
+      mat-icon-button
+      *ngIf="participant && (eventFinalized$ | async) === false"
+      color="primary"
+      (click)="setParticipant(index, participant)"
+    >
       <mat-icon>create</mat-icon>
     </button>
     <button

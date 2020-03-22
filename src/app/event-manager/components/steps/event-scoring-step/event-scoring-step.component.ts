@@ -43,6 +43,9 @@ export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
   @Select(EventManagerState.roundReady)
   public ready$: Observable<(index: number) => boolean>;
 
+  @Select(EventManagerState.eventFlag)
+  public eventFinalized$: Observable<boolean>;
+
   @Output() public previous: EventEmitter<void> = new EventEmitter();
   @Output() public next: EventEmitter<void> = new EventEmitter();
 
