@@ -22,9 +22,7 @@ describe('LandingComponent', () => {
   });
 
   it('should pass a title to agari-layout', () => {
-    expect((page.layout.attributes as any).title.value).toEqual(
-      'Welcome to Agari!'
-    );
+    expect((page.layout.attributes as any).title.value).toEqual('Welcome to Agari!');
   });
 });
 

@@ -1,0 +1,66 @@
+<ng-container *ngIf="(result$ | async)!(index) as result">
+  <mat-card *ngFor="let game of result.games; index as gameIndex; trackBy: trackByIndex">
+    <mat-card-header>
+      <mat-card-title>Table {{ gameIndex | asOrdinal }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <ng-container *ngFor="let participantNr of Object.keys(game)">
+          <mat-list-item>
+            <div mat-line>
+              <span class="agari-number">{{ participantNr | asNumber | asOrdinal }}.</span>
+              <span *ngIf="(participant$ | async)!(participantNr | asNumber) as participant">
+                {{ participant.name }}
+              </span>
+            </div>
+            <div mat-line>
+              <ng-container *ngIf="game[participantNr] as participantResult">
+                <span class="agari-number">{{ participantResult.finalScoreTimesSixty | asScore }}</span>
+                <span>&nbsp;{{ participantResult | breakdown }}</span>
+                <span class="agari-number">
+                  {{ participantResult.bonusScoreTimesSixty | hideZero | asScore }}
+                </span>
+              </ng-container>
+            </div>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-action-row>
+        <button mat-icon-button color="primary" *ngIf="!isSet(game)" (click)="setScore(gameIndex, game)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          *ngIf="isSet(game) && (eventFinalized$ | async) === false"
+          (click)="setScore(gameIndex, game)"
+        >
+          <mat-icon>create</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          *ngIf="isSet(game) && !result.finalized"
+          (click)="unsetScore(gameIndex)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-card-actions>
+  </mat-card>
+  <mat-action-row>
+    <button mat-button (click)="goToPrevious()">Previous</button>
+    <button mat-flat-button *ngIf="result.finalized" color="primary" (click)="goToNext()">Next</button>
+    <button
+      mat-flat-button
+      *ngIf="!result.finalized"
+      color="accent"
+      (click)="finalize()"
+      [disabled]="(ready$ | async)!(index) === false"
+    >
+      Finalize
+    </button>
+  </mat-action-row>
+</ng-container>

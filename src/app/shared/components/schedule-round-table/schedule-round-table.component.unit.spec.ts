@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
-import { ScheduleGeneratorRoundTableComponent } from './schedule-generator-round-table.component';
+import { ScheduleRoundTableComponent } from './schedule-round-table.component';
 
 describe('ScheduleGeneratorRoundTableComponent', () => {
   let page: Page;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, ScheduleGeneratorRoundTableComponent],
+      declarations: [TestHostComponent, ScheduleRoundTableComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
@@ -39,35 +39,27 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 
   it('should compute the correct table configuration', () => {
     page.host.scheduleRound = {
-      games: [
-        { participantNrs: [1, 2, 3, 4] },
-        { participantNrs: [5, 6, 7, 8] }
-      ]
+      games: [{ participantNrs: [0, 1, 2, 3] }, { participantNrs: [4, 5, 6, 7] }]
     };
     page.detectChanges();
 
     expect(page.root.tableConfiguration.headers).toEqual(false);
     expect(page.root.tableConfiguration.dataSource.data).toEqual([
-      [0, { participantNrs: [1, 2, 3, 4] }],
-      [1, { participantNrs: [5, 6, 7, 8] }]
+      [0, { participantNrs: [0, 1, 2, 3] }],
+      [1, { participantNrs: [4, 5, 6, 7] }]
     ]);
   });
 
   it('should compute the correct column configuration', () => {
     page.host.scheduleRound = {
-      games: [{ participantNrs: [1, 2, 3, 4] }]
+      games: [{ participantNrs: [0, 1, 2, 3] }]
     };
     page.detectChanges();
 
-    const element: [number, ScheduleGame] = [
-      1,
-      { participantNrs: [5, 6, 7, 8] }
-    ];
+    const element: [number, ScheduleGame] = [1, { participantNrs: [4, 5, 6, 7] }];
 
     expect(page.root.tableConfiguration.columns.length).toEqual(6);
-    expect(page.root.tableConfiguration.columns[0].cell(element)).toEqual(
-      'Table'
-    );
+    expect(page.root.tableConfiguration.columns[0].cell(element)).toEqual('Table');
     expect(page.root.tableConfiguration.columns[1].cell(element)).toEqual(2);
     expect(page.root.tableConfiguration.columns[2].cell(element)).toEqual(5);
     expect(page.root.tableConfiguration.columns[3].cell(element)).toEqual(6);
@@ -77,8 +69,8 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get root(): ScheduleGeneratorRoundTableComponent {
-    return this.component(ScheduleGeneratorRoundTableComponent);
+  public get root(): ScheduleRoundTableComponent {
+    return this.component(ScheduleRoundTableComponent);
   }
 
   public get host(): TestHostComponent {
@@ -92,9 +84,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-schedule-generator-round-table
-      [scheduleRound]="scheduleRound"
-    ></agari-schedule-generator-round-table>
+    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
   `
 })
 class TestHostComponent {

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { agariRoutes } from 'src/app/agari.routes';
 import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
 

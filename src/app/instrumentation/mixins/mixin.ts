@@ -22,4 +22,12 @@ export class Mixin {
       }
     };
   }
+
+  public static TrackByIndex<T extends Constructor<any>>(Base: T) {
+    return class TrackByIndex extends Base {
+      public trackByIndex(index: number, item: any): number {
+        return index;
+      }
+    };
+  }
 }

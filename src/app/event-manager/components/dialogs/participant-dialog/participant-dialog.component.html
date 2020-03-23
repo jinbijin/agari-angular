@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Participant no. {{ data.index | asOrdinal }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <mat-form-field [formControl]="formGroup.controls.name" ngDefaultControl>
+      <mat-label>Participant name</mat-label>
+      <input matInput [formControl]="formGroup.controls.name" required />
+      <mat-error *ngIf="formGroup.controls.name.errors as errors">{{
+        errorMessage.display(errors)
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field [formControl]="formGroup.controls.id" ngDefaultControl>
+      <mat-label>Participant ID</mat-label>
+      <input matInput [formControl]="formGroup.controls.id" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="accent" [mat-dialog-close]="formGroup.value" [disabled]="formGroup.invalid">
+    <mat-icon>add_box</mat-icon>
+    <span>Save</span>
+  </button>
+</mat-dialog-actions>

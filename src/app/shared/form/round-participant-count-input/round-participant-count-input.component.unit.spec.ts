@@ -32,38 +32,6 @@ describe('RoundParticipantCountInputComponent', () => {
     page.root.onTouched();
   });
 
-  describe('validation messages', () => {
-    it('should generate correctly for round count', () => {
-      expect(page.root.roundCountErrorMessage({ required: true })).toEqual(
-        'This field is required.'
-      );
-      expect(
-        page.root.roundCountErrorMessage({ min: { min: 1, actual: -1 } })
-      ).toEqual('Number of rounds must be greater than 0.');
-      expect(page.root.roundCountErrorMessage({})).toBeUndefined();
-    });
-
-    it('should generate correctly for participant count', () => {
-      expect(
-        page.root.participantCountErrorMessage({ required: true })
-      ).toEqual('This field is required.');
-      expect(
-        page.root.participantCountErrorMessage({ min: { min: 1, actual: -1 } })
-      ).toEqual('Number of participants must be greater than 0.');
-      expect(
-        page.root.participantCountErrorMessage({
-          mod: { modulus: 4, remainder: 0, actual: 1 }
-        })
-      ).toEqual('Number of participants must be divisible by 4.');
-      expect(
-        page.root.participantCountErrorMessage({
-          minParticipant: { min: 20, actual: 16 }
-        })
-      ).toEqual('Number of participants must be at least 20.');
-      expect(page.root.participantCountErrorMessage({})).toBeUndefined();
-    });
-  });
-
   describe('validation', () => {
     it('should not give errors for correct round counts', async () => {
       page.root.controls.roundCount.setValue(4);
@@ -192,9 +160,7 @@ describe('RoundParticipantCountInputComponent', () => {
       page.root.registerOnChange(mockOnChange);
       page.root.onChange({ roundCount: 4, participantCount: 20 });
 
-      expect(mockOnChange.mock.calls).toEqual([
-        [{ roundCount: 4, participantCount: 20 }]
-      ]);
+      expect(mockOnChange.mock.calls).toEqual([[{ roundCount: 4, participantCount: 20 }]]);
     });
 
     it('should register a touched function', () => {
@@ -234,9 +200,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-round-participant-count-input
-      [formControl]="formControl"
-    ></agari-round-participant-count-input>
+    <agari-round-participant-count-input [formControl]="formControl"></agari-round-participant-count-input>
   `
 })
 class TestHostComponent {

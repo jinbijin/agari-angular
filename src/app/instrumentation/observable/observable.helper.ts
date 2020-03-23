@@ -4,10 +4,7 @@ import { catchError, finalize } from 'rxjs/operators';
 import { Status } from '../enum/status.enum';
 
 export class ObservableHelper {
-  public static setStatus<T>(
-    observable: Observable<T>,
-    setStatus: (value: Status) => void
-  ): Observable<T> {
+  public static setStatus<T>(observable: Observable<T>, setStatus: (value: Status) => void): Observable<T> {
     setStatus(Status.InProgress);
     return observable.pipe(
       finalize(() => setStatus(Status.Done)),

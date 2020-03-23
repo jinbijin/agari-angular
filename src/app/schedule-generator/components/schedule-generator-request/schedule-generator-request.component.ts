@@ -36,8 +36,6 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.store.dispatch(
-      new GenerateSchedule(this.controls.roundParticipantCount.value)
-    );
+    this.store.dispatch(new GenerateSchedule(this.controls.roundParticipantCount.value));
   }
 }

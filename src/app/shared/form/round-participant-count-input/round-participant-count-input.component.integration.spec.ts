@@ -15,12 +15,7 @@ describe('RoundParticipantCountInputComponent integration', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
         declarations: [TestHostComponent, RoundParticipantCountInputComponent],
-        imports: [
-          ReactiveFormsModule,
-          NoopAnimationsModule,
-          MatFormFieldModule,
-          MatInputModule
-        ],
+        imports: [ReactiveFormsModule, NoopAnimationsModule, MatFormFieldModule, MatInputModule],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     });
@@ -74,9 +69,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-round-participant-count-input
-      [formControl]="formControl"
-    ></agari-round-participant-count-input>
+    <agari-round-participant-count-input [formControl]="formControl"></agari-round-participant-count-input>
   `
 })
 class TestHostComponent {

@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>
+  Round {{ data.index.roundIndex | asOrdinal }}, Table {{ data.index.gameIndex | asOrdinal }}
+</h2>
+<mat-dialog-content>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Basic scores</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="formGroup.controls.basicScore">
+        <ng-container *ngFor="let key of keys; last as isLast">
+          <mat-form-field
+            *ngIf="formGroup.controls.basicScore.controls[key] as control"
+            [formControl]="control"
+            ngDefaultControl
+          >
+            <mat-label>
+              {{ key | asNumber | asOrdinal }}.&nbsp;{{ (participant$ | async)!(key | asNumber)?.name }}
+            </mat-label>
+            <input matInput [formControl]="control" [errorStateMatcher]="matcher" required />
+            <mat-error *ngIf="formGroup.controls.basicScore.invalid">
+              <ng-container *ngIf="control.errors as errors; else basicValid">
+                {{ errorMessage.display(errors, customMessages) }}
+              </ng-container>
+              <ng-template #basicValid>
+                <ng-container *ngIf="isLast">
+                  <ng-container *ngIf="formGroup.controls.basicScore.errors as errors">
+                    {{ errorMessage.display(errors, customMessages) }}
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Special scores</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="formGroup.controls.bonusScore">
+        <ng-container *ngFor="let key of keys; last as isLast">
+          <mat-form-field *ngIf="formGroup.controls.bonusScore.controls[key] as control">
+            <mat-label>
+              {{ key | asNumber | asOrdinal }}.&nbsp;{{ (participant$ | async)!(key | asNumber)?.name }}
+            </mat-label>
+            <input matInput [formControl]="control" />
+            <mat-error *ngIf="control.errors as errors">
+              {{ errorMessage.display(errors, customMessages) }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button [mat-dialog-close]="formGroup.value" color="accent" [disabled]="formGroup.invalid">
+    <mat-icon>add_box</mat-icon>
+    Save
+  </button>
+</mat-dialog-actions>

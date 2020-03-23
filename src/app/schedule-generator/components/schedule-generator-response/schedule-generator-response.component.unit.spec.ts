@@ -12,6 +12,7 @@ import {
   GenerateScheduleQueryVariables
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { AsOrdinalPipe } from 'src/app/shared/pipes/as-ordinal.pipe';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
@@ -25,11 +26,8 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, ScheduleGeneratorResponseComponent],
-      imports: [
-        NgxsModule.forRoot([ScheduleGeneratorState]),
-        ApolloTestingModule
-      ],
+      declarations: [TestHostComponent, ScheduleGeneratorResponseComponent, AsOrdinalPipe],
+      imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
       providers: [
         {
           provide: GenerateScheduleGQL,
@@ -64,21 +62,16 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
     page.detectChanges();
 
-    store.dispatch(
-      new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-    );
+    store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
     await page.fixture.whenStable();
     page.detectChanges();
 
     expect(generateScheduleMock.mock.calls).toEqual([
-      [
-        { participantCount: 20, roundCount: 4 },
-        { fetchPolicy: 'network-only' }
-      ],
+      [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
     ]);
-    expect(page.scheduleGeneratorRounds.length).toEqual(2);
+    expect(page.scheduleRounds.length).toEqual(2);
   });
 
   it('should throw on network error', async () => {
@@ -100,9 +93,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
 
     page.detectChanges();
 
-    store.dispatch(
-      new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-    );
+    store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
     await page.fixture.whenStable();
     page.detectChanges();
 
@@ -119,8 +110,8 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  public get scheduleGeneratorRounds(): HTMLElement[] {
-    return this.queryAll('agari-schedule-generator-round');
+  public get scheduleRounds(): HTMLElement[] {
+    return this.queryAll('agari-schedule-round');
   }
 }
 

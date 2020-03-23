@@ -1,0 +1,6 @@
+<mat-action-row>
+  <button mat-button (click)="goToPrevious()">Previous</button>
+  <button mat-flat-button *ngIf="(finalized$ | async) !== true" color="accent" (click)="finalize()">
+    Finalize
+  </button>
+</mat-action-row>

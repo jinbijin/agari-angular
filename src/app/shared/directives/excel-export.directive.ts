@@ -9,9 +9,9 @@ import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-ex
 export class ExcelExportDirective {
   constructor(private readonly excelExport: ExcelExportService) {}
 
-  private readonly config$: BehaviorSubject<
+  private readonly config$: BehaviorSubject<ExcelExportConfiguration | undefined> = new BehaviorSubject<
     ExcelExportConfiguration | undefined
-  > = new BehaviorSubject<ExcelExportConfiguration | undefined>(undefined);
+  >(undefined);
 
   @Input('agariExcelExport')
   public set config(value: ExcelExportConfiguration) {

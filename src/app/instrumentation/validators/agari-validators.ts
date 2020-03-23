@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 export class AgariValidators {
   public static mod(modulus: number, remainder: number): ValidatorFn {
@@ -9,9 +9,7 @@ export class AgariValidators {
     };
   }
 
-  public static minParticipant(
-    roundCountControl: AbstractControl
-  ): ValidatorFn {
+  public static minParticipant(roundCountControl: AbstractControl): ValidatorFn {
     return (control: AbstractControl) => {
       if (!roundCountControl.value || !control.value) {
         return null; // Some other validation should fail.
@@ -29,4 +27,22 @@ export class AgariValidators {
           };
     };
   }
+
+  public static zeroSum: ValidatorFn = (control: FormGroup) => {
+    const keys = Object.keys(control.controls);
+    let sum: number = 0;
+    if (control.controls) {
+      for (const key of keys) {
+        if (!control.controls[key].value) {
+          return null; // Some other validation should fail
+        }
+        // This is an integer, otherwise some other validation should fail
+        sum += Math.round(+control.controls[key].value * 10);
+      }
+    }
+    if (sum !== 0) {
+      return { zeroSum: { actualSum: sum / 10 } };
+    }
+    return null;
+  };
 }

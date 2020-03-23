@@ -3,25 +3,21 @@
     <ng-container *ngIf="status === 'DONE' && result.data.generateSchedule">
       <mat-toolbar>
         <div class="agari-spacer"></div>
-        <button
-          mat-flat-button
-          color="primary"
-          [agariExcelExport]="(export$ | async)!"
-        >
+        <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
           Export to .xlsx
         </button>
       </mat-toolbar>
       <div class="agari-grid">
         <div
           class="agari-grid-item"
-          *ngFor="let item of result.data?.generateSchedule?.rounds?.entries()"
+          *ngFor="let round of result.data?.generateSchedule?.rounds; index as index"
         >
-          <agari-schedule-generator-round
-            *ngIf="item[1]"
-            [scheduleRound]="item[1]"
-            [roundNumber]="item[0] + 1"
+          <agari-schedule-round
+            *ngIf="round"
+            [scheduleRound]="round"
+            [roundNumber]="index | asOrdinal"
             data-test-id="schedule-round"
-          ></agari-schedule-generator-round>
+          ></agari-schedule-round>
         </div>
         <div class="agari-horizontal-filler"></div>
         <div class="agari-horizontal-filler"></div>

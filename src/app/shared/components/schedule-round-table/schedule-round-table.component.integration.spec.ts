@@ -4,7 +4,7 @@ import { ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 import { AgariTableComponent } from 'src/app/shared/table/agari-table.component';
 
-import { ScheduleGeneratorRoundTableComponent } from './schedule-generator-round-table.component';
+import { ScheduleRoundTableComponent } from './schedule-round-table.component';
 
 describe('ScheduleGeneratorRoundTableComponent integration', () => {
   let page: Page;
@@ -14,7 +14,7 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
       TestBed.configureTestingModule({
         declarations: [
           TestHostComponent,
-          ScheduleGeneratorRoundTableComponent,
+          ScheduleRoundTableComponent,
           AgariTableComponent,
           MatHeaderRowDefStubDirective,
           MatRowDefStubDirective
@@ -29,16 +29,11 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 
     it('should compute the correct table configuration', () => {
       page.host.scheduleRound = {
-        games: [
-          { participantNrs: [1, 2, 3, 4] },
-          { participantNrs: [5, 6, 7, 8] }
-        ]
+        games: [{ participantNrs: [1, 2, 3, 4] }, { participantNrs: [5, 6, 7, 8] }]
       };
       page.detectChanges();
 
-      expect(page.agariTable.tableConfiguration.dataSource.data.length).toEqual(
-        2
-      );
+      expect(page.agariTable.tableConfiguration.dataSource.data.length).toEqual(2);
     });
 
     it('should compute the correct column configuration', () => {
@@ -53,8 +48,8 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get root(): ScheduleGeneratorRoundTableComponent {
-    return this.component(ScheduleGeneratorRoundTableComponent);
+  public get root(): ScheduleRoundTableComponent {
+    return this.component(ScheduleRoundTableComponent);
   }
 
   public get host(): TestHostComponent {
@@ -68,9 +63,7 @@ class Page extends PageBase<TestHostComponent> {
 
 @Component({
   template: `
-    <agari-schedule-generator-round-table
-      [scheduleRound]="scheduleRound"
-    ></agari-schedule-generator-round-table>
+    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
   `
 })
 class TestHostComponent {

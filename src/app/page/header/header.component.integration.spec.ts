@@ -24,10 +24,7 @@ describe('HeaderComponent integration', () => {
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
 
-      inject(
-        [OverlayContainer],
-        (oc: OverlayContainer) => (overlayContainer = oc)
-      )();
+      inject([OverlayContainer], (oc: OverlayContainer) => (overlayContainer = oc))();
 
       page = new Page(TestBed.createComponent(TestHostComponent));
     });
@@ -36,9 +33,7 @@ describe('HeaderComponent integration', () => {
       page.host.routes = [{ label: 'Test', path: '/test', display: true }];
       page.detectChanges();
 
-      const matButton = await page.loader.getHarness(
-        MatButtonHarness.with({ selector: '.mat-icon-button' })
-      );
+      const matButton = await page.loader.getHarness(MatButtonHarness.with({ selector: '.mat-icon-button' }));
       expect(matButton).toBeTruthy();
 
       const matMenu = await page.loader.getHarness(MatMenuHarness);

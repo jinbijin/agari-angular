@@ -3,9 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
-import { ScheduleGeneratorRoundTableComponent } from '../schedule-generator-round-table/schedule-generator-round-table.component';
+import { ScheduleRoundTableComponent } from '../schedule-round-table/schedule-round-table.component';
 
-import { ScheduleGeneratorRoundComponent } from './schedule-generator-round.component';
+import { ScheduleRoundComponent } from './schedule-round.component';
 
 describe('ScheduleGeneratorRoundComponent integration', () => {
   let page: Page;
@@ -13,11 +13,7 @@ describe('ScheduleGeneratorRoundComponent integration', () => {
   describe('with AgariScheduleGeneratorRoundTable', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
-        declarations: [
-          TestHostComponent,
-          ScheduleGeneratorRoundComponent,
-          ScheduleGeneratorRoundTableComponent
-        ],
+        declarations: [TestHostComponent, ScheduleRoundComponent, ScheduleRoundTableComponent],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     });
@@ -38,8 +34,8 @@ describe('ScheduleGeneratorRoundComponent integration', () => {
 });
 
 class Page extends PageBase<TestHostComponent> {
-  public get root(): ScheduleGeneratorRoundComponent {
-    return this.component(ScheduleGeneratorRoundComponent);
+  public get root(): ScheduleRoundComponent {
+    return this.component(ScheduleRoundComponent);
   }
 
   public get host(): TestHostComponent {
@@ -50,17 +46,14 @@ class Page extends PageBase<TestHostComponent> {
     return this.query<HTMLElement>('mat-card-title');
   }
 
-  public get scheduleGeneratorRoundTable(): ScheduleGeneratorRoundTableComponent {
-    return this.component(ScheduleGeneratorRoundTableComponent);
+  public get scheduleGeneratorRoundTable(): ScheduleRoundTableComponent {
+    return this.component(ScheduleRoundTableComponent);
   }
 }
 
 @Component({
   template: `
-    <agari-schedule-generator-round
-      [roundNumber]="roundNumber"
-      [scheduleRound]="scheduleRound"
-    ></agari-schedule-generator-round>
+    <agari-schedule-round [roundNumber]="roundNumber" [scheduleRound]="scheduleRound"></agari-schedule-round>
   `
 })
 class TestHostComponent {

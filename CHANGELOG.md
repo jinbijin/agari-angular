@@ -1,3 +1,13 @@
+# 2.0.0
+
+### Planned features
+
+- Manage events in offline (mostly) mode
+
+### Breaking changes
+
+- Exported Excel now has participant numbers starting from 0 instead of 1
+
 # 1.1.2 (2020-03-09)
 
 ### Features

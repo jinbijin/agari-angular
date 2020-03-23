@@ -11,10 +11,11 @@ import {
   GenerateScheduleQueryVariables
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { ScheduleRoundComponent } from 'src/app/shared/components/schedule-round/schedule-round.component';
+import { AsOrdinalPipe } from 'src/app/shared/pipes/as-ordinal.pipe';
 
 import { GenerateSchedule } from '../../store/schedule-generator.action';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
-import { ScheduleGeneratorRoundComponent } from '../schedule-generator-round/schedule-generator-round.component';
 
 import { ScheduleGeneratorResponseComponent } from './schedule-generator-response.component';
 
@@ -29,12 +30,10 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
         declarations: [
           TestHostComponent,
           ScheduleGeneratorResponseComponent,
-          ScheduleGeneratorRoundComponent
+          ScheduleRoundComponent,
+          AsOrdinalPipe
         ],
-        imports: [
-          NgxsModule.forRoot([ScheduleGeneratorState]),
-          ApolloTestingModule
-        ],
+        imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
         providers: [
           {
             provide: GenerateScheduleGQL,
@@ -67,25 +66,17 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
 
       page.detectChanges();
 
-      store.dispatch(
-        new GenerateSchedule({ roundCount: 4, participantCount: 20 })
-      );
+      store.dispatch(new GenerateSchedule({ roundCount: 4, participantCount: 20 }));
       await page.fixture.whenStable();
       page.detectChanges();
 
       expect(generateScheduleMock.mock.calls).toEqual([
-        [
-          { participantCount: 20, roundCount: 4 },
-          { fetchPolicy: 'network-only' }
-        ],
-        [
-          { participantCount: 20, roundCount: 4 },
-          { fetchPolicy: 'cache-only' }
-        ],
+        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
+        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
       ]);
-      expect(page.scheduleGeneratorRound.roundNumber).toEqual(1);
-      expect(page.scheduleGeneratorRound.scheduleRound).toEqual({
+      expect(page.scheduleRound.roundNumber).toEqual(1);
+      expect(page.scheduleRound.scheduleRound).toEqual({
         games: [{ participantNrs: [1, 2, 3, 4] }]
       });
     });
@@ -101,8 +92,8 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  public get scheduleGeneratorRound(): ScheduleGeneratorRoundComponent {
-    return this.component(ScheduleGeneratorRoundComponent);
+  public get scheduleRound(): ScheduleRoundComponent {
+    return this.component(ScheduleRoundComponent);
   }
 }
 

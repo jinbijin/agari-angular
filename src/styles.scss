@@ -17,20 +17,12 @@ $break-xs: 320px;
 $break-sm: 600px;
 $break-md: 880px;
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
+@import './app/scss/size.scss';
 
-body {
-  margin: 0;
-  font-family: 'Noto Serif JP', serif;
-  font-size: small;
-}
-
-footer .mat-toolbar {
-  font-size: medium;
+.agari-flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
 }
 
 .agari-spacer {
@@ -52,4 +44,29 @@ footer .mat-toolbar {
 
 .agari-cell-text {
   padding-right: 4px !important;
+}
+
+.agari-overflow {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-icon {
+  padding-right: 4px;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.mat-action-row {
+  border-top-style: none !important;
 }
