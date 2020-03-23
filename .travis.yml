@@ -24,7 +24,7 @@ deploy:
     script: bash deploy/deploy.sh
     on:
       all_branches: true
-      condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+
+      condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_ce6d252d3043_key -iv $encrypted_ce6d252d3043_iv
     -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d
