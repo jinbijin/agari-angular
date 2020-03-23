@@ -21,6 +21,7 @@ import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dia
 @Component({
   selector: 'agari-event-scoring-step',
   templateUrl: './event-scoring-step.component.html',
+  styleUrls: ['./event-scoring-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {

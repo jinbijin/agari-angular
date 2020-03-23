@@ -4,21 +4,27 @@
       <mat-card-title>Table {{ gameIndex | asOrdinal }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p *ngFor="let participantNr of Object.keys(game)">
-        <span>{{ participantNr | asNumber | asOrdinal }}.&nbsp;</span>
-        <span *ngIf="(participant$ | async)!(participantNr | asNumber) as participant">
-          {{ participant.name }}
-        </span>
-        <ng-container *ngIf="game[participantNr] as participantResult">
-          <span>{{ participantResult.finalScoreTimesSixty | asScore }}</span>
-          (
-          <span>{{ participantResult.basicScoreTimesSixty | asScore }}</span>
-          +
-          <span>{{ participantResult.placementScoreTimesSixty | asScore }}</span>
-          )
-          <span>{{ participantResult.bonusScoreTimesSixty | hideZero | asScore }}</span>
+      <mat-list>
+        <ng-container *ngFor="let participantNr of Object.keys(game)">
+          <mat-list-item>
+            <div mat-line>
+              <span class="agari-number">{{ participantNr | asNumber | asOrdinal }}.</span>
+              <span *ngIf="(participant$ | async)!(participantNr | asNumber) as participant">
+                {{ participant.name }}
+              </span>
+            </div>
+            <div mat-line>
+              <ng-container *ngIf="game[participantNr] as participantResult">
+                <span class="agari-number">{{ participantResult.finalScoreTimesSixty | asScore }}</span>
+                <span>&nbsp;{{ participantResult | breakdown }}</span>
+                <span class="agari-number">
+                  {{ participantResult.bonusScoreTimesSixty | hideZero | asScore }}
+                </span>
+              </ng-container>
+            </div>
+          </mat-list-item>
         </ng-container>
-      </p>
+      </mat-list>
     </mat-card-content>
     <mat-card-actions>
       <mat-action-row>
