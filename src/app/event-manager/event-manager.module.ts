@@ -17,6 +17,7 @@ import { EventRegistrationStepComponent } from './components/steps/event-registr
 import { EventScoringStepComponent } from './components/steps/event-scoring-step/event-scoring-step.component';
 import { eventManagerRoutes } from './event-manager.routes';
 import { EventManagerComponent } from './page/event-manager.component';
+import { EventStatusService } from './services/event-status.service';
 import { ScoreConverterService } from './services/score-converter.service';
 import { EventManagerState } from './store/event-manager.state';
 
@@ -41,6 +42,6 @@ import { EventManagerState } from './store/event-manager.state';
     NgxsModule.forFeature([EventManagerState]),
   ],
   exports: [],
-  providers: [ScoreConverterService],
+  providers: [EventStatusService, ScoreConverterService],
 })
 export class EventManagerModule {}
