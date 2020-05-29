@@ -4,7 +4,7 @@ import {
   Component,
   OnDestroy,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { EventManagerStepComponent } from '../event-manager-step/event-manager-s
 @Component({
   selector: 'agari-event-manager-stepper',
   templateUrl: './event-manager-stepper.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventManagerStepperComponent extends Mixin.TrackByIndex(EmptyBase)
   implements AfterViewInit, OnDestroy {
@@ -65,7 +65,7 @@ export class EventManagerStepperComponent extends Mixin.TrackByIndex(EmptyBase)
       this.subscriptions.add(
         this.currentStep
           .pipe(
-            filter(current => current === index),
+            filter((current) => current === index),
             tap(() => step.panel.open())
           )
           .subscribe()

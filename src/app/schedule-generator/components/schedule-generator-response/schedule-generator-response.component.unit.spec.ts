@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
+  GenerateScheduleQueryVariables,
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 import { AsOrdinalPipe } from 'src/app/shared/pipes/as-ordinal.pipe';
@@ -31,10 +31,10 @@ describe('ScheduleGeneratorResponseComponent', () => {
       providers: [
         {
           provide: GenerateScheduleGQL,
-          useFactory: () => new GenerateScheduleGqlStub()
-        }
+          useFactory: () => new GenerateScheduleGqlStub(),
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     store = TestBed.inject(Store);
@@ -55,7 +55,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
         data: { generateSchedule: { rounds: [{ games: [] }, { games: [] }] } },
         loading: false,
         networkStatus: NetworkStatus.ready,
-        stale: false
+        stale: false,
       })
     );
     generateScheduleGql.fetch = generateScheduleMock;
@@ -69,7 +69,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
     expect(generateScheduleMock.mock.calls).toEqual([
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
       [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
-      [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
+      [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
     ]);
     expect(page.scheduleRounds.length).toEqual(2);
   });
@@ -82,9 +82,9 @@ describe('ScheduleGeneratorResponseComponent', () => {
         data: { generateSchedule: { rounds: [] } },
         loading: false,
         networkStatus: NetworkStatus.ready,
-        stale: false
+        stale: false,
       }).pipe(
-        tap(data => {
+        tap((data) => {
           throw { message: 'test' };
         })
       )
@@ -116,9 +116,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-schedule-generator-response></agari-schedule-generator-response>
-  `
+  template: ` <agari-schedule-generator-response></agari-schedule-generator-response> `,
 })
 class TestHostComponent {}
 

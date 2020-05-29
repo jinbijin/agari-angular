@@ -10,7 +10,7 @@ describe('FooterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHostComponent, FooterComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     page = new Page(TestBed.createComponent(TestHostComponent));
@@ -41,8 +41,6 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-footer version="1.0.0"></agari-footer>
-  `
+  template: ` <agari-footer version="1.0.0"></agari-footer> `,
 })
 class TestHostComponent {}

@@ -11,4 +11,4 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AgariModule)
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));

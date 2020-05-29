@@ -7,6 +7,6 @@ import { NgxsModule } from '@ngxs/store';
   declarations: [],
   imports: [CommonModule, BrowserAnimationsModule, NgxsModule.forRoot([])],
   exports: [BrowserAnimationsModule],
-  providers: []
+  providers: [],
 })
 export class CoreModule {}

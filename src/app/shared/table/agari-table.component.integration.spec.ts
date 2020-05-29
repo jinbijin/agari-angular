@@ -15,7 +15,7 @@ describe('AgariTableComponent integration', () => {
       TestBed.configureTestingModule({
         declarations: [TestHostComponent, AgariTableComponent],
         imports: [MatTableModule],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     });
 
@@ -26,7 +26,7 @@ describe('AgariTableComponent integration', () => {
     it('should have default settings', async () => {
       page.host.tableConfiguration = {
         dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
-        columns: [{ id: 'test', header: 'Test', cell: element => element.name }]
+        columns: [{ id: 'test', header: 'Test', cell: (element) => element.name }],
       };
       page.detectChanges();
 
@@ -44,7 +44,7 @@ describe('AgariTableComponent integration', () => {
       page.host.tableConfiguration = {
         dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
         headers: false,
-        columns: [{ id: 'test', cell: element => element.name }]
+        columns: [{ id: 'test', cell: (element) => element.name }],
       };
       page.detectChanges();
 
@@ -63,10 +63,10 @@ describe('AgariTableComponent integration', () => {
           {
             id: 'test',
             header: 'Test',
-            cell: element => element.name,
-            displayed: false
-          }
-        ]
+            cell: (element) => element.name,
+            displayed: false,
+          },
+        ],
       };
       page.detectChanges();
 
@@ -93,9 +93,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-table [tableConfiguration]="tableConfiguration"></agari-table>
-  `
+  template: ` <agari-table [tableConfiguration]="tableConfiguration"></agari-table> `,
 })
 class TestHostComponent {
   public tableConfiguration: TableConfiguration<any>;

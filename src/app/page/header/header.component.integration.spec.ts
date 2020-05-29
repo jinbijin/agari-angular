@@ -21,7 +21,7 @@ describe('HeaderComponent integration', () => {
       await TestBed.configureTestingModule({
         declarations: [TestHostComponent, HeaderComponent],
         imports: [NoopAnimationsModule, MatMenuModule, MatButtonModule],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
 
       inject([OverlayContainer], (oc: OverlayContainer) => (overlayContainer = oc))();
@@ -60,9 +60,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-header [routes]="routes"></agari-header>
-  `
+  template: ` <agari-header [routes]="routes"></agari-header> `,
 })
 class TestHostComponent {
   public routes: AgariRoutes;

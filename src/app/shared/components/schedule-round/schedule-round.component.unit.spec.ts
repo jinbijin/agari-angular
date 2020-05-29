@@ -11,7 +11,7 @@ describe('ScheduleGeneratorRoundComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ScheduleRoundComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -50,7 +50,7 @@ class Page extends PageBase<TestHostComponent> {
 @Component({
   template: `
     <agari-schedule-round [roundNumber]="roundNumber" [scheduleRound]="scheduleRound"></agari-schedule-round>
-  `
+  `,
 })
 class TestHostComponent {
   public roundNumber: number;

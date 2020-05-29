@@ -14,7 +14,7 @@ describe('ScheduleGeneratorRoundComponent integration', () => {
     beforeEach(async () => {
       TestBed.configureTestingModule({
         declarations: [TestHostComponent, ScheduleRoundComponent, ScheduleRoundTableComponent],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     });
 
@@ -27,7 +27,7 @@ describe('ScheduleGeneratorRoundComponent integration', () => {
       page.detectChanges();
 
       expect(page.scheduleGeneratorRoundTable.scheduleRound).toEqual({
-        games: []
+        games: [],
       });
     });
   });
@@ -54,7 +54,7 @@ class Page extends PageBase<TestHostComponent> {
 @Component({
   template: `
     <agari-schedule-round [roundNumber]="roundNumber" [scheduleRound]="scheduleRound"></agari-schedule-round>
-  `
+  `,
 })
 class TestHostComponent {
   public roundNumber: number;

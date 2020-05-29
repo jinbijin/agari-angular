@@ -10,7 +10,7 @@ describe('AgariComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHostComponent, AgariComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     page = new Page(TestBed.createComponent(TestHostComponent));
@@ -49,8 +49,6 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-root></agari-root>
-  `
+  template: ` <agari-root></agari-root> `,
 })
 class TestHostComponent {}

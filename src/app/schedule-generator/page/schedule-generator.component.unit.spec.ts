@@ -10,7 +10,7 @@ describe('ScheduleGeneratorComponent', () => {
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
       declarations: [ScheduleGeneratorComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

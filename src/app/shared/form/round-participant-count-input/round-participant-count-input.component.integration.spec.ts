@@ -16,7 +16,7 @@ describe('RoundParticipantCountInputComponent integration', () => {
       TestBed.configureTestingModule({
         declarations: [TestHostComponent, RoundParticipantCountInputComponent],
         imports: [ReactiveFormsModule, NoopAnimationsModule, MatFormFieldModule, MatInputModule],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     });
 
@@ -28,7 +28,7 @@ describe('RoundParticipantCountInputComponent integration', () => {
     it('should set values correctly', async () => {
       page.host.formControl.setValue({
         roundCount: 4,
-        participantCount: 20
+        participantCount: 20,
       });
       page.detectChanges();
       await page.fixture.whenStable();
@@ -70,7 +70,7 @@ class Page extends PageBase<TestHostComponent> {
 @Component({
   template: `
     <agari-round-participant-count-input [formControl]="formControl"></agari-round-participant-count-input>
-  `
+  `,
 })
 class TestHostComponent {
   public formControl: FormControl;

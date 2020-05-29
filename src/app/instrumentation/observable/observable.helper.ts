@@ -8,7 +8,7 @@ export class ObservableHelper {
     setStatus(Status.InProgress);
     return observable.pipe(
       finalize(() => setStatus(Status.Done)),
-      catchError(error => {
+      catchError((error) => {
         setStatus(Status.Failed);
         throw error;
       })

@@ -22,8 +22,8 @@ export class AgariValidators {
         : {
             minParticipant: {
               min: 4 * roundCountOddCeiling,
-              actual: participantCount
-            }
+              actual: participantCount,
+            },
           };
     };
   }

@@ -7,6 +7,6 @@ export const scheduleGeneratorRoutes: AgariRoutes = [
     path: '',
     component: ScheduleGeneratorComponent,
     label: 'Schedule generator',
-    display: true
-  }
+    display: true,
+  },
 ];

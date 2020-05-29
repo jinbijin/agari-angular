@@ -14,8 +14,8 @@ export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: 
           Validators.required,
           Validators.min(1),
           AgariValidators.mod(4, 0),
-          AgariValidators.minParticipant(roundCount)
-        ])
+          AgariValidators.minParticipant(roundCount),
+        ]),
       };
       this.formGroup = new FormGroup(this.controls);
     }
@@ -27,7 +27,7 @@ export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: 
       participantCount: FormControl;
     };
 
-    public onChange: (event: any) => void = event => {};
+    public onChange: (event: any) => void = (event) => {};
 
     public onTouched: () => void = () => {};
 

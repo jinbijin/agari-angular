@@ -7,7 +7,7 @@ import { EventManagerState } from 'src/app/event-manager/store/event-manager.sta
 @Component({
   selector: 'agari-event-finalization-step',
   templateUrl: './event-finalization-step.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventFinalizationStepComponent {
   constructor(private readonly store: Store) {}

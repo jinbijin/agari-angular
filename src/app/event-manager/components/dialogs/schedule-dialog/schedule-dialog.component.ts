@@ -6,7 +6,7 @@ import { Schedule } from 'src/app/graphql/generated/types';
 
 @Component({
   templateUrl: './schedule-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleDialogComponent {
   @Select(EventManagerState.schedule)

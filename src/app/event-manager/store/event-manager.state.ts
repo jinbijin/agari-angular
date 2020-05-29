@@ -20,7 +20,7 @@ import {
   SetParticipant,
   SetRoundParticipantCount,
   UnsetGameResult,
-  UnsetSchedule
+  UnsetSchedule,
 } from './event-manager.actions';
 
 export interface EventManagerStateModel {
@@ -41,8 +41,8 @@ export interface EventManagerStateModel {
     roundParticipantFlag: false,
     configurationFlag: false,
     registrationFlag: false,
-    eventFlag: false
-  }
+    eventFlag: false,
+  },
 })
 @Injectable()
 export class EventManagerState implements NgxsOnInit {
@@ -103,14 +103,14 @@ export class EventManagerState implements NgxsOnInit {
 
   @Selector()
   public static registrationReady(state: EventManagerStateModel): boolean {
-    return state.participants?.every(p => !!p) || false;
+    return state.participants?.every((p) => !!p) || false;
   }
 
   @Selector()
   public static roundReady(state: EventManagerStateModel): (index: number) => boolean {
     return (index: number) => {
       const round = state.results ? state.results[index] : undefined;
-      return round?.gameSet?.every(s => s) || false;
+      return round?.gameSet?.every((s) => s) || false;
     };
   }
 
@@ -211,7 +211,7 @@ export class EventManagerState implements NgxsOnInit {
     return this.generateScheduleGql
       .fetch(ctx.getState().roundParticipantCount, { fetchPolicy: 'network-only' })
       .pipe(
-        map(response => {
+        map((response) => {
           ctx.patchState({ schedule: response.data.generateSchedule });
         })
       );
@@ -228,7 +228,7 @@ export class EventManagerState implements NgxsOnInit {
     ctx.patchState({
       configurationFlag: true,
       participants: [...new Array(roundParticipantCount?.participantCount)],
-      results: [...new Array(roundParticipantCount?.roundCount)]
+      results: [...new Array(roundParticipantCount?.roundCount)],
     });
   }
 
@@ -243,16 +243,16 @@ export class EventManagerState implements NgxsOnInit {
   public finalizeRegistration(ctx: StateContext<EventManagerStateModel>): void {
     ctx.patchState({
       registrationFlag: true,
-      results: ctx.getState().schedule?.rounds.map(r => ({
+      results: ctx.getState().schedule?.rounds.map((r) => ({
         finalized: false,
-        games: r.games.map(g => ({
+        games: r.games.map((g) => ({
           [g.participantNrs[0]]: undefined,
           [g.participantNrs[1]]: undefined,
           [g.participantNrs[2]]: undefined,
-          [g.participantNrs[3]]: undefined
+          [g.participantNrs[3]]: undefined,
         })),
-        gameSet: r.games.map(g => false)
-      }))
+        gameSet: r.games.map((g) => false),
+      })),
     });
   }
 
@@ -264,9 +264,9 @@ export class EventManagerState implements NgxsOnInit {
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
-            gameSet: updateItem<boolean>(payload.index.gameIndex, true)
+            gameSet: updateItem<boolean>(payload.index.gameIndex, true),
           })
-        )
+        ),
       })
     );
   }
@@ -281,7 +281,7 @@ export class EventManagerState implements NgxsOnInit {
       [keys[0]]: undefined,
       [keys[1]]: undefined,
       [keys[2]]: undefined,
-      [keys[3]]: undefined
+      [keys[3]]: undefined,
     };
     ctx.setState(
       patch({
@@ -289,9 +289,9 @@ export class EventManagerState implements NgxsOnInit {
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
-            gameSet: updateItem<boolean>(payload.index.gameIndex, false)
+            gameSet: updateItem<boolean>(payload.index.gameIndex, false),
           })
-        )
+        ),
       })
     );
   }
@@ -303,7 +303,7 @@ export class EventManagerState implements NgxsOnInit {
   ): void {
     ctx.setState(
       patch({
-        results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any)
+        results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any),
       })
     );
   }

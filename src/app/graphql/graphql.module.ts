@@ -25,7 +25,7 @@ export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
       message = 'The server cannot be reached at this moment. Please try again later.';
     }
     snackBar.open(message, undefined, {
-      duration: 5000
+      duration: 5000,
     });
   });
 
@@ -44,8 +44,8 @@ export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, MatSnackBar]
-    }
-  ]
+      deps: [HttpLink, MatSnackBar],
+    },
+  ],
 })
 export class GraphQLModule {}

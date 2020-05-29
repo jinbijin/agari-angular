@@ -6,7 +6,7 @@ import { Participant } from 'src/app/instrumentation/types/participant.type';
 
 @Component({
   templateUrl: './participant-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParticipantDialogComponent {
   constructor(
@@ -16,6 +16,6 @@ export class ParticipantDialogComponent {
 
   public formGroup: FormGroup & { controls: Record<keyof Participant, FormControl> } = new FormGroup({
     id: new FormControl(this.data.participant?.id),
-    name: new FormControl(this.data.participant?.name, [Validators.required])
+    name: new FormControl(this.data.participant?.name, [Validators.required]),
   }) as any;
 }

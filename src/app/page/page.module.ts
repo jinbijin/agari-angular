@@ -21,9 +21,9 @@ import { HeaderComponent } from './header/header.component';
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [HeaderComponent, FooterComponent, ContentComponent],
-  providers: []
+  providers: [],
 })
 export class PageModule {}

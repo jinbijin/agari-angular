@@ -13,7 +13,7 @@ export class ScoreConverterService {
         basicScoreTimesSixty: Math.round(value.basicScore[key] * 60),
         placementScoreTimesSixty: placementBonusTimesSixty[key],
         finalScoreTimesSixty: Math.round(value.basicScore[key] * 60) + placementBonusTimesSixty[key],
-        bonusScoreTimesSixty: Math.round(value.bonusScore[key] * 60)
+        bonusScoreTimesSixty: Math.round(value.bonusScore[key] * 60),
       };
     }
     return obj;
@@ -31,8 +31,8 @@ export class ScoreConverterService {
   private placementBonusTimesSixty(value: ScoreForm, key: string): number {
     const keys = Object.keys(value.basicScore);
     return keys
-      .filter(k => k !== key)
-      .map(k => {
+      .filter((k) => k !== key)
+      .map((k) => {
         const score = Math.round(value.basicScore[key] * 10);
         const opponentScore = Math.round(value.basicScore[k] * 10);
         if (opponentScore < score) {

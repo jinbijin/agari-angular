@@ -10,7 +10,7 @@ import {
   FinalizeConfiguration,
   GenerateSchedule,
   SetRoundParticipantCount,
-  UnsetSchedule
+  UnsetSchedule,
 } from '../../../store/event-manager.actions';
 import { EventManagerState } from '../../../store/event-manager.state';
 import { RoundParticipantDialogComponent } from '../../dialogs/round-participant-dialog/round-participant-dialog.component';
@@ -19,7 +19,7 @@ import { ScheduleDialogComponent } from '../../dialogs/schedule-dialog/schedule-
 @Component({
   selector: 'agari-event-configuration-step',
   templateUrl: './event-configuration-step.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventConfigurationStepComponent {
   constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
@@ -75,8 +75,8 @@ export class EventConfigurationStepComponent {
     dialogRef
       .afterClosed()
       .pipe(
-        filter(value => !!value),
-        tap(value => this.store.dispatch(new SetRoundParticipantCount(value)))
+        filter((value) => !!value),
+        tap((value) => this.store.dispatch(new SetRoundParticipantCount(value)))
       )
       .subscribe();
   }

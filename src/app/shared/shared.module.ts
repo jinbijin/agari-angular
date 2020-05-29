@@ -42,7 +42,7 @@ const materialModules: Type<any>[] = [
   MatStepperModule,
   MatTableModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
 ];
 
 @NgModule({
@@ -57,7 +57,7 @@ const materialModules: Type<any>[] = [
     AsOrdinalPipe,
     AsScorePipe,
     HideZeroPipe,
-    BreakdownPipe
+    BreakdownPipe,
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
@@ -73,7 +73,7 @@ const materialModules: Type<any>[] = [
     AsOrdinalPipe,
     AsScorePipe,
     HideZeroPipe,
-    BreakdownPipe
-  ]
+    BreakdownPipe,
+  ],
 })
 export class SharedModule {}
