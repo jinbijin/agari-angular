@@ -121,6 +121,7 @@ export class EventManagerState implements NgxsOnInit {
 
   constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
   public ngxsOnInit(ctx: StateContext<EventManagerStateModel>) {
+    /*
     ctx.setState({
       roundParticipantCount: {
         roundCount: 4,
@@ -194,6 +195,7 @@ export class EventManagerState implements NgxsOnInit {
       registrationFlag: false,
       eventFlag: false
     });
+    */
   }
 
   @Action(SetRoundParticipantCount)
