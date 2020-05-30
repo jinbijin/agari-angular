@@ -3,4 +3,5 @@ export class StateNames {
   public static readonly eventConfigurationState = 'eventConfiguration';
   public static readonly eventScheduleState = 'eventSchedule';
   public static readonly eventRegistrationState = 'eventRegistration';
+  public static readonly eventRoundState = 'eventRound';
 }

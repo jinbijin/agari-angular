@@ -13,4 +13,10 @@ export class AssertService {
       throw new Error(message || 'Value is expected to be undefined, but is defined.');
     }
   }
+
+  public areEqual<T extends U, U>(expected: T, actual: U, message?: string): asserts actual is T {
+    if (actual !== expected) {
+      throw new Error(message || 'Unexpected value.');
+    }
+  }
 }
