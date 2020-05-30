@@ -28,7 +28,7 @@ export class EventConfigurationState {
     ctx: StateContext<EventConfigurationStateModel>,
     { payload }: SetRoundParticipantCount
   ): void {
-    this.assertClear(ctx);
+    this.assertUndefined(ctx);
     ctx.patchState({ roundParticipantCount: payload });
   }
 
@@ -49,7 +49,7 @@ export class EventConfigurationState {
     ctx.patchState({ roundParticipantCount: undefined });
   }
 
-  private assertClear(ctx: StateContext<EventConfigurationStateModel>): void {
+  private assertUndefined(ctx: StateContext<EventConfigurationStateModel>): void {
     if (ctx.getState().roundParticipantCount) {
       throw new Error('Round and participant counts are already set.');
     }

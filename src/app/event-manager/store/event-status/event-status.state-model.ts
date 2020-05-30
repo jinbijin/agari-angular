@@ -1,4 +1,5 @@
-import { EventPhase, EventStatus } from 'src/app/instrumentation/types/event-status/event-status.type';
+import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
+import { EventStatus } from 'src/app/instrumentation/types/event-status/event-status.type';
 
 export interface EventStatusStateModel {
   status: EventStatus;
