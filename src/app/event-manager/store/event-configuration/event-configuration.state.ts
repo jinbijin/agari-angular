@@ -1,4 +1,5 @@
 import { Action, State, StateContext, Store } from '@ngxs/store';
+import { AssertService } from 'src/app/core/services/assert.service';
 import { ComparisonResult } from 'src/app/instrumentation/enum/comparison-result.enum';
 import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
 import { GlobalState } from 'src/app/instrumentation/types/global-state/global-state.type';
@@ -21,7 +22,11 @@ import {
   defaults: defaultEventConfigurationStateModel,
 })
 export class EventConfigurationState {
-  constructor(private readonly store: Store, private readonly eventStatus: EventStatusService) {}
+  constructor(
+    private readonly store: Store,
+    private readonly eventStatus: EventStatusService,
+    private readonly assert: AssertService
+  ) {}
 
   @Action(SetRoundParticipantCount)
   public setRoundParticipantCount(
@@ -50,19 +55,22 @@ export class EventConfigurationState {
   }
 
   private assertUndefined(ctx: StateContext<EventConfigurationStateModel>): void {
-    if (ctx.getState().roundParticipantCount) {
-      throw new Error('Round and participant counts are already set.');
-    }
+    this.assert.undefined(
+      ctx.getState().roundParticipantCount,
+      'Round and participant counts are already set.'
+    );
   }
 
   private assertSet(ctx: StateContext<EventConfigurationStateModel>): void {
-    if (!ctx.getState().roundParticipantCount) {
-      throw new Error('Round and participant counts are not set.');
-    }
+    this.assert.nonNullable(
+      ctx.getState().roundParticipantCount,
+      'Round and participant counts have not been set.'
+    );
   }
 
   private assertScheduleGenerationNotFinalized(): void {
-    const status = this.store.selectSnapshot((state: GlobalState) => state.eventStatus).status;
+    const status = this.store.selectSnapshot((state: GlobalState) => state[StateNames.eventStatusState])
+      .status;
     if (this.eventStatus.compare(status, { phase: EventPhase.Schedule }) === ComparisonResult.GreaterThan) {
       throw new Error('Configuration can not be changed anymore.');
     }

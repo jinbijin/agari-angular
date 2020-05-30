@@ -8,6 +8,7 @@ import {
   FinishedStatus,
 } from 'src/app/instrumentation/types/event-status/event-status.type';
 import { GlobalState } from 'src/app/instrumentation/types/global-state/global-state.type';
+import { StateNames } from 'src/app/instrumentation/types/global-state/state-names.type';
 
 import { EventPhaseService } from './event-phase.service';
 
@@ -46,8 +47,9 @@ export class EventStatusService {
       case EventPhase.Registration:
         return { phase: EventPhase.Round, index: 0 };
       case EventPhase.Round:
-        const roundCount = this.store.selectSnapshot((state: GlobalState) => state.eventConfiguration)
-          .roundParticipantCount?.roundCount;
+        const roundCount = this.store.selectSnapshot(
+          (state: GlobalState) => state[StateNames.eventConfigurationState]
+        ).roundParticipantCount?.roundCount;
         if (!roundCount) {
           throw new Error('Cannot proceed past this status if no round count is set.');
         }
