@@ -63,10 +63,7 @@ export class EventConfigurationState {
 
   private assertScheduleGenerationNotFinalized(): void {
     const status = this.store.selectSnapshot((state: GlobalState) => state.eventStatus).status;
-    if (
-      this.eventStatus.compare(status, { phase: EventPhase.ScheduleGeneration }) ===
-      ComparisonResult.GreaterThan
-    ) {
+    if (this.eventStatus.compare(status, { phase: EventPhase.Schedule }) === ComparisonResult.GreaterThan) {
       throw new Error('Configuration can not be changed anymore.');
     }
   }

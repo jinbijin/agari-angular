@@ -40,8 +40,8 @@ export class EventStatusService {
   public next(status: Exclude<EventStatus, FinishedStatus>): Exclude<EventStatus, ConfigurationStatus> {
     switch (status.phase) {
       case EventPhase.Configuration:
-        return { phase: EventPhase.ScheduleGeneration };
-      case EventPhase.ScheduleGeneration:
+        return { phase: EventPhase.Schedule };
+      case EventPhase.Schedule:
         return { phase: EventPhase.Registration };
       case EventPhase.Registration:
         return { phase: EventPhase.Round, index: 0 };

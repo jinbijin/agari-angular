@@ -4,15 +4,15 @@ import { EventPhase } from 'src/app/instrumentation/types/event-status/event-pha
 
 export interface EventPhaseService {
   index(phase: EventPhase.Configuration): 0;
-  index(phase: EventPhase.ScheduleGeneration): 1;
+  index(phase: EventPhase.Schedule): 1;
   index(phase: EventPhase.Registration): 2;
   index(phase: EventPhase.Round): 3;
   index(phase: EventPhase.Result): 4;
   index(phase: EventPhase.Finished): 5;
   index(phase: EventPhase): number;
 
-  next(phase: EventPhase.Configuration): EventPhase.ScheduleGeneration;
-  next(phase: EventPhase.ScheduleGeneration): EventPhase.Registration;
+  next(phase: EventPhase.Configuration): EventPhase.Schedule;
+  next(phase: EventPhase.Schedule): EventPhase.Registration;
   next(phase: EventPhase.Registration): EventPhase.Round;
   next(phase: EventPhase.Round): EventPhase.Result;
   next(phase: EventPhase.Result): EventPhase.Finished;
@@ -25,7 +25,7 @@ export class EventPhaseService implements EventPhaseService {
     switch (phase) {
       case EventPhase.Configuration:
         return 0;
-      case EventPhase.ScheduleGeneration:
+      case EventPhase.Schedule:
         return 1;
       case EventPhase.Registration:
         return 2;
@@ -53,8 +53,8 @@ export class EventPhaseService implements EventPhaseService {
   ): Exclude<EventPhase, EventPhase.Configuration> {
     switch (phase) {
       case EventPhase.Configuration:
-        return EventPhase.ScheduleGeneration;
-      case EventPhase.ScheduleGeneration:
+        return EventPhase.Schedule;
+      case EventPhase.Schedule:
         return EventPhase.Registration;
       case EventPhase.Registration:
         return EventPhase.Round;

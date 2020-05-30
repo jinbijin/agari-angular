@@ -1,6 +1,6 @@
 export const enum EventPhase {
   Configuration = 'CONFIGURATION',
-  ScheduleGeneration = 'SCHEDULE_GENERATION',
+  Schedule = 'SCHEDULE',
   Registration = 'REGISTRATION',
   Round = 'ROUND',
   Result = 'RESULT',

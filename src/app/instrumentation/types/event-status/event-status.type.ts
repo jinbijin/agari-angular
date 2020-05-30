@@ -5,7 +5,7 @@ export interface ConfigurationStatus {
 }
 
 export interface ScheduleGenerationStatus {
-  phase: EventPhase.ScheduleGeneration;
+  phase: EventPhase.Schedule;
 }
 
 export interface RegistrationStatus {
