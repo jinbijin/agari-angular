@@ -38,14 +38,14 @@ export class EventConfigurationState {
     { payload }: UpdateRoundParticipantCount
   ): void {
     this.assertSet(ctx);
-    this.assertNotFinalized();
+    this.assertScheduleGenerationNotFinalized();
     ctx.patchState({ roundParticipantCount: payload });
   }
 
   @Action(ClearRoundParticipantCount)
   public clearRoundParticipantCount(ctx: StateContext<EventConfigurationStateModel>): void {
     this.assertSet(ctx);
-    this.assertNotFinalized();
+    this.assertScheduleGenerationNotFinalized();
     ctx.patchState({ roundParticipantCount: undefined });
   }
 
@@ -61,7 +61,7 @@ export class EventConfigurationState {
     }
   }
 
-  private assertNotFinalized(): void {
+  private assertScheduleGenerationNotFinalized(): void {
     const status = this.store.selectSnapshot<EventStatusStateModel>(EventStatusState).status;
     if (
       this.eventStatus.compare(status, { phase: EventPhase.ScheduleGeneration }) ===

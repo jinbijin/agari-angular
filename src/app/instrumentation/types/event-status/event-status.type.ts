@@ -20,7 +20,7 @@ export interface RegistrationStatus {
 
 export interface RoundStatus {
   phase: EventPhase.Round;
-  number: number;
+  index: number;
 }
 
 export interface FinishedStatus {

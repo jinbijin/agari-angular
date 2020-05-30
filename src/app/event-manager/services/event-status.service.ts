@@ -12,10 +12,10 @@ export class EventStatusService {
       return ComparisonResult.GreaterThan;
     }
     if (first.phase === EventPhase.Round && second.phase === EventPhase.Round) {
-      if (first.number < second.number) {
+      if (first.index < second.index) {
         return ComparisonResult.LessThan;
       }
-      if (first.number > second.number) {
+      if (first.index > second.index) {
         return ComparisonResult.GreaterThan;
       }
     }
