@@ -10,6 +10,6 @@ import { defaultEventStatusStateModel, EventStatusStateModel } from './event-sta
 export class EventStatusState {
   @Action(Set)
   public set(ctx: StateContext<EventStatusStateModel>, { payload }: Set): void {
-    ctx.patchState({ status: payload.status });
+    ctx.patchState({ status: payload });
   }
 }

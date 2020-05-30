@@ -4,5 +4,5 @@ const actionTag: string = '[EventStatus]';
 
 export class Set {
   public static readonly type: string = `${actionTag} Set`;
-  public constructor(public readonly payload: { status: EventStatus }) {}
+  public constructor(public readonly payload: EventStatus) {}
 }
