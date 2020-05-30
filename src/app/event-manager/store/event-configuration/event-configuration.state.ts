@@ -1,6 +1,6 @@
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { ComparisonResult } from 'src/app/instrumentation/enum/comparison-result.enum';
-import { EventPhase } from 'src/app/instrumentation/types/event-status/event-status.type';
+import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
 
 import { EventStatusService } from '../../services/event-status.service';
 import { EventStatusState } from '../event-status/event-status.state';

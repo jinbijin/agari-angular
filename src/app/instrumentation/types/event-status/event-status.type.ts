@@ -1,10 +1,4 @@
-export const enum EventPhase {
-  Configuration = 1,
-  ScheduleGeneration = 2,
-  Registration = 3,
-  Round = 4,
-  Finished = 5,
-}
+import { EventPhase } from './event-phase.enum';
 
 export interface ConfigurationStatus {
   phase: EventPhase.Configuration;
@@ -23,6 +17,10 @@ export interface RoundStatus {
   index: number;
 }
 
+export interface ResultStatus {
+  phase: EventPhase.Result;
+}
+
 export interface FinishedStatus {
   phase: EventPhase.Finished;
 }
@@ -32,4 +30,5 @@ export type EventStatus =
   | ScheduleGenerationStatus
   | RegistrationStatus
   | RoundStatus
+  | ResultStatus
   | FinishedStatus;
