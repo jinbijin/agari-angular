@@ -1,16 +1,16 @@
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
 import { EventStatus } from 'src/app/instrumentation/types/event-status/event-status.type';
+import { GlobalState } from 'src/app/instrumentation/types/global-state/global-state.type';
+import { StateNames } from 'src/app/instrumentation/types/global-state/state-names.type';
 
 import { EventStatusService } from '../../services/event-status.service';
-import { EventConfigurationState } from '../event-configuration/event-configuration.state';
-import { EventConfigurationStateModel } from '../event-configuration/event-configuration.state-model';
 
 import { Finalize } from './event-status.actions';
 import { defaultEventStatusStateModel, EventStatusStateModel } from './event-status.state-model';
 
 @State<EventStatusStateModel>({
-  name: 'eventStatus',
+  name: StateNames.eventStatusState,
   defaults: defaultEventStatusStateModel,
 })
 export class EventStatusState {
@@ -30,7 +30,7 @@ export class EventStatusState {
       case EventPhase.Registration:
         return { phase: EventPhase.Round, index: 0 };
       case EventPhase.Round:
-        const roundCount = this.store.selectSnapshot<EventConfigurationStateModel>(EventConfigurationState)
+        const roundCount = this.store.selectSnapshot((state: GlobalState) => state.eventConfiguration)
           .roundParticipantCount?.roundCount;
         if (!roundCount) {
           throw new Error('Cannot proceed past this status if no round count is set.');

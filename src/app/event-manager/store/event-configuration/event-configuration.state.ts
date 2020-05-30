@@ -1,10 +1,10 @@
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { ComparisonResult } from 'src/app/instrumentation/enum/comparison-result.enum';
 import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
+import { GlobalState } from 'src/app/instrumentation/types/global-state/global-state.type';
+import { StateNames } from 'src/app/instrumentation/types/global-state/state-names.type';
 
 import { EventStatusService } from '../../services/event-status.service';
-import { EventStatusState } from '../event-status/event-status.state';
-import { EventStatusStateModel } from '../event-status/event-status.state-model';
 
 import {
   ClearRoundParticipantCount,
@@ -17,7 +17,7 @@ import {
 } from './event-configuration.state-model';
 
 @State<EventConfigurationStateModel>({
-  name: 'eventConfiguration',
+  name: StateNames.eventConfigurationState,
   defaults: defaultEventConfigurationStateModel,
 })
 export class EventConfigurationState {
@@ -62,7 +62,7 @@ export class EventConfigurationState {
   }
 
   private assertScheduleGenerationNotFinalized(): void {
-    const status = this.store.selectSnapshot<EventStatusStateModel>(EventStatusState).status;
+    const status = this.store.selectSnapshot((state: GlobalState) => state.eventStatus).status;
     if (
       this.eventStatus.compare(status, { phase: EventPhase.ScheduleGeneration }) ===
       ComparisonResult.GreaterThan
