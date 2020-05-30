@@ -2,7 +2,7 @@ import { EventStatus } from 'src/app/instrumentation/types/event-status/event-st
 
 const actionTag: string = '[EventStatus]';
 
-export class Set {
-  public static readonly type: string = `${actionTag} Set`;
+export class Finalize {
+  public static readonly type: string = `${actionTag} Finalize`;
   public constructor(public readonly payload: EventStatus) {}
 }
