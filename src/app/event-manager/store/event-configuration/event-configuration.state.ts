@@ -21,8 +21,6 @@ import {
   defaults: defaultEventConfigurationStateModel,
 })
 export class EventConfigurationState {
-  private readonly finalizedErrorMessage: string = 'Configuration cannot be changed anymore.';
-
   constructor(private readonly store: Store, private readonly eventStatus: EventStatusService) {}
 
   @Action(SetRoundParticipantCount)
@@ -30,9 +28,7 @@ export class EventConfigurationState {
     ctx: StateContext<EventConfigurationStateModel>,
     { payload }: SetRoundParticipantCount
   ): void {
-    if (ctx.getState().roundParticipantCount) {
-      throw new Error('Round and participant count is already set.');
-    }
+    this.assertClear(ctx);
     ctx.patchState({ roundParticipantCount: payload });
   }
 
@@ -41,14 +37,28 @@ export class EventConfigurationState {
     ctx: StateContext<EventConfigurationStateModel>,
     { payload }: UpdateRoundParticipantCount
   ): void {
+    this.assertSet(ctx);
     this.assertNotFinalized();
     ctx.patchState({ roundParticipantCount: payload });
   }
 
   @Action(ClearRoundParticipantCount)
   public clearRoundParticipantCount(ctx: StateContext<EventConfigurationStateModel>): void {
+    this.assertSet(ctx);
     this.assertNotFinalized();
     ctx.patchState({ roundParticipantCount: undefined });
+  }
+
+  private assertClear(ctx: StateContext<EventConfigurationStateModel>): void {
+    if (ctx.getState().roundParticipantCount) {
+      throw new Error('Round and participant counts are already set.');
+    }
+  }
+
+  private assertSet(ctx: StateContext<EventConfigurationStateModel>): void {
+    if (!ctx.getState().roundParticipantCount) {
+      throw new Error('Round and participant counts are not set.');
+    }
   }
 
   private assertNotFinalized(): void {
@@ -57,7 +67,7 @@ export class EventConfigurationState {
       this.eventStatus.compare(status, { phase: EventPhase.ScheduleGeneration }) ===
       ComparisonResult.GreaterThan
     ) {
-      throw new Error(this.finalizedErrorMessage);
+      throw new Error('Configuration can not be changed anymore.');
     }
   }
 }
