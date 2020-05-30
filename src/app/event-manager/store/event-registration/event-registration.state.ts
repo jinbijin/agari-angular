@@ -1,9 +1,13 @@
-import { Action, State, StateContext } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { AssertService } from 'src/app/core/services/assert.service';
+import { ComparisonResult } from 'src/app/instrumentation/enum/comparison-result.enum';
+import { EventPhase } from 'src/app/instrumentation/types/event-status/event-phase.enum';
+import { GlobalState } from 'src/app/instrumentation/types/global-state/global-state.type';
 import { StateNames } from 'src/app/instrumentation/types/global-state/state-names.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 
+import { EventStatusService } from '../../services/event-status.service';
 import { EventManagerStateModel } from '../event-manager.state';
 
 import { ClearParticipant, SetParticipant, UpdateParticipant } from './event-registration.actions';
@@ -17,10 +21,15 @@ import {
   defaults: defaultEventRegistrationStateModel,
 })
 export class EventRegistrationState {
-  constructor(private readonly assert: AssertService) {}
+  constructor(
+    private readonly store: Store,
+    private readonly eventStatus: EventStatusService,
+    private readonly assert: AssertService
+  ) {}
 
   @Action(SetParticipant)
   public setParticipant(ctx: StateContext<EventManagerStateModel>, { payload }: SetParticipant): void {
+    this.assertAfterSchedule();
     this.assertParticipantUndefined(ctx, payload.index);
     ctx.setState(
       patch({ participants: updateItem<Participant | undefined>(payload.index, payload.participant) })
@@ -29,6 +38,7 @@ export class EventRegistrationState {
 
   @Action(UpdateParticipant)
   public updateParticipant(ctx: StateContext<EventManagerStateModel>, { payload }: UpdateParticipant): void {
+    this.assertBeforeFinished();
     this.assertParticipantSet(ctx, payload.index);
     ctx.setState(
       patch({ participants: updateItem<Participant | undefined>(payload.index, payload.participant) })
@@ -37,6 +47,7 @@ export class EventRegistrationState {
 
   @Action(ClearParticipant)
   public clearParticipant(ctx: StateContext<EventManagerStateModel>, { payload }: ClearParticipant): void {
+    this.assertBeforeRound();
     this.assertParticipantSet(ctx, payload.index);
     ctx.setState(patch({ participants: updateItem<Participant | undefined>(payload.index, undefined) }));
   }
@@ -55,5 +66,31 @@ export class EventRegistrationState {
     const participants = ctx.getState().participants;
     this.assert.nonNullable(participants, `Participant array has not been initialized.`);
     return participants;
+  }
+
+  private assertAfterSchedule(): void {
+    const status = this.store.selectSnapshot((state: GlobalState) => state[StateNames.eventStatusState])
+      .status;
+    if (this.eventStatus.compare(status, { phase: EventPhase.Registration }) === ComparisonResult.LessThan) {
+      throw new Error('Players cannot be registered yet.');
+    }
+  }
+
+  private assertBeforeRound(): void {
+    const status = this.store.selectSnapshot((state: GlobalState) => state[StateNames.eventStatusState])
+      .status;
+    if (
+      this.eventStatus.compare(status, { phase: EventPhase.Registration }) === ComparisonResult.GreaterThan
+    ) {
+      throw new Error('Players cannot be cleared anymore.');
+    }
+  }
+
+  private assertBeforeFinished(): void {
+    const status = this.store.selectSnapshot((state: GlobalState) => state[StateNames.eventStatusState])
+      .status;
+    if (this.eventStatus.compare(status, { phase: EventPhase.Finished }) === ComparisonResult.Equal) {
+      throw new Error('Players cannot be changed anymore.');
+    }
   }
 }
