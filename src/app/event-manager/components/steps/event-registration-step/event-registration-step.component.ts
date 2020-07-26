@@ -15,7 +15,7 @@ import { ParticipantDialogComponent } from '../../dialogs/participant-dialog/par
   selector: 'agari-event-registration-step',
   templateUrl: './event-registration-step.component.html',
   styleUrls: ['./event-registration-step.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase) {
   constructor(private readonly dialog: MatDialog, private readonly store: Store) {
@@ -41,7 +41,7 @@ export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase
     const dialogRef = this.dialog.open(ParticipantDialogComponent, { data: { participant, index } });
     dialogRef
       .afterClosed()
-      .pipe(tap(value => this.store.dispatch(new SetParticipant({ participant: value, index }))))
+      .pipe(tap((value) => this.store.dispatch(new SetParticipant({ participant: value, index }))))
       .subscribe();
   }
 

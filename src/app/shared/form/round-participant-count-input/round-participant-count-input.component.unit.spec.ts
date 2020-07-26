@@ -11,7 +11,7 @@ describe('RoundParticipantCountInputComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, RoundParticipantCountInputComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -49,14 +49,14 @@ describe('RoundParticipantCountInputComponent', () => {
 
       expect(page.root.controls.roundCount.valid).toEqual(false);
       expect(page.root.controls.roundCount.errors).toEqual({
-        min: { min: 1, actual: 0 }
+        min: { min: 1, actual: 0 },
       });
     });
 
     it('should give an error for empty round count', () => {
       expect(page.root.controls.roundCount.valid).toEqual(false);
       expect(page.root.controls.roundCount.errors).toEqual({
-        required: true
+        required: true,
       });
     });
 
@@ -78,7 +78,7 @@ describe('RoundParticipantCountInputComponent', () => {
 
       expect(page.root.controls.participantCount.valid).toEqual(false);
       expect(page.root.controls.participantCount.errors).toEqual({
-        min: { min: 1, actual: 0 }
+        min: { min: 1, actual: 0 },
       });
     });
 
@@ -90,7 +90,7 @@ describe('RoundParticipantCountInputComponent', () => {
 
       expect(page.root.controls.participantCount.valid).toEqual(false);
       expect(page.root.controls.participantCount.errors).toEqual({
-        mod: { modulus: 4, remainder: 0, actual: 1 }
+        mod: { modulus: 4, remainder: 0, actual: 1 },
       });
     });
 
@@ -102,7 +102,7 @@ describe('RoundParticipantCountInputComponent', () => {
 
       expect(page.root.controls.participantCount.valid).toEqual(false);
       expect(page.root.controls.participantCount.errors).toEqual({
-        minParticipant: { min: 20, actual: 16 }
+        minParticipant: { min: 20, actual: 16 },
       });
     });
 
@@ -113,7 +113,7 @@ describe('RoundParticipantCountInputComponent', () => {
 
       expect(page.root.controls.participantCount.valid).toEqual(false);
       expect(page.root.controls.participantCount.errors).toEqual({
-        required: true
+        required: true,
       });
     });
 
@@ -133,7 +133,7 @@ describe('RoundParticipantCountInputComponent', () => {
       await page.fixture.whenStable();
 
       expect(page.root.validate(page.host.formControl)).toEqual({
-        roundParticipantCount: {}
+        roundParticipantCount: {},
       });
     });
   });
@@ -155,7 +155,7 @@ describe('RoundParticipantCountInputComponent', () => {
     });
 
     it('should register a change function', () => {
-      const mockOnChange = jest.fn(value => {});
+      const mockOnChange = jest.fn((value) => {});
 
       page.root.registerOnChange(mockOnChange);
       page.root.onChange({ roundCount: 4, participantCount: 20 });
@@ -201,7 +201,7 @@ class Page extends PageBase<TestHostComponent> {
 @Component({
   template: `
     <agari-round-participant-count-input [formControl]="formControl"></agari-round-participant-count-input>
-  `
+  `,
 })
 class TestHostComponent {
   public formControl: FormControl;

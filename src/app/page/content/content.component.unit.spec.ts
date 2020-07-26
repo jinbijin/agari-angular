@@ -16,10 +16,10 @@ describe('ContentComponent', () => {
       providers: [
         {
           provide: BreakpointObserver,
-          useFactory: () => breakpointObserverStub
-        }
+          useFactory: () => breakpointObserverStub,
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -29,7 +29,7 @@ describe('ContentComponent', () => {
 
   it('should create', () => {
     breakpointObserverStub = {
-      observe: query => EMPTY
+      observe: (query) => EMPTY,
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
@@ -39,8 +39,8 @@ describe('ContentComponent', () => {
 
   it('should open sidenav for larger screens', () => {
     breakpointObserverStub = {
-      observe: query =>
-        typeof query === 'string' ? of({ breakpoints: { [query]: true }, matches: true }) : EMPTY
+      observe: (query) =>
+        typeof query === 'string' ? of({ breakpoints: { [query]: true }, matches: true }) : EMPTY,
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
@@ -50,8 +50,8 @@ describe('ContentComponent', () => {
 
   it('should close sidenav for smaller screens', () => {
     breakpointObserverStub = {
-      observe: query =>
-        typeof query === 'string' ? of({ breakpoints: { [query]: false }, matches: false }) : EMPTY
+      observe: (query) =>
+        typeof query === 'string' ? of({ breakpoints: { [query]: false }, matches: false }) : EMPTY,
     };
     page = new Page(TestBed.createComponent(TestHostComponent));
     page.detectChanges();
@@ -75,16 +75,14 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-content></agari-content>
-  `
+  template: ` <agari-content></agari-content> `,
 })
 class TestHostComponent {}
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'mat-sidenav',
-  template: ''
+  template: '',
 })
 class MatSidenavStubComponent {
   @Input()

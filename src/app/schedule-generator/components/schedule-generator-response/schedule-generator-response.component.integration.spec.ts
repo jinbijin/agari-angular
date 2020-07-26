@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
+  GenerateScheduleQueryVariables,
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 import { ScheduleRoundComponent } from 'src/app/shared/components/schedule-round/schedule-round.component';
@@ -31,16 +31,16 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
           TestHostComponent,
           ScheduleGeneratorResponseComponent,
           ScheduleRoundComponent,
-          AsOrdinalPipe
+          AsOrdinalPipe,
         ],
         imports: [NgxsModule.forRoot([ScheduleGeneratorState]), ApolloTestingModule],
         providers: [
           {
             provide: GenerateScheduleGQL,
-            useFactory: () => new GenerateScheduleGqlStub()
-          }
+            useFactory: () => new GenerateScheduleGqlStub(),
+          },
         ],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
 
       store = TestBed.inject(Store);
@@ -54,12 +54,12 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
         of({
           data: {
             generateSchedule: {
-              rounds: [{ games: [{ participantNrs: [1, 2, 3, 4] }] }]
-            }
+              rounds: [{ games: [{ participantNrs: [1, 2, 3, 4] }] }],
+            },
           },
           loading: false,
           networkStatus: NetworkStatus.ready,
-          stale: false
+          stale: false,
         })
       );
       generateScheduleGql.fetch = generateScheduleMock;
@@ -73,11 +73,11 @@ describe('ScheduleGeneratorResponseComponent integration', () => {
       expect(generateScheduleMock.mock.calls).toEqual([
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'network-only' }],
         [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
-        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }]
+        [{ participantCount: 20, roundCount: 4 }, { fetchPolicy: 'cache-only' }],
       ]);
       expect(page.scheduleRound.roundNumber).toEqual(1);
       expect(page.scheduleRound.scheduleRound).toEqual({
-        games: [{ participantNrs: [1, 2, 3, 4] }]
+        games: [{ participantNrs: [1, 2, 3, 4] }],
       });
     });
   });
@@ -98,9 +98,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-schedule-generator-response></agari-schedule-generator-response>
-  `
+  template: ` <agari-schedule-generator-response></agari-schedule-generator-response> `,
 })
 class TestHostComponent {}
 

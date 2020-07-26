@@ -7,7 +7,7 @@ import { ScoreConverterService } from 'src/app/event-manager/services/score-conv
 import {
   FinalizeRoundResult,
   SetGameResult,
-  UnsetGameResult
+  UnsetGameResult,
 } from 'src/app/event-manager/store/event-manager.actions';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
@@ -22,7 +22,7 @@ import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dia
   selector: 'agari-event-scoring-step',
   templateUrl: './event-scoring-step.component.html',
   styleUrls: ['./event-scoring-step.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
   constructor(
@@ -54,24 +54,24 @@ export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
 
   public isSet(game: GameResult): boolean {
     return Object.keys(game)
-      .map(n => game[n])
-      .every(p => !!p);
+      .map((n) => game[n])
+      .every((p) => !!p);
   }
 
   public setScore(gameIndex: number, game: GameResult): void {
     const dialogRef = this.dialog.open(ScoringDialogComponent, {
-      data: { index: { roundIndex: this.index, gameIndex }, game }
+      data: { index: { roundIndex: this.index, gameIndex }, game },
     });
     dialogRef
       .afterClosed()
       .pipe(
-        filter(value => !!value),
-        map(value => this.scoreConverter.convert(value)),
-        tap(value =>
+        filter((value) => !!value),
+        map((value) => this.scoreConverter.convert(value)),
+        tap((value) =>
           this.store.dispatch(
             new SetGameResult({
               index: { roundIndex: this.index, gameIndex },
-              game: value
+              game: value,
             })
           )
         )

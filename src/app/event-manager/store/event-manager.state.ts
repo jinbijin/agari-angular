@@ -20,7 +20,7 @@ import {
   SetParticipant,
   SetRoundParticipantCount,
   UnsetGameResult,
-  UnsetSchedule
+  UnsetSchedule,
 } from './event-manager.actions';
 
 export interface EventManagerStateModel {
@@ -41,8 +41,8 @@ export interface EventManagerStateModel {
     roundParticipantFlag: false,
     configurationFlag: false,
     registrationFlag: false,
-    eventFlag: false
-  }
+    eventFlag: false,
+  },
 })
 @Injectable()
 export class EventManagerState implements NgxsOnInit {
@@ -103,14 +103,14 @@ export class EventManagerState implements NgxsOnInit {
 
   @Selector()
   public static registrationReady(state: EventManagerStateModel): boolean {
-    return state.participants?.every(p => !!p) || false;
+    return state.participants?.every((p) => !!p) || false;
   }
 
   @Selector()
   public static roundReady(state: EventManagerStateModel): (index: number) => boolean {
     return (index: number) => {
       const round = state.results ? state.results[index] : undefined;
-      return round?.gameSet?.every(s => s) || false;
+      return round?.gameSet?.every((s) => s) || false;
     };
   }
 
@@ -124,7 +124,7 @@ export class EventManagerState implements NgxsOnInit {
     ctx.setState({
       roundParticipantCount: {
         roundCount: 4,
-        participantCount: 20
+        participantCount: 20,
       },
       schedule: {
         rounds: [
@@ -134,8 +134,8 @@ export class EventManagerState implements NgxsOnInit {
               { participantNrs: [4, 5, 6, 7] },
               { participantNrs: [8, 9, 10, 11] },
               { participantNrs: [12, 13, 14, 15] },
-              { participantNrs: [16, 17, 18, 19] }
-            ]
+              { participantNrs: [16, 17, 18, 19] },
+            ],
           },
           {
             games: [
@@ -143,8 +143,8 @@ export class EventManagerState implements NgxsOnInit {
               { participantNrs: [3, 5, 8, 14] },
               { participantNrs: [7, 9, 12, 18] },
               { participantNrs: [2, 11, 13, 16] },
-              { participantNrs: [0, 6, 15, 17] }
-            ]
+              { participantNrs: [0, 6, 15, 17] },
+            ],
           },
           {
             games: [
@@ -152,8 +152,8 @@ export class EventManagerState implements NgxsOnInit {
               { participantNrs: [3, 10, 12, 17] },
               { participantNrs: [1, 7, 14, 16] },
               { participantNrs: [0, 5, 11, 18] },
-              { participantNrs: [2, 4, 9, 15] }
-            ]
+              { participantNrs: [2, 4, 9, 15] },
+            ],
           },
           {
             games: [
@@ -161,10 +161,10 @@ export class EventManagerState implements NgxsOnInit {
               { participantNrs: [5, 10, 15, 16] },
               { participantNrs: [0, 9, 14, 19] },
               { participantNrs: [3, 4, 13, 18] },
-              { participantNrs: [2, 7, 8, 17] }
-            ]
-          }
-        ]
+              { participantNrs: [2, 7, 8, 17] },
+            ],
+          },
+        ],
       },
       participants: [
         { name: 'A' },
@@ -186,13 +186,13 @@ export class EventManagerState implements NgxsOnInit {
         { name: 'Q' },
         { name: 'R' },
         { name: 'S' },
-        { name: 'T' }
+        { name: 'T' },
       ],
       results: [undefined, undefined, undefined, undefined],
       roundParticipantFlag: true,
       configurationFlag: true,
       registrationFlag: false,
-      eventFlag: false
+      eventFlag: false,
     });
   }
 
@@ -209,7 +209,7 @@ export class EventManagerState implements NgxsOnInit {
     return this.generateScheduleGql
       .fetch(ctx.getState().roundParticipantCount, { fetchPolicy: 'network-only' })
       .pipe(
-        map(response => {
+        map((response) => {
           ctx.patchState({ schedule: response.data.generateSchedule });
         })
       );
@@ -226,7 +226,7 @@ export class EventManagerState implements NgxsOnInit {
     ctx.patchState({
       configurationFlag: true,
       participants: [...new Array(roundParticipantCount?.participantCount)],
-      results: [...new Array(roundParticipantCount?.roundCount)]
+      results: [...new Array(roundParticipantCount?.roundCount)],
     });
   }
 
@@ -241,16 +241,16 @@ export class EventManagerState implements NgxsOnInit {
   public finalizeRegistration(ctx: StateContext<EventManagerStateModel>): void {
     ctx.patchState({
       registrationFlag: true,
-      results: ctx.getState().schedule?.rounds.map(r => ({
+      results: ctx.getState().schedule?.rounds.map((r) => ({
         finalized: false,
-        games: r.games.map(g => ({
+        games: r.games.map((g) => ({
           [g.participantNrs[0]]: undefined,
           [g.participantNrs[1]]: undefined,
           [g.participantNrs[2]]: undefined,
-          [g.participantNrs[3]]: undefined
+          [g.participantNrs[3]]: undefined,
         })),
-        gameSet: r.games.map(g => false)
-      }))
+        gameSet: r.games.map((g) => false),
+      })),
     });
   }
 
@@ -262,9 +262,9 @@ export class EventManagerState implements NgxsOnInit {
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
-            gameSet: updateItem<boolean>(payload.index.gameIndex, true)
+            gameSet: updateItem<boolean>(payload.index.gameIndex, true),
           })
-        )
+        ),
       })
     );
   }
@@ -279,7 +279,7 @@ export class EventManagerState implements NgxsOnInit {
       [keys[0]]: undefined,
       [keys[1]]: undefined,
       [keys[2]]: undefined,
-      [keys[3]]: undefined
+      [keys[3]]: undefined,
     };
     ctx.setState(
       patch({
@@ -287,9 +287,9 @@ export class EventManagerState implements NgxsOnInit {
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
-            gameSet: updateItem<boolean>(payload.index.gameIndex, false)
+            gameSet: updateItem<boolean>(payload.index.gameIndex, false),
           })
-        )
+        ),
       })
     );
   }
@@ -301,7 +301,7 @@ export class EventManagerState implements NgxsOnInit {
   ): void {
     ctx.setState(
       patch({
-        results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any)
+        results: updateItem<RoundResult | undefined>(payload.index, patch({ finalized: true }) as any),
       })
     );
   }

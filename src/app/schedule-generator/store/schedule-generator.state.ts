@@ -6,7 +6,7 @@ import { finalize } from 'rxjs/operators';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
+  GenerateScheduleQueryVariables,
 } from 'src/app/graphql/generated/types';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
 import { ObservableHelper } from 'src/app/instrumentation/observable/observable.helper';
@@ -22,8 +22,8 @@ export interface ScheduleGeneratorStateModel {
   name: 'scheduleGenerator',
   defaults: {
     status: Status.Idle,
-    payload: null
-  }
+    payload: null,
+  },
 })
 @Injectable()
 export class ScheduleGeneratorState {
@@ -45,9 +45,9 @@ export class ScheduleGeneratorState {
     { payload }: GenerateSchedule
   ): Observable<ApolloQueryResult<GenerateScheduleQuery>> {
     const observable = this.generateScheduleGql.fetch(payload, {
-      fetchPolicy: 'network-only'
+      fetchPolicy: 'network-only',
     });
-    return ObservableHelper.setStatus(observable, value => patchState({ status: value })).pipe(
+    return ObservableHelper.setStatus(observable, (value) => patchState({ status: value })).pipe(
       finalize(() => patchState({ payload }))
     );
   }

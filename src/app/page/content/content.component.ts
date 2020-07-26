@@ -9,7 +9,7 @@ const largeBreakpoint: string = '(min-width: 1200px)';
   selector: 'agari-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentComponent implements OnInit {
   public sidenavOpened: Observable<boolean>;
@@ -19,6 +19,6 @@ export class ContentComponent implements OnInit {
   public ngOnInit(): void {
     this.sidenavOpened = this.breakpointObserver
       .observe(largeBreakpoint)
-      .pipe(map(state => state.breakpoints[largeBreakpoint]));
+      .pipe(map((state) => state.breakpoints[largeBreakpoint]));
   }
 }

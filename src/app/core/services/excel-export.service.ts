@@ -15,11 +15,11 @@ export class ExcelExportService {
     const worksheet: Xlsx.WorkSheet = Xlsx.utils.aoa_to_sheet(config.data);
     const workbook: Xlsx.WorkBook = {
       Sheets: { [config.sheetname]: worksheet },
-      SheetNames: [config.sheetname]
+      SheetNames: [config.sheetname],
     };
     const excelBuffer = Xlsx.write(workbook, {
       bookType: 'xlsx',
-      type: 'array'
+      type: 'array',
     });
     const excelData: Blob = new Blob([excelBuffer], { type: this.fileType });
     FileSaver.saveAs(excelData, config.filename + this.fileExtension);

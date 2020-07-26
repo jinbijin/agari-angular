@@ -17,9 +17,9 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
           ScheduleRoundTableComponent,
           AgariTableComponent,
           MatHeaderRowDefStubDirective,
-          MatRowDefStubDirective
+          MatRowDefStubDirective,
         ],
-        schemas: [NO_ERRORS_SCHEMA]
+        schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
     });
 
@@ -29,7 +29,7 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 
     it('should compute the correct table configuration', () => {
       page.host.scheduleRound = {
-        games: [{ participantNrs: [1, 2, 3, 4] }, { participantNrs: [5, 6, 7, 8] }]
+        games: [{ participantNrs: [1, 2, 3, 4] }, { participantNrs: [5, 6, 7, 8] }],
       };
       page.detectChanges();
 
@@ -38,7 +38,7 @@ describe('ScheduleGeneratorRoundTableComponent integration', () => {
 
     it('should compute the correct column configuration', () => {
       page.host.scheduleRound = {
-        games: [{ participantNrs: [1, 2, 3, 4] }]
+        games: [{ participantNrs: [1, 2, 3, 4] }],
       };
       page.detectChanges();
 
@@ -62,9 +62,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
-  `
+  template: ` <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table> `,
 })
 class TestHostComponent {
   public scheduleRound: ScheduleRound;
@@ -74,7 +72,7 @@ class TestHostComponent {
   // tslint:disable-next-line: directive-selector
   selector: '[matHeaderRowDef]',
   // tslint:disable-next-line: no-inputs-metadata-property
-  inputs: ['columns: matHeaderRowDef']
+  inputs: ['columns: matHeaderRowDef'],
 })
 class MatHeaderRowDefStubDirective {}
 
@@ -82,6 +80,6 @@ class MatHeaderRowDefStubDirective {}
   // tslint:disable-next-line: directive-selector
   selector: '[matRowDef]',
   // tslint:disable-next-line: no-inputs-metadata-property
-  inputs: ['columns: matRowDefColumns']
+  inputs: ['columns: matRowDefColumns'],
 })
 class MatRowDefStubDirective {}

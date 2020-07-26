@@ -5,14 +5,14 @@ import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.t
 @Injectable({ providedIn: 'root' })
 export class ErrorMessageService {
   private readonly errorMessages: KeyMessagePair[] = [
-    { key: 'required', message: error => 'This field is required.' },
-    { key: 'pattern', message: error => 'Invalid input.' }
+    { key: 'required', message: (error) => 'This field is required.' },
+    { key: 'pattern', message: (error) => 'Invalid input.' },
   ];
 
   public display(errors: ValidationErrors, customMessages?: KeyMessagePair[]): string | undefined {
     for (const keyMessagePair of this.errorMessages) {
       if (errors[keyMessagePair.key]) {
-        const customKeyMessagePair = customMessages?.find(p => p.key === keyMessagePair.key);
+        const customKeyMessagePair = customMessages?.find((p) => p.key === keyMessagePair.key);
         if (customKeyMessagePair) {
           return customKeyMessagePair.message(errors[keyMessagePair.key]);
         }

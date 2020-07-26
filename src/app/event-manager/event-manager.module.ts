@@ -32,15 +32,15 @@ import { EventManagerState } from './store/event-manager.state';
     RoundParticipantDialogComponent,
     ScheduleDialogComponent,
     ParticipantDialogComponent,
-    ScoringDialogComponent
+    ScoringDialogComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(eventManagerRoutes),
-    NgxsModule.forFeature([EventManagerState])
+    NgxsModule.forFeature([EventManagerState]),
   ],
   exports: [],
-  providers: [ScoreConverterService]
+  providers: [ScoreConverterService],
 })
 export class EventManagerModule {}

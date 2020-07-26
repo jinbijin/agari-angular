@@ -15,15 +15,15 @@ import { ScheduleGeneratorState } from './store/schedule-generator.state';
   declarations: [
     ScheduleGeneratorComponent,
     ScheduleGeneratorRequestComponent,
-    ScheduleGeneratorResponseComponent
+    ScheduleGeneratorResponseComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(scheduleGeneratorRoutes),
-    NgxsModule.forFeature([ScheduleGeneratorState])
+    NgxsModule.forFeature([ScheduleGeneratorState]),
   ],
   exports: [],
-  providers: []
+  providers: [],
 })
 export class ScheduleGeneratorModule {}

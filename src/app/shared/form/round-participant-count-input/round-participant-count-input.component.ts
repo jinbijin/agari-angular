@@ -5,7 +5,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
+  Validator,
 } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -25,14 +25,14 @@ import { RoundParticipantValueAccessor } from './mixins/round-participant-value-
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RoundParticipantCountInputComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => RoundParticipantCountInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class RoundParticipantCountInputComponent
   extends RoundParticipantValueAccessor(Mixin.Reactive(EmptyBase))
@@ -41,30 +41,30 @@ export class RoundParticipantCountInputComponent
     super();
     this.subscription.add(
       this.controls.roundCount.valueChanges
-        .pipe(tap(value => this.controls.participantCount.updateValueAndValidity()))
+        .pipe(tap((value) => this.controls.participantCount.updateValueAndValidity()))
         .subscribe()
     );
     this.subscription.add(
       combineLatest([this.controls.roundCount.valueChanges, this.controls.participantCount.valueChanges])
         .pipe(
-          map(value => ({
+          map((value) => ({
             roundCount: value[0] ? +value[0] : value[0],
-            participantCount: value[1] ? +value[1] : value[1]
+            participantCount: value[1] ? +value[1] : value[1],
           })),
-          tap(value => this.onChange(value))
+          tap((value) => this.onChange(value))
         )
         .subscribe()
     );
   }
 
   public roundCustomErrorMessages: KeyMessagePair[] = [
-    { key: 'min', message: error => 'Number of rounds must be greater than 0.' }
+    { key: 'min', message: (error) => 'Number of rounds must be greater than 0.' },
   ];
 
   public participantCustomErrorMessages: KeyMessagePair[] = [
-    { key: 'min', message: error => 'Number of participants must be greater than 0.' },
-    { key: 'mod', message: error => 'Number of participants must be divisible by 4.' },
-    { key: 'minParticipant', message: error => `Number of participants must be at least ${error.min}.` }
+    { key: 'min', message: (error) => 'Number of participants must be greater than 0.' },
+    { key: 'mod', message: (error) => 'Number of participants must be divisible by 4.' },
+    { key: 'minParticipant', message: (error) => `Number of participants must be at least ${error.min}.` },
   ];
 
   public ngOnInit(): void {}

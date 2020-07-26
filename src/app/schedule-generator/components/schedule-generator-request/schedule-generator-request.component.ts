@@ -11,7 +11,7 @@ import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
   selector: 'agari-schedule-generator-request',
   templateUrl: './schedule-generator-request.component.html',
   styleUrls: ['./schedule-generator-request.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleGeneratorRequestComponent implements OnInit {
   @Select(ScheduleGeneratorState.status)
@@ -29,8 +29,8 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
     this.controls = {
       roundParticipantCount: new FormControl({
         roundCount: undefined,
-        participantCount: undefined
-      })
+        participantCount: undefined,
+      }),
     };
     this.formGroup = new FormGroup(this.controls);
   }

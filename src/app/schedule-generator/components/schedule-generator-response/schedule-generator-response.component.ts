@@ -9,7 +9,7 @@ import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-ex
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
+  GenerateScheduleQueryVariables,
 } from '../../../graphql/generated/types';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
 
@@ -17,7 +17,7 @@ import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
   selector: 'agari-schedule-generator-response',
   templateUrl: './schedule-generator-response.component.html',
   styleUrls: ['./schedule-generator-response.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleGeneratorResponseComponent implements OnInit {
   @Select(ScheduleGeneratorState.status)
@@ -34,8 +34,8 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
 
   public ngOnInit(): void {
     this.result$ = this.payload$.pipe(
-      filter(payload => !!payload),
-      switchMap(payload =>
+      filter((payload) => !!payload),
+      switchMap((payload) =>
         this.generateScheduleGql.fetch(
           payload as GenerateScheduleQueryVariables, // payload is not null because of filter
           { fetchPolicy: 'cache-only' }
@@ -43,17 +43,17 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
       )
     );
     this.export$ = this.result$.pipe(
-      map(result =>
+      map((result) =>
         result.data.generateSchedule
           ? {
-              data: result.data.generateSchedule.rounds.map(r => r.games.flatMap(g => g.participantNrs)),
+              data: result.data.generateSchedule.rounds.map((r) => r.games.flatMap((g) => g.participantNrs)),
               filename: [
                 'schedule',
                 result.data.generateSchedule.rounds.length,
                 result.data.generateSchedule.rounds[0].games.length,
-                new Date().toISOString()
+                new Date().toISOString(),
               ].join('_'),
-              sheetname: 'Schedule'
+              sheetname: 'Schedule',
             }
           : undefined
       )

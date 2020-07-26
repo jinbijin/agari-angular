@@ -15,7 +15,7 @@ import { AgariValidators } from 'src/app/instrumentation/validators/agari-valida
 
 @Component({
   templateUrl: './scoring-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScoringDialogComponent {
   constructor(
@@ -24,11 +24,11 @@ export class ScoringDialogComponent {
   ) {}
 
   public readonly customMessages: KeyMessagePair[] = [
-    { key: 'pattern', message: error => 'Invalid input. Expected a number with at most one decimal (.).' },
+    { key: 'pattern', message: (error) => 'Invalid input. Expected a number with at most one decimal (.).' },
     {
       key: 'zeroSum',
-      message: error => `The scores must sum to zero. Actual sum: ${error.actualSum.toFixed(1)}`
-    }
+      message: (error) => `The scores must sum to zero. Actual sum: ${error.actualSum.toFixed(1)}`,
+    },
   ];
 
   @Select(EventManagerState.participant)
@@ -60,7 +60,7 @@ export class ScoringDialogComponent {
         [this.keys[3]]: new FormControl(
           Transforms.asScore(this.data.game[this.keys[3]]?.basicScoreTimesSixty),
           [Validators.required, Validators.pattern(this.scoreRegex)]
-        )
+        ),
       },
       { validators: [AgariValidators.zeroSum] }
     ),
@@ -80,7 +80,7 @@ export class ScoringDialogComponent {
       [this.keys[3]]: new FormControl(
         Transforms.asScore(this.data.game[this.keys[3]]?.bonusScoreTimesSixty),
         [Validators.pattern(this.scoreRegex)]
-      )
-    })
+      ),
+    }),
   }) as any;
 }

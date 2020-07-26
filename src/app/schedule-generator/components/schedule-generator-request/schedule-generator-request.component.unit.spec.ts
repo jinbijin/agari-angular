@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 import {
   GenerateScheduleGQL,
   GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
+  GenerateScheduleQueryVariables,
 } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
@@ -28,10 +28,10 @@ describe('ScheduleGeneratorRequestComponent', () => {
       providers: [
         {
           provide: GenerateScheduleGQL,
-          useFactory: () => new GenerateScheduleGqlStub()
-        }
+          useFactory: () => new GenerateScheduleGqlStub(),
+        },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     generateScheduleGql = TestBed.inject(GenerateScheduleGQL);
@@ -51,7 +51,7 @@ describe('ScheduleGeneratorRequestComponent', () => {
         data: { generateSchedule: { rounds: [] } },
         loading: false,
         networkStatus: NetworkStatus.ready,
-        stale: false
+        stale: false,
       })
     );
     generateScheduleGql.fetch = generateScheduleMock;
@@ -61,7 +61,7 @@ describe('ScheduleGeneratorRequestComponent', () => {
     page.detectChanges();
 
     expect(generateScheduleMock.mock.calls).toEqual([
-      [{ participantCount: undefined, roundCount: undefined }, { fetchPolicy: 'network-only' }]
+      [{ participantCount: undefined, roundCount: undefined }, { fetchPolicy: 'network-only' }],
     ]);
   });
 
@@ -73,9 +73,9 @@ describe('ScheduleGeneratorRequestComponent', () => {
         data: { generateSchedule: { rounds: [] } },
         loading: false,
         networkStatus: NetworkStatus.ready,
-        stale: false
+        stale: false,
       }).pipe(
-        tap(data => {
+        tap((data) => {
           throw { message: 'test' };
         })
       )
@@ -105,9 +105,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-schedule-generator-request></agari-schedule-generator-request>
-  `
+  template: ` <agari-schedule-generator-request></agari-schedule-generator-request> `,
 })
 class TestHostComponent {}
 

@@ -5,7 +5,7 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
 
 @Component({
   templateUrl: './round-participant-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoundParticipantDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: RoundParticipantCount) {}
@@ -15,6 +15,6 @@ export class RoundParticipantDialogComponent {
       roundParticipantCount: FormControl;
     };
   } = new FormGroup({
-    roundParticipantCount: new FormControl(this.data)
+    roundParticipantCount: new FormControl(this.data),
   }) as any;
 }

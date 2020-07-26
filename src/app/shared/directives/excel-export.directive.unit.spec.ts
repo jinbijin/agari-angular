@@ -16,9 +16,9 @@ describe('ExcelExportDirective', () => {
       providers: [
         {
           provide: ExcelExportService,
-          useFactory: () => new ExcelExportServiceStub()
-        }
-      ]
+          useFactory: () => new ExcelExportServiceStub(),
+        },
+      ],
     }).compileComponents();
 
     excelExport = TestBed.inject(ExcelExportService);
@@ -30,7 +30,7 @@ describe('ExcelExportDirective', () => {
     page.host.config = {
       data: [],
       filename: 'testfile',
-      sheetname: 'testsheet'
+      sheetname: 'testsheet',
     };
     page.detectChanges();
 
@@ -41,7 +41,7 @@ describe('ExcelExportDirective', () => {
     page.host.config = {
       data: [],
       filename: 'testfile',
-      sheetname: 'testsheet'
+      sheetname: 'testsheet',
     };
     const excelExportMock = jest.fn();
     excelExport.exportExcel = excelExportMock;
@@ -51,7 +51,7 @@ describe('ExcelExportDirective', () => {
     page.detectChanges();
 
     expect(excelExportMock.mock.calls).toEqual([
-      [{ data: [], filename: 'testfile', sheetname: 'testsheet' }]
+      [{ data: [], filename: 'testfile', sheetname: 'testsheet' }],
     ]);
   });
 
@@ -82,9 +82,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <button [agariExcelExport]="config">Test</button>
-  `
+  template: ` <button [agariExcelExport]="config">Test</button> `,
 })
 class TestHostComponent {
   public config: ExcelExportConfiguration;

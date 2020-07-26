@@ -7,6 +7,6 @@ export const eventManagerRoutes: AgariRoutes = [
     path: '',
     component: EventManagerComponent,
     label: 'Event manager',
-    display: true
-  }
+    display: true,
+  },
 ];

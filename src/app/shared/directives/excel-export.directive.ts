@@ -4,7 +4,7 @@ import { ExcelExportService } from 'src/app/core/services/excel-export.service';
 import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 
 @Directive({
-  selector: '[agariExcelExport]'
+  selector: '[agariExcelExport]',
 })
 export class ExcelExportDirective {
   constructor(private readonly excelExport: ExcelExportService) {}

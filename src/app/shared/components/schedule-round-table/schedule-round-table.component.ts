@@ -8,7 +8,7 @@ import { Transforms } from 'src/app/instrumentation/transforms/transforms';
   selector: 'agari-schedule-round-table',
   templateUrl: './schedule-round-table.component.html',
   styleUrls: ['./schedule-round-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleRoundTableComponent implements OnInit {
   @Input()
@@ -22,7 +22,7 @@ export class ScheduleRoundTableComponent implements OnInit {
     'participant1',
     'participant2',
     'participant3',
-    'participant4'
+    'participant4',
   ];
 
   public tableConfiguration: TableConfiguration<[number, ScheduleGame]>;
@@ -35,18 +35,18 @@ export class ScheduleRoundTableComponent implements OnInit {
       dataSource: new MatTableDataSource<[number, ScheduleGame]>(this.dataSource),
       headers: false,
       columns: [
-        { id: 'table', cell: element => 'Table', classes: ['agari-cell-text'] },
+        { id: 'table', cell: (element) => 'Table', classes: ['agari-cell-text'] },
         {
           id: 'tableNumber',
-          cell: element => Transforms.asOrdinal(element[0]),
-          classes: ['agari-cell-numeric', 'agari-cell-right-gap']
+          cell: (element) => Transforms.asOrdinal(element[0]),
+          classes: ['agari-cell-numeric', 'agari-cell-right-gap'],
         },
-        ...[0, 1, 2, 3].map(i => ({
+        ...[0, 1, 2, 3].map((i) => ({
           id: 'participant' + i,
           cell: (element: [number, ScheduleGame]) => Transforms.asOrdinal(element[1].participantNrs[i]),
-          classes: ['agari-cell-numeric', ...(i === 3 ? ['agari-cell-right-gap'] : [])]
-        }))
-      ]
+          classes: ['agari-cell-numeric', ...(i === 3 ? ['agari-cell-right-gap'] : [])],
+        })),
+      ],
     };
   }
 }

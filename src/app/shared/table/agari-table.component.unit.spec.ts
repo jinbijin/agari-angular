@@ -16,9 +16,9 @@ describe('AgariTableComponent', () => {
         TestHostComponent,
         AgariTableComponent,
         MatHeaderRowDefStubDirective,
-        MatRowDefStubDirective
+        MatRowDefStubDirective,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -29,7 +29,7 @@ describe('AgariTableComponent', () => {
   it('should create', () => {
     page.host.tableConfiguration = {
       dataSource: new MatTableDataSource<any>(),
-      columns: []
+      columns: [],
     };
     page.detectChanges();
 
@@ -39,7 +39,7 @@ describe('AgariTableComponent', () => {
   it('should display displayable columns', () => {
     page.host.tableConfiguration = {
       dataSource: new MatTableDataSource<any>([{ name: 'test' }]),
-      columns: [{ id: 'test', header: 'Test', cell: element => element.name }]
+      columns: [{ id: 'test', header: 'Test', cell: (element) => element.name }],
     };
     page.detectChanges();
 
@@ -54,9 +54,9 @@ describe('AgariTableComponent', () => {
           id: 'test',
           displayed: false,
           header: 'Test',
-          cell: element => element.name
-        }
-      ]
+          cell: (element) => element.name,
+        },
+      ],
     };
     page.detectChanges();
 
@@ -75,9 +75,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-table [tableConfiguration]="tableConfiguration"></agari-table>
-  `
+  template: ` <agari-table [tableConfiguration]="tableConfiguration"></agari-table> `,
 })
 class TestHostComponent {
   public tableConfiguration: TableConfiguration<any>;
@@ -87,7 +85,7 @@ class TestHostComponent {
   // tslint:disable-next-line: directive-selector
   selector: '[matHeaderRowDef]',
   // tslint:disable-next-line: no-inputs-metadata-property
-  inputs: ['columns: matHeaderRowDef']
+  inputs: ['columns: matHeaderRowDef'],
 })
 class MatHeaderRowDefStubDirective {}
 
@@ -95,6 +93,6 @@ class MatHeaderRowDefStubDirective {}
   // tslint:disable-next-line: directive-selector
   selector: '[matRowDef]',
   // tslint:disable-next-line: no-inputs-metadata-property
-  inputs: ['columns: matRowDefColumns']
+  inputs: ['columns: matRowDefColumns'],
 })
 class MatRowDefStubDirective {}

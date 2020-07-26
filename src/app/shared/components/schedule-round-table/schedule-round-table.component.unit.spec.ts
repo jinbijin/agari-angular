@@ -11,7 +11,7 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent, ScheduleRoundTableComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -21,7 +21,7 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 
   it('should create', () => {
     page.host.scheduleRound = {
-      games: []
+      games: [],
     };
     page.detectChanges();
 
@@ -30,7 +30,7 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 
   it('should contain a table', () => {
     page.host.scheduleRound = {
-      games: []
+      games: [],
     };
     page.detectChanges();
 
@@ -39,20 +39,20 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
 
   it('should compute the correct table configuration', () => {
     page.host.scheduleRound = {
-      games: [{ participantNrs: [0, 1, 2, 3] }, { participantNrs: [4, 5, 6, 7] }]
+      games: [{ participantNrs: [0, 1, 2, 3] }, { participantNrs: [4, 5, 6, 7] }],
     };
     page.detectChanges();
 
     expect(page.root.tableConfiguration.headers).toEqual(false);
     expect(page.root.tableConfiguration.dataSource.data).toEqual([
       [0, { participantNrs: [0, 1, 2, 3] }],
-      [1, { participantNrs: [4, 5, 6, 7] }]
+      [1, { participantNrs: [4, 5, 6, 7] }],
     ]);
   });
 
   it('should compute the correct column configuration', () => {
     page.host.scheduleRound = {
-      games: [{ participantNrs: [0, 1, 2, 3] }]
+      games: [{ participantNrs: [0, 1, 2, 3] }],
     };
     page.detectChanges();
 
@@ -83,9 +83,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table>
-  `
+  template: ` <agari-schedule-round-table [scheduleRound]="scheduleRound"></agari-schedule-round-table> `,
 })
 class TestHostComponent {
   public scheduleRound: ScheduleRound;

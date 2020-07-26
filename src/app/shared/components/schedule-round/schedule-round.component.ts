@@ -5,7 +5,7 @@ import { ScheduleRound } from 'src/app/graphql/generated/types';
   selector: 'agari-schedule-round',
   templateUrl: './schedule-round.component.html',
   styleUrls: ['./schedule-round.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleRoundComponent {
   @Input()

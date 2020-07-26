@@ -9,7 +9,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
-      declarations: [TestHostComponent, LayoutComponent]
+      declarations: [TestHostComponent, LayoutComponent],
     }).compileComponents();
   });
 
@@ -50,8 +50,6 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-layout title="Title"><p>Inner content</p></agari-layout>
-  `
+  template: ` <agari-layout title="Title"><p>Inner content</p></agari-layout> `,
 })
 class TestHostComponent {}

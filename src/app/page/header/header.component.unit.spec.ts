@@ -11,7 +11,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestHostComponent, HeaderComponent, MatMenuStubDirective],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     page = new Page(TestBed.createComponent(TestHostComponent));
@@ -67,8 +67,8 @@ describe('HeaderComponent', () => {
     page.host.routes = [
       {
         label: 'Test',
-        display: false
-      }
+        display: false,
+      },
     ];
     page.detectChanges();
 
@@ -100,9 +100,7 @@ class Page extends PageBase<TestHostComponent> {
 }
 
 @Component({
-  template: `
-    <agari-header [routes]="routes"></agari-header>
-  `
+  template: ` <agari-header [routes]="routes"></agari-header> `,
 })
 class TestHostComponent {
   public routes: AgariRoutes;
@@ -111,6 +109,6 @@ class TestHostComponent {
 @Directive({
   // tslint:disable-next-line: directive-selector
   selector: 'mat-menu',
-  exportAs: 'matMenu'
+  exportAs: 'matMenu',
 })
 class MatMenuStubDirective {}

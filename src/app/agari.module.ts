@@ -22,10 +22,10 @@ import { PageModule } from './page/page.module';
     GraphQLModule,
     PageModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    })
+      enabled: environment.production,
+    }),
   ],
   providers: [],
-  bootstrap: [AgariComponent]
+  bootstrap: [AgariComponent],
 })
 export class AgariModule {}

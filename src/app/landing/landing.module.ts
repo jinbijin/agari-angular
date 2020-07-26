@@ -10,6 +10,6 @@ import { LandingComponent } from './page/landing.component';
   declarations: [LandingComponent],
   imports: [SharedModule, RouterModule.forChild(landingRoutes)],
   exports: [],
-  providers: []
+  providers: [],
 })
 export class LandingModule {}

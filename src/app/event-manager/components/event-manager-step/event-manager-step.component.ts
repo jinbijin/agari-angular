@@ -4,14 +4,14 @@ import {
   ContentChild,
   Input,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'agari-event-manager-step',
   templateUrl: './event-manager-step.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventManagerStepComponent {
   public index: number;

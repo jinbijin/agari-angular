@@ -6,7 +6,7 @@ import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
   selector: 'agari-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
   public readonly brand: string = 'アガリ';
@@ -19,6 +19,6 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   public ngOnInit(): void {
-    this.displayedRoutes = this.routes.filter(r => r.display);
+    this.displayedRoutes = this.routes.filter((r) => r.display);
   }
 }
