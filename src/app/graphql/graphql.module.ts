@@ -1,10 +1,14 @@
+import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
+import {HttpLink, HttpLinkModule} from 'apollo-angular/http';
+import {InMemoryCache, ApolloLink} from '@apollo/client/core';
+import {onError} from '@apollo/client/link/error';
 import { NgModule } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
-import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloLink } from 'apollo-link';
-import { onError } from 'apollo-link-error';
+
+
+
+
+
 
 import { environment } from '../../environments/environment';
 
@@ -39,7 +43,6 @@ export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
 }
 
 @NgModule({
-  exports: [ApolloModule, HttpLinkModule],
   imports: [MatSnackBarModule],
   providers: [
     {

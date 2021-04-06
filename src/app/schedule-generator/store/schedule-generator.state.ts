@@ -1,6 +1,7 @@
+import {ApolloQueryResult} from '@apollo/client/core';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { ApolloQueryResult } from 'apollo-client';
+
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import {

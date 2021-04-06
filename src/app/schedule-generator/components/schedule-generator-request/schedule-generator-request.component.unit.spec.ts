@@ -1,9 +1,10 @@
+import {ApolloQueryResult, NetworkStatus} from '@apollo/client/core';
 import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { QueryOptionsAlone } from 'apollo-angular/types';
-import { ApolloQueryResult, NetworkStatus } from 'apollo-client';
+
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {
