@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const largeBreakpoint: string = '(min-width: 1200px)';
+const largeBreakpoint = '(min-width: 1200px)';
 
 @Component({
   selector: 'agari-content',

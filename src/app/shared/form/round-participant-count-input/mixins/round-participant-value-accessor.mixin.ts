@@ -3,7 +3,7 @@ import { Constructor } from 'src/app/instrumentation/mixins/types/constructor';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
 
 export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: T) {
-  // tslint:disable-next-line: no-shadowed-variable
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   return class RoundParticipantValueAccessor extends Base implements ControlValueAccessor {
     constructor(...args: any[]) {
       super(...args);

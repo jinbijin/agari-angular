@@ -7,12 +7,10 @@ import { ScheduleGeneratorComponent } from './schedule-generator.component';
 describe('ScheduleGeneratorComponent', () => {
   let page: Page;
 
-  beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+  beforeEach(async () => await TestBed.configureTestingModule({
       declarations: [ScheduleGeneratorComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  });
+    }).compileComponents());
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(ScheduleGeneratorComponent));

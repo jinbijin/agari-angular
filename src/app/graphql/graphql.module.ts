@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 const uri = `${environment.apiBaseUrl}/graphql`;
 export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
   const error = onError(({ graphQLErrors, networkError }) => {
-    let message: string = 'An unknown error has occurred';
+    let message = 'An unknown error has occurred';
     if (graphQLErrors) {
       const errorCode = graphQLErrors[0].extensions?.code;
       switch (errorCode) {

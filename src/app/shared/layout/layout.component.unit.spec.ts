@@ -7,11 +7,9 @@ import { LayoutComponent } from './layout.component';
 describe('LayoutComponent', () => {
   let page: Page;
 
-  beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+  beforeEach(async () => await TestBed.configureTestingModule({
       declarations: [TestHostComponent, LayoutComponent]
-    }).compileComponents();
-  });
+    }).compileComponents());
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));

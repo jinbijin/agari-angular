@@ -3,13 +3,9 @@ Object.defineProperty(document, 'doctype', {
   value: '<!DOCTYPE html>'
 });
 Object.defineProperty(window, 'getComputedStyle', {
-  value: () => {
-    return {
+  value: () => ({
       display: 'none',
       appearance: ['-webkit-appearance'],
-      getPropertyValue: prop => {
-        return '';
-      }
-    };
-  }
+      getPropertyValue: prop => ''
+    })
 });
