@@ -9,16 +9,17 @@ import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-  public readonly brand: string = 'アガリ';
-
   @Input()
   public routes: AgariRoutes = agariRoutes;
 
+  public readonly brand: string = 'アガリ';
+
   public displayedRoutes: AgariRoutes;
 
-  constructor() {}
+  public constructor() {}
 
   public ngOnInit(): void {
     this.displayedRoutes = this.routes.filter(r => r.display);
   }
+
 }

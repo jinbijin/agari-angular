@@ -39,15 +39,15 @@ class Page extends PageBase<ScheduleGeneratorComponent> {
     return this.component();
   }
 
-  get agariLayout(): HTMLElement {
+  public get agariLayout(): HTMLElement {
     return this.query<HTMLElement>('agari-layout');
   }
 
-  get agariScheduleGeneratorRequest(): HTMLElement {
+  public get agariScheduleGeneratorRequest(): HTMLElement {
     return this.query<HTMLElement>('agari-schedule-generator-request');
   }
 
-  get agariScheduleGeneratorResponse(): HTMLElement {
+  public get agariScheduleGeneratorResponse(): HTMLElement {
     return this.query<HTMLElement>('agari-schedule-generator-response');
   }
 }

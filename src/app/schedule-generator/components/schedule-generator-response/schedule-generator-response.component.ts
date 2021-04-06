@@ -30,7 +30,7 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
 
   public export$: Observable<ExcelExportConfiguration | undefined>;
 
-  constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   public ngOnInit(): void {
     this.result$ = this.payload$.pipe(

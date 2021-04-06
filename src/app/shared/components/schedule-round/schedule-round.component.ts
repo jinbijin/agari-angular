@@ -14,5 +14,5 @@ export class ScheduleRoundComponent {
   @Input()
   public roundNumber: number;
 
-  constructor() {}
+  public constructor() {}
 }

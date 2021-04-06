@@ -69,7 +69,7 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  get sidenav(): MatSidenavStubComponent {
+  public get sidenav(): MatSidenavStubComponent {
     return this.component(MatSidenavStubComponent);
   }
 }

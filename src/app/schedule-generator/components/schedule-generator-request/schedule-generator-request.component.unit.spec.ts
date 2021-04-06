@@ -76,6 +76,7 @@ describe('ScheduleGeneratorRequestComponent', () => {
         stale: false
       }).pipe(
         tap(data => {
+          // eslint-disable-next-line no-throw-literal
           throw { message: 'test' };
         })
       )

@@ -18,10 +18,6 @@ import { ParticipantDialogComponent } from '../../dialogs/participant-dialog/par
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase) {
-  constructor(private readonly dialog: MatDialog, private readonly store: Store) {
-    super();
-  }
-
   @Select(EventManagerState.participants)
   public readonly participants$: Observable<(Participant | undefined)[] | undefined>;
 
@@ -36,6 +32,10 @@ export class EventRegistrationStepComponent extends Mixin.TrackByIndex(EmptyBase
 
   @Output() public readonly previous: EventEmitter<void> = new EventEmitter();
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
+
+  public constructor(private readonly dialog: MatDialog, private readonly store: Store) {
+    super();
+  }
 
   public setParticipant(index: number, participant?: Participant): void {
     const dialogRef = this.dialog.open(ParticipantDialogComponent, { data: { participant, index } });

@@ -9,13 +9,13 @@ import { Participant } from 'src/app/instrumentation/types/participant.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipantDialogComponent {
-  constructor(
-    public readonly errorMessage: ErrorMessageService,
-    @Inject(MAT_DIALOG_DATA) public readonly data: { participant?: Participant; index: number }
-  ) {}
-
   public formGroup: FormGroup & { controls: Record<keyof Participant, FormControl> } = new FormGroup({
     id: new FormControl(this.data.participant?.id),
     name: new FormControl(this.data.participant?.name, [Validators.required])
   }) as any;
+
+  public constructor(
+    public readonly errorMessage: ErrorMessageService,
+    @Inject(MAT_DIALOG_DATA) public readonly data: { participant?: Participant; index: number }
+  ) {}
 }

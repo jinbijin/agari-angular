@@ -10,7 +10,7 @@ export class LayoutComponent implements OnInit {
   @Input()
   public title: string;
 
-  constructor() {}
+  public constructor() {}
 
   public ngOnInit(): void {}
 }

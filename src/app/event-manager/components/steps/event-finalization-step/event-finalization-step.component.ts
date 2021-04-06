@@ -10,12 +10,12 @@ import { EventManagerState } from 'src/app/event-manager/store/event-manager.sta
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventFinalizationStepComponent {
-  constructor(private readonly store: Store) {}
-
   @Output() public previous: EventEmitter<void> = new EventEmitter();
 
   @Select(EventManagerState.eventFlag)
   public readonly finalized$: Observable<boolean>;
+
+  public constructor(private readonly store: Store) {}
 
   public goToPrevious(): void {
     this.previous.emit();

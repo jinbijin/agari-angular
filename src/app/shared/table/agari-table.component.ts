@@ -11,7 +11,7 @@ export class AgariTableComponent implements OnInit {
 
   public displayedColumns: string[];
 
-  constructor() {}
+  public constructor() {}
 
   public ngOnInit(): void {
     this.displayedColumns = this.tableConfiguration.columns

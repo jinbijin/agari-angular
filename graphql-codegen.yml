@@ -5,6 +5,9 @@ generates:
   ./src/app/graphql/generated/types.ts:
     plugins:
       - 'add': '/* istanbul ignore file */'
+      - 'add': '/* eslint-disable @typescript-eslint/explicit-member-accessibility */'
+      - 'add': '/* eslint-disable id-blacklist */'
+      - 'add': '/* eslint-disable @typescript-eslint/naming-convention */'
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-apollo-angular'

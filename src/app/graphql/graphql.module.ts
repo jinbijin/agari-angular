@@ -9,6 +9,7 @@ import { onError } from 'apollo-link-error';
 import { environment } from '../../environments/environment';
 
 const uri = `${environment.apiBaseUrl}/graphql`;
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createApollo(httpLink: HttpLink, snackBar: MatSnackBar) {
   const error = onError(({ graphQLErrors, networkError }) => {
     let message = 'An unknown error has occurred';

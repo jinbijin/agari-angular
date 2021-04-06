@@ -27,6 +27,8 @@ export interface ScheduleGeneratorStateModel {
 })
 @Injectable()
 export class ScheduleGeneratorState {
+  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+
   @Selector()
   public static status(state: ScheduleGeneratorStateModel): Status {
     return state.status;
@@ -36,8 +38,6 @@ export class ScheduleGeneratorState {
   public static payload(state: ScheduleGeneratorStateModel): GenerateScheduleQueryVariables | null {
     return state.payload;
   }
-
-  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   @Action(GenerateSchedule)
   public generateSchedule(

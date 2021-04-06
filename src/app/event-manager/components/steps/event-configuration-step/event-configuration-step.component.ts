@@ -22,8 +22,6 @@ import { ScheduleDialogComponent } from '../../dialogs/schedule-dialog/schedule-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventConfigurationStepComponent {
-  constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
-
   @Select(EventManagerState.roundParticipantCount)
   public readonly roundParticipantCount$: Observable<RoundParticipantCount | undefined>;
 
@@ -40,6 +38,8 @@ export class EventConfigurationStepComponent {
   public readonly registrationFinalized$: Observable<boolean>;
 
   @Output() public readonly next: EventEmitter<void> = new EventEmitter();
+
+  public constructor(private readonly dialog: MatDialog, private readonly store: Store) {}
 
   public setNumber(roundParticipantCount?: RoundParticipantCount): void {
     const dialogRef = this.dialog.open(RoundParticipantDialogComponent, { data: roundParticipantCount });

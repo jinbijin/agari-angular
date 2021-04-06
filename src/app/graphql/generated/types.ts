@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
+/* eslint-disable id-blacklist */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* istanbul ignore file */
 import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
