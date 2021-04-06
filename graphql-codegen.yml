@@ -1,16 +1,16 @@
 overwrite: true
-schema: 'http://localhost:5001/graphql'
-documents: 'src/**/*.graphql'
+schema: http://localhost:5001/graphql
+documents: src/**/*.graphql
 generates:
   ./src/app/graphql/generated/types.ts:
     plugins:
-      - 'add': '/* istanbul ignore file */'
-      - 'add': '/* eslint-disable @typescript-eslint/explicit-member-accessibility */'
-      - 'add': '/* eslint-disable id-blacklist */'
-      - 'add': '/* eslint-disable @typescript-eslint/naming-convention */'
-      - 'typescript'
-      - 'typescript-operations'
-      - 'typescript-apollo-angular'
+      - add:
+        content:
+          - '/* istanbul ignore file */'
+          - '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular
   ./src/app/graphql/generated/schema.json:
     plugins:
-      - 'introspection'
+      - introspection

@@ -1,15 +1,9 @@
-import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
-import {HttpLink, HttpLinkModule} from 'apollo-angular/http';
+import {APOLLO_OPTIONS} from 'apollo-angular';
+import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache, ApolloLink} from '@apollo/client/core';
 import {onError} from '@apollo/client/link/error';
 import { NgModule } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
-
-
-
-
-
 import { environment } from '../../environments/environment';
 
 const uri = `${environment.apiBaseUrl}/graphql`;
