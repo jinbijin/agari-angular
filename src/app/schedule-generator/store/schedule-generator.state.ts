@@ -1,6 +1,7 @@
+import {ApolloQueryResult} from '@apollo/client/core';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { ApolloQueryResult } from 'apollo-client';
+
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import {
@@ -27,6 +28,8 @@ export interface ScheduleGeneratorStateModel {
 })
 @Injectable()
 export class ScheduleGeneratorState {
+  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+
   @Selector()
   public static status(state: ScheduleGeneratorStateModel): Status {
     return state.status;
@@ -36,8 +39,6 @@ export class ScheduleGeneratorState {
   public static payload(state: ScheduleGeneratorStateModel): GenerateScheduleQueryVariables | null {
     return state.payload;
   }
-
-  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   @Action(GenerateSchedule)
   public generateSchedule(

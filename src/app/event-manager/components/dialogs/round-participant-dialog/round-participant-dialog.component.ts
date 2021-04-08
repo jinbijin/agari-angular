@@ -8,8 +8,6 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoundParticipantDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: RoundParticipantCount) {}
-
   public formGroup: FormGroup & {
     controls: {
       roundParticipantCount: FormControl;
@@ -17,4 +15,6 @@ export class RoundParticipantDialogComponent {
   } = new FormGroup({
     roundParticipantCount: new FormControl(this.data)
   }) as any;
+
+  public constructor(@Inject(MAT_DIALOG_DATA) public readonly data: RoundParticipantCount) {}
 }

@@ -75,7 +75,7 @@ class Page extends PageBase<TestHostComponent> {
 class TestHostComponent {
   public formControl: FormControl;
 
-  constructor() {
+  public constructor() {
     this.formControl = new FormControl(undefined);
   }
 }

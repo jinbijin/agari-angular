@@ -18,10 +18,8 @@ import { AgariValidators } from 'src/app/instrumentation/validators/agari-valida
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoringDialogComponent {
-  constructor(
-    public readonly errorMessage: ErrorMessageService,
-    @Inject(MAT_DIALOG_DATA) public readonly data: { index: ScheduleGameIndex; game: GameResult }
-  ) {}
+  @Select(EventManagerState.participant)
+  public readonly participant$: Observable<(index: number) => Participant | undefined>;
 
   public readonly customMessages: KeyMessagePair[] = [
     { key: 'pattern', message: error => 'Invalid input. Expected a number with at most one decimal (.).' },
@@ -31,15 +29,13 @@ export class ScoringDialogComponent {
     }
   ];
 
-  @Select(EventManagerState.participant)
-  public readonly participant$: Observable<(index: number) => Participant | undefined>;
-
   public matcher: AgariErrorStateMatcher = new AgariErrorStateMatcher();
-
-  private readonly scoreRegex = new RegExp(/^\-?\d*\.?\d{0,1}$/);
 
   public keys: string[] = Object.keys(this.data.game);
 
+  private readonly scoreRegex = new RegExp(/^\-?\d*\.?\d{0,1}$/);
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public formGroup: FormGroup & {
     controls: Record<'basicScore' | 'bonusScore', FormGroup & { controls: Record<string, FormControl> }>;
   } = new FormGroup({
@@ -83,4 +79,9 @@ export class ScoringDialogComponent {
       )
     })
   }) as any;
+
+  public constructor(
+    public readonly errorMessage: ErrorMessageService,
+    @Inject(MAT_DIALOG_DATA) public readonly data: { index: ScheduleGameIndex; game: GameResult }
+  ) {}
 }

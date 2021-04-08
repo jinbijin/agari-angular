@@ -2,10 +2,18 @@ import { ControlValueAccessor, FormControl, FormGroup, Validators } from '@angul
 import { Constructor } from 'src/app/instrumentation/mixins/types/constructor';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
 
+// eslint-disable-next-line
 export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: T) {
-  // tslint:disable-next-line: no-shadowed-variable
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   return class RoundParticipantValueAccessor extends Base implements ControlValueAccessor {
-    constructor(...args: any[]) {
+    public formGroup: FormGroup; 
+
+    public controls: {
+      roundCount: FormControl;
+      participantCount: FormControl;
+    };
+
+    public constructor(...args: any[]) {
       super(...args);
       const roundCount: FormControl = new FormControl(undefined, [Validators.required, Validators.min(1)]);
       this.controls = {
@@ -19,13 +27,6 @@ export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: 
       };
       this.formGroup = new FormGroup(this.controls);
     }
-
-    public formGroup: FormGroup;
-
-    public controls: {
-      roundCount: FormControl;
-      participantCount: FormControl;
-    };
 
     public onChange: (event: any) => void = event => {};
 

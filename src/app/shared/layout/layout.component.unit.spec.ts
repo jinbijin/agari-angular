@@ -7,11 +7,9 @@ import { LayoutComponent } from './layout.component';
 describe('LayoutComponent', () => {
   let page: Page;
 
-  beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+  beforeEach(async () => await TestBed.configureTestingModule({
       declarations: [TestHostComponent, LayoutComponent]
-    }).compileComponents();
-  });
+    }).compileComponents());
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(TestHostComponent));
@@ -40,11 +38,11 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  get title(): HTMLElement {
+  public get title(): HTMLElement {
     return this.query<HTMLElement>('h2');
   }
 
-  get innerContent(): HTMLElement {
+  public get innerContent(): HTMLElement {
     return this.query<HTMLElement>('p');
   }
 }

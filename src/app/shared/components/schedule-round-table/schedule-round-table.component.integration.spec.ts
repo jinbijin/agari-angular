@@ -71,17 +71,17 @@ class TestHostComponent {
 }
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[matHeaderRowDef]',
-  // tslint:disable-next-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['columns: matHeaderRowDef']
 })
 class MatHeaderRowDefStubDirective {}
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[matRowDef]',
-  // tslint:disable-next-line: no-inputs-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['columns: matRowDefColumns']
 })
 class MatRowDefStubDirective {}

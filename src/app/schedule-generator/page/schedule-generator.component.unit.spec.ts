@@ -7,12 +7,10 @@ import { ScheduleGeneratorComponent } from './schedule-generator.component';
 describe('ScheduleGeneratorComponent', () => {
   let page: Page;
 
-  beforeEach(async () => {
-    return await TestBed.configureTestingModule({
+  beforeEach(async () => await TestBed.configureTestingModule({
       declarations: [ScheduleGeneratorComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  });
+    }).compileComponents());
 
   beforeEach(() => {
     page = new Page(TestBed.createComponent(ScheduleGeneratorComponent));
@@ -41,15 +39,15 @@ class Page extends PageBase<ScheduleGeneratorComponent> {
     return this.component();
   }
 
-  get agariLayout(): HTMLElement {
+  public get agariLayout(): HTMLElement {
     return this.query<HTMLElement>('agari-layout');
   }
 
-  get agariScheduleGeneratorRequest(): HTMLElement {
+  public get agariScheduleGeneratorRequest(): HTMLElement {
     return this.query<HTMLElement>('agari-schedule-generator-request');
   }
 
-  get agariScheduleGeneratorResponse(): HTMLElement {
+  public get agariScheduleGeneratorResponse(): HTMLElement {
     return this.query<HTMLElement>('agari-schedule-generator-response');
   }
 }

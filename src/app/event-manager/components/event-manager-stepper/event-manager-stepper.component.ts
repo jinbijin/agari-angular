@@ -23,11 +23,7 @@ import { EventManagerStepComponent } from '../event-manager-step/event-manager-s
 })
 export class EventManagerStepperComponent extends Mixin.TrackByIndex(EmptyBase)
   implements AfterViewInit, OnDestroy {
-  private subscriptions: Subscription = new Subscription();
-
   @ViewChildren(EventManagerStepComponent) public steps: QueryList<EventManagerStepComponent>;
-
-  private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Select(EventManagerState.configurationFlag)
   public readonly configFinalized$: Observable<boolean>;
@@ -37,6 +33,10 @@ export class EventManagerStepperComponent extends Mixin.TrackByIndex(EmptyBase)
 
   @Select(EventManagerState.results)
   public readonly results$: Observable<(RoundResult | undefined)[] | undefined>;
+
+  private subscriptions: Subscription = new Subscription();
+
+  private readonly currentStep: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   public ngAfterViewInit(): void {
     this.resetSubscriptions();

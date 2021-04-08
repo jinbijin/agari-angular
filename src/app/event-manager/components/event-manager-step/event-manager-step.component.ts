@@ -14,8 +14,6 @@ import { MatExpansionPanel } from '@angular/material/expansion';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventManagerStepComponent {
-  public index: number;
-
   @Input() public disabled: boolean;
 
   @ViewChild(MatExpansionPanel) public panel: MatExpansionPanel;
@@ -23,4 +21,6 @@ export class EventManagerStepComponent {
   @ContentChild('header') public header: TemplateRef<any>;
 
   @ContentChild('content') public content: TemplateRef<any>;
+
+  public index: number;
 }

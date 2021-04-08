@@ -86,15 +86,15 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  get brand(): HTMLElement {
+  public get brand(): HTMLElement {
     return this.query<HTMLElement>('a');
   }
 
-  get menuButton(): HTMLButtonElement {
+  public get menuButton(): HTMLButtonElement {
     return this.query<HTMLButtonElement>('button');
   }
 
-  get matMenu(): HTMLElement {
+  public get matMenu(): HTMLElement {
     return this.query<HTMLElement>('mat-menu');
   }
 }
@@ -109,7 +109,7 @@ class TestHostComponent {
 }
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'mat-menu',
   exportAs: 'matMenu'
 })

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const largeBreakpoint: string = '(min-width: 1200px)';
+const largeBreakpoint = '(min-width: 1200px)';
 
 @Component({
   selector: 'agari-content',
@@ -14,7 +14,7 @@ const largeBreakpoint: string = '(min-width: 1200px)';
 export class ContentComponent implements OnInit {
   public sidenavOpened: Observable<boolean>;
 
-  constructor(private readonly breakpointObserver: BreakpointObserver) {}
+  public constructor(private readonly breakpointObserver: BreakpointObserver) {}
 
   public ngOnInit(): void {
     this.sidenavOpened = this.breakpointObserver

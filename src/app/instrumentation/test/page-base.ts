@@ -5,7 +5,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 export abstract class PageBase<TComponent> {
-  constructor(public fixture: ComponentFixture<TComponent>) {}
+  public constructor(public fixture: ComponentFixture<TComponent>) {}
 
   public get loader(): HarnessLoader {
     return TestbedHarnessEnvironment.loader(this.fixture);

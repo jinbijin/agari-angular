@@ -23,7 +23,7 @@ export class ScheduleGeneratorRequestComponent implements OnInit {
     roundParticipantCount: FormControl;
   };
 
-  constructor(private readonly store: Store) {}
+  public constructor(private readonly store: Store) {}
 
   public ngOnInit(): void {
     this.controls = {

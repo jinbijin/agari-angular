@@ -1,9 +1,10 @@
+import {ApolloQueryResult, NetworkStatus} from '@apollo/client/core';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NgxsModule, Store } from '@ngxs/store';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 import { QueryOptionsAlone } from 'apollo-angular/types';
-import { ApolloQueryResult, NetworkStatus } from 'apollo-client';
+
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {
@@ -85,6 +86,7 @@ describe('ScheduleGeneratorResponseComponent', () => {
         stale: false
       }).pipe(
         tap(data => {
+          // eslint-disable-next-line no-throw-literal
           throw { message: 'test' };
         })
       )

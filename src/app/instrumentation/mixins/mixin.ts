@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Constructor } from './types/constructor';
 
 export class Mixin {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public static Reactive<T extends Constructor<any>>(Base: T) {
     return class Reactive extends Base implements OnDestroy {
       protected readonly subscription: Subscription;
@@ -23,6 +24,7 @@ export class Mixin {
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public static TrackByIndex<T extends Constructor<any>>(Base: T) {
     return class TrackByIndex extends Base {
       public trackByIndex(index: number, item: any): number {

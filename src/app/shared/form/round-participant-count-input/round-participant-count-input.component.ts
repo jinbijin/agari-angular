@@ -37,7 +37,17 @@ import { RoundParticipantValueAccessor } from './mixins/round-participant-value-
 export class RoundParticipantCountInputComponent
   extends RoundParticipantValueAccessor(Mixin.Reactive(EmptyBase))
   implements OnInit, ControlValueAccessor, Validator {
-  constructor(public readonly errorMessage: ErrorMessageService) {
+  public roundCustomErrorMessages: KeyMessagePair[] = [
+    { key: 'min', message: error => 'Number of rounds must be greater than 0.' }
+  ];
+
+  public participantCustomErrorMessages: KeyMessagePair[] = [
+    { key: 'min', message: error => 'Number of participants must be greater than 0.' },
+    { key: 'mod', message: error => 'Number of participants must be divisible by 4.' },
+    { key: 'minParticipant', message: error => `Number of participants must be at least ${error.min}.` }
+  ];
+
+  public constructor(public readonly errorMessage: ErrorMessageService) {
     super();
     this.subscription.add(
       this.controls.roundCount.valueChanges
@@ -56,16 +66,6 @@ export class RoundParticipantCountInputComponent
         .subscribe()
     );
   }
-
-  public roundCustomErrorMessages: KeyMessagePair[] = [
-    { key: 'min', message: error => 'Number of rounds must be greater than 0.' }
-  ];
-
-  public participantCustomErrorMessages: KeyMessagePair[] = [
-    { key: 'min', message: error => 'Number of participants must be greater than 0.' },
-    { key: 'mod', message: error => 'Number of participants must be divisible by 4.' },
-    { key: 'minParticipant', message: error => `Number of participants must be at least ${error.min}.` }
-  ];
 
   public ngOnInit(): void {}
 

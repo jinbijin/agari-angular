@@ -27,7 +27,7 @@ export class ScheduleRoundTableComponent implements OnInit {
 
   public tableConfiguration: TableConfiguration<[number, ScheduleGame]>;
 
-  constructor() {}
+  public constructor() {}
 
   public ngOnInit(): void {
     this.dataSource = [...this.scheduleRound.games.entries()];

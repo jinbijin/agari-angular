@@ -1,6 +1,7 @@
+import {ApolloQueryResult} from '@apollo/client/core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { ApolloQueryResult } from 'apollo-client';
+
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
@@ -30,7 +31,7 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
 
   public export$: Observable<ExcelExportConfiguration | undefined>;
 
-  constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
 
   public ngOnInit(): void {
     this.result$ = this.payload$.pipe(

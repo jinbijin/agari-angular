@@ -10,5 +10,5 @@ import { environment } from '../../../environments/environment';
 export class FooterComponent {
   @Input() public version: string = environment.version;
 
-  constructor() {}
+  public constructor() {}
 }

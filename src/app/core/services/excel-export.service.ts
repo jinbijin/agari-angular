@@ -14,7 +14,9 @@ export class ExcelExportService {
   public exportExcel<T = any>(config: ExcelExportConfiguration<T>): void {
     const worksheet: Xlsx.WorkSheet = Xlsx.utils.aoa_to_sheet(config.data);
     const workbook: Xlsx.WorkBook = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       Sheets: { [config.sheetname]: worksheet },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       SheetNames: [config.sheetname]
     };
     const excelBuffer = Xlsx.write(workbook, {

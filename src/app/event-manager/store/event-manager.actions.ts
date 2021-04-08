@@ -5,50 +5,50 @@ import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-i
 
 export class SetRoundParticipantCount {
   public static readonly type: string = '[EventManager] Set round participant count';
-  constructor(public readonly payload?: RoundParticipantCount) {}
+  public constructor(public readonly payload?: RoundParticipantCount) {}
 }
 
 export class GenerateSchedule {
   public static readonly type: string = '[EventManager] Generate schedule';
-  constructor() {}
+  public constructor() {}
 }
 
 export class UnsetSchedule {
   public static readonly type: string = '[EventManager] Unset schedule';
-  constructor() {}
+  public constructor() {}
 }
 
 export class FinalizeConfiguration {
   public static readonly type: string = '[EventManager] Finalize configuration';
-  constructor() {}
+  public constructor() {}
 }
 
 export class SetParticipant {
   public static readonly type: string = '[EventManager] Set participant';
-  constructor(public readonly payload: { participant?: Participant; index: number }) {}
+  public constructor(public readonly payload: { participant?: Participant; index: number }) {}
 }
 
 export class FinalizeRegistration {
   public static readonly type: string = '[EventManager] Finalize registration';
-  constructor() {}
+  public constructor() {}
 }
 
 export class SetGameResult {
   public static readonly type: string = '[EventManager] Set game result';
-  constructor(public readonly payload: { game: GameResult; index: ScheduleGameIndex }) {}
+  public constructor(public readonly payload: { game: GameResult; index: ScheduleGameIndex }) {}
 }
 
 export class UnsetGameResult {
   public static readonly type: string = '[EventManager] Unset game result';
-  constructor(public readonly payload: { index: ScheduleGameIndex }) {}
+  public constructor(public readonly payload: { index: ScheduleGameIndex }) {}
 }
 
 export class FinalizeRoundResult {
   public static readonly type: string = '[EventManager] Finalize round result';
-  constructor(public readonly payload: { index: number }) {}
+  public constructor(public readonly payload: { index: number }) {}
 }
 
 export class FinalizeEvent {
   public static readonly type: string = '[EventManager] Finalize event';
-  constructor() {}
+  public constructor() {}
 }

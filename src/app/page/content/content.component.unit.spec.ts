@@ -69,7 +69,7 @@ class Page extends PageBase<TestHostComponent> {
     return this.component();
   }
 
-  get sidenav(): MatSidenavStubComponent {
+  public get sidenav(): MatSidenavStubComponent {
     return this.component(MatSidenavStubComponent);
   }
 }
@@ -82,7 +82,7 @@ class Page extends PageBase<TestHostComponent> {
 class TestHostComponent {}
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'mat-sidenav',
   template: ''
 })

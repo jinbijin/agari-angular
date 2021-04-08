@@ -25,14 +25,6 @@ import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dia
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly store: Store,
-    private readonly scoreConverter: ScoreConverterService
-  ) {
-    super();
-  }
-
   @Input() public index: number;
 
   @Select(EventManagerState.participant)
@@ -50,7 +42,16 @@ export class EventScoringStepComponent extends Mixin.TrackByIndex(EmptyBase) {
   @Output() public previous: EventEmitter<void> = new EventEmitter();
   @Output() public next: EventEmitter<void> = new EventEmitter();
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public Object = Object;
+
+  public constructor(
+    private readonly dialog: MatDialog,
+    private readonly store: Store,
+    private readonly scoreConverter: ScoreConverterService
+  ) {
+    super();
+  }
 
   public isSet(game: GameResult): boolean {
     return Object.keys(game)
