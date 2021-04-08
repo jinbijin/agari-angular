@@ -2,7 +2,7 @@ import { ControlValueAccessor, FormControl, FormGroup, Validators } from '@angul
 import { Constructor } from 'src/app/instrumentation/mixins/types/constructor';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
+// eslint-disable-next-line
 export function RoundParticipantValueAccessor<T extends Constructor<any>>(Base: T) {
   // eslint-disable-next-line @typescript-eslint/no-shadow
   return class RoundParticipantValueAccessor extends Base implements ControlValueAccessor {
