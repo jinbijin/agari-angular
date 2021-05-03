@@ -3,7 +3,8 @@ import { agariRoutes } from 'src/app/agari.routes';
 import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
 
 @Component({
-  selector: 'agari-header',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'header[agariHeader]',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

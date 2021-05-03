@@ -19,6 +19,14 @@ $break-md: 880px;
 
 @import './app/scss/size.scss';
 
+html,
+body {
+  height: 100vh;
+}
+body {
+  margin: 0;
+}
+
 .agari-flex-row {
   display: flex;
   flex-flow: row nowrap;

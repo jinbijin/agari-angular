@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'agari-footer',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'footer[agariFooter]',
   templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

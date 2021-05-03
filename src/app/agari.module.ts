@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 
 import { AgariComponent } from './agari.component';
 import { agariRoutes } from './agari.routes';
+import { PageLayoutModule } from './components/page-layout/page-layout.module';
 import { CoreModule } from './core/core.module';
 import { GraphQLModule } from './graphql/graphql.module';
 import { PageModule } from './page/page.module';
@@ -21,6 +22,7 @@ import { PageModule } from './page/page.module';
     HttpClientModule,
     GraphQLModule,
     PageModule,
+    PageLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
