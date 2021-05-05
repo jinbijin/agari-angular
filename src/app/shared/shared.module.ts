@@ -20,7 +20,6 @@ import { ScheduleRoundTableComponent } from './components/schedule-round-table/s
 import { ScheduleRoundComponent } from './components/schedule-round/schedule-round.component';
 import { ExcelExportDirective } from './directives/excel-export.directive';
 import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
-import { LayoutComponent } from './layout/layout.component';
 import { AsNumberPipe } from './pipes/as-number.pipe';
 import { AsOrdinalPipe } from './pipes/as-ordinal.pipe';
 import { AsScorePipe } from './pipes/as-score.pipe';
@@ -47,7 +46,6 @@ const materialModules: Type<any>[] = [
 
 @NgModule({
   declarations: [
-    LayoutComponent,
     RoundParticipantCountInputComponent,
     ScheduleRoundComponent,
     ScheduleRoundTableComponent,
@@ -61,7 +59,6 @@ const materialModules: Type<any>[] = [
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
-    LayoutComponent,
     ReactiveFormsModule,
     ...materialModules,
     RoundParticipantCountInputComponent,

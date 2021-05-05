@@ -1,0 +1,8 @@
+@mixin full-size(
+    $padding: 0px
+) {
+    width: calc(100% - 2 * #{$padding});
+    height: calc(100% - 2 * #{$padding});
+    padding: $padding;
+    overflow-y: auto;
+}

@@ -1,0 +1,6 @@
+@use '/src/app/scss/abstracts/mixins';
+
+:host {
+    @include mixins.full-size($padding: 1rem);
+    grid-area: page-content;
+}

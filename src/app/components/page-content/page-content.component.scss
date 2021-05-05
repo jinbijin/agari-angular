@@ -1,0 +1,8 @@
+@use '/src/app/scss/abstracts/mixins';
+
+:host {
+    @include mixins.full-size();
+    display: grid;
+    grid-template-areas: ". page-content .";
+    grid-template-columns: 1fr minmax(0, 80ch) 1fr;
+}

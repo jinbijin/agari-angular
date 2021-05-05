@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
+import { PageContentModule } from '../components/page-content/page-content.module';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -21,7 +22,8 @@ import { ScheduleGeneratorState } from './store/schedule-generator.state';
     CommonModule,
     SharedModule,
     RouterModule.forChild(scheduleGeneratorRoutes),
-    NgxsModule.forFeature([ScheduleGeneratorState])
+    NgxsModule.forFeature([ScheduleGeneratorState]),
+    PageContentModule,
   ],
   exports: [],
   providers: []
