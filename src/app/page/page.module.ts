@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { HeaderBarModule } from '../components/header-bar/header-bar.module';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -21,7 +22,8 @@ import { HeaderComponent } from './header/header.component';
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    RouterModule
+    RouterModule,
+    HeaderBarModule
   ],
   exports: [HeaderComponent, FooterComponent, ContentComponent],
   providers: []

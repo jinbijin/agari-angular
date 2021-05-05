@@ -1,14 +1,17 @@
-<mat-toolbar color="primary" class="mat-elevation-z6">
-  <a mat-button routerLink="/" class="agari-brand">{{ brand }}</a>
-  <span class="agari-spacer"></span>
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="rootMenu"
-    aria-label="Menu button"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-</mat-toolbar>
+<agari-header-bar>
+  <agari-header-bar-brand>
+    <a mat-button routerLink="/" class="agari-brand">{{ brand }}</a>
+  </agari-header-bar-brand>
+  <agari-header-bar-menu>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="rootMenu"
+      aria-label="Menu button"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </agari-header-bar-menu>
+</agari-header-bar>
 
 <mat-menu #rootMenu="matMenu">
   <a
