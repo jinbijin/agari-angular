@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 64px;
-    background: #3f51b5;
+    background: whitesmoke;
     display: grid;
     align-items: center;
     box-sizing: border-box;
@@ -10,13 +10,13 @@
     grid-template-areas: "header-brand . header-menu";
     grid-template-columns: auto 1fr auto;
 
-    &::after {
+    &::before {
         content: "";
         position: absolute;
         left: 0;
-        bottom: 0;
+        top: 0;
         width: 100%;
-        box-shadow: 0 -1rem 1rem 1rem #424242;
+        box-shadow: 0 1rem 1rem 1rem gray;
         z-index: -1;
     }
 }
