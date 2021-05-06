@@ -1,8 +1,10 @@
+@use '/src/app/scss/theme/color';
+
 :host {
     position: relative;
     width: 100%;
     height: 64px;
-    background: whitesmoke;
+    background: color.$background-accent;
     display: grid;
     align-items: center;
     box-sizing: border-box;
@@ -16,7 +18,7 @@
         left: 0;
         top: 0;
         width: 100%;
-        box-shadow: 0 1rem 1rem 1rem gray;
+        box-shadow: 0 1rem 1rem 1rem color.$foreground;
         z-index: -1;
     }
 }

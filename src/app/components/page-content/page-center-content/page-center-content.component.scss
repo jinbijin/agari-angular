@@ -1,8 +1,9 @@
 @use '/src/app/scss/abstracts/mixins';
+@use '/src/app/scss/theme/color';
 
 :host {
     @include mixins.full-size;
     grid-area: page-content;
     padding: 1rem 2rem;
-    background: #fafafa;
+    background: color.$background-accent;
 }

@@ -1,3 +1,4 @@
+@use './app/scss/theme/color';
 @import '~@angular/material/theming';
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,900&display=swap&subset=japanese');
 
@@ -25,6 +26,7 @@ body {
   margin: 0;
   font-family: 'Noto Serif JP', serif;
   font-size: small;
+  background: color.$background;
 }
 
 ::-webkit-scrollbar {
@@ -36,7 +38,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #3f51b5;
+  background-color: color.$primary;
   border-radius: 6px;
 }
 
