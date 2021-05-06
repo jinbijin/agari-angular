@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from '../components/button/button.module';
 import { FooterBarModule } from '../components/footer-bar/footer-bar.module';
 import { HeaderBarModule } from '../components/header-bar/header-bar.module';
 
@@ -24,6 +25,7 @@ import { HeaderComponent } from './header/header.component';
     MatMenuModule,
     MatSidenavModule,
     RouterModule,
+    ButtonModule,
     HeaderBarModule,
     FooterBarModule
   ],

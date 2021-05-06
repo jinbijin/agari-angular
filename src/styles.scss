@@ -25,7 +25,6 @@ body {
 body {
   margin: 0;
   font-family: 'Noto Serif JP', serif;
-  font-size: small;
   background: color.$background;
 }
 
@@ -40,6 +39,12 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: color.$primary;
   border-radius: 6px;
+}
+
+a {
+  text-decoration: none;
+  cursor: default;
+  color: inherit;
 }
 
 .agari-flex-row {
