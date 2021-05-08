@@ -1,15 +1,30 @@
+@use '/src/app/scss//abstracts/mixins';
 @use '/src/app/scss/theme/color';
 
 :host {
+    @include mixins.border-rounded;
     position: relative;
     padding: 0.5rem 1rem;
     overflow: hidden;
-    border: 1px solid;
-    border-radius: 4px 4px 1.5rem 4px;
 
     &[data-color="primary"] {
         background: color.$primary;
         color: color.$primary-contrast;
-        border-color: color.$primary-contrast;
+    }
+
+    &::before {
+        @include mixins.border-rounded;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        background: color.$foreground;
+    }
+
+    &:hover::before {
+        opacity: 0.2;
     }
 }
