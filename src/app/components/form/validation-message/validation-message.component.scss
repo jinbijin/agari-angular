@@ -1,0 +1,7 @@
+@use '/src/app/scss/theme/color';
+
+:host {
+    display: block;
+    font-size: small;
+    color: color.$error;
+}

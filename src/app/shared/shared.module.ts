@@ -15,6 +15,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormModule } from '../components/form/form.module';
 
 import { ScheduleRoundTableComponent } from './components/schedule-round-table/schedule-round-table.component';
 import { ScheduleRoundComponent } from './components/schedule-round/schedule-round.component';
@@ -57,7 +58,7 @@ const materialModules: Type<any>[] = [
     HideZeroPipe,
     BreakdownPipe
   ],
-  imports: [CommonModule, ReactiveFormsModule, ...materialModules],
+  imports: [CommonModule, ReactiveFormsModule, ...materialModules, FormModule],
   exports: [
     ReactiveFormsModule,
     ...materialModules,
