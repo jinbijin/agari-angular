@@ -182,8 +182,8 @@ export class EventManagerState implements NgxsOnInit {
   @Action(SetGameResult)
   public setGameResult(ctx: StateContext<EventManagerStateModel>, { payload }: SetGameResult): void {
     ctx.setState(
-      patch({
-        results: updateItem<RoundResult | undefined>(
+      patch<any>({
+        results: updateItem<RoundResult>(
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
@@ -207,8 +207,8 @@ export class EventManagerState implements NgxsOnInit {
       [keys[3]]: undefined
     };
     ctx.setState(
-      patch({
-        results: updateItem<RoundResult | undefined>(
+      patch<any>({
+        results: updateItem<RoundResult>(
           payload.index.roundIndex,
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
