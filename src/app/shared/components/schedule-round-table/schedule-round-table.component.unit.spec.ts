@@ -1,7 +1,8 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { RoundRobinGame } from 'src/app/instrumentation/types/schedule/round-robin-game.type';
+import { RoundRobinRound } from 'src/app/instrumentation/types/schedule/round-robin-round.type';
 
 import { ScheduleRoundTableComponent } from './schedule-round-table.component';
 
@@ -56,7 +57,7 @@ describe('ScheduleGeneratorRoundTableComponent', () => {
     };
     page.detectChanges();
 
-    const element: [number, ScheduleGame] = [1, { participantNrs: [4, 5, 6, 7] }];
+    const element: [number, RoundRobinGame] = [1, { participantNrs: [4, 5, 6, 7] }];
 
     expect(page.root.tableConfiguration.columns.length).toEqual(6);
     expect(page.root.tableConfiguration.columns[0].cell(element)).toEqual('Table');
@@ -88,5 +89,5 @@ class Page extends PageBase<TestHostComponent> {
   `
 })
 class TestHostComponent {
-  public scheduleRound: ScheduleRound;
+  public scheduleRound: RoundRobinRound;
 }
