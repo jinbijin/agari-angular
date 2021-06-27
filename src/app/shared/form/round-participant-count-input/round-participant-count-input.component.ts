@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidatorFn,
   ControlValueAccessor,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -10,6 +11,7 @@ import {
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { ErrorMessageService } from 'src/app/core/services/error-message.service';
+import { ScheduleGeneratorService } from 'src/app/core/services/schedule-generator.service';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
 import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
@@ -47,7 +49,7 @@ export class RoundParticipantCountInputComponent
     { key: 'minParticipant', message: error => `Number of participants must be at least ${error.min}.` }
   ];
 
-  public constructor(public readonly errorMessage: ErrorMessageService) {
+  public constructor(public readonly errorMessage: ErrorMessageService, private readonly scheduleGenerator: ScheduleGeneratorService) {
     super();
     this.subscription.add(
       this.controls.roundCount.valueChanges
@@ -71,5 +73,9 @@ export class RoundParticipantCountInputComponent
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.formGroup.valid ? null : { roundParticipantCount: {} };
+  }
+
+  private get inputValidator(): AsyncValidatorFn {
+    return (control: AbstractControl) => this.scheduleGenerator.validateGenerateScheduleQuery(this.formGroup.value).pipe(map(response => response?.data ? null : { unavailable: true }));
   }
 }
