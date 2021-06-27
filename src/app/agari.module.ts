@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 import { AgariComponent } from './agari.component';
 import { agariRoutes } from './agari.routes';
 import { CoreModule } from './core/core.module';
-import { GraphQLModule } from './graphql/graphql.module';
 import { PageModule } from './page/page.module';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { PageModule } from './page/page.module';
     RouterModule.forRoot(agariRoutes, { relativeLinkResolution: 'legacy' }),
     CoreModule,
     HttpClientModule,
-    GraphQLModule,
     PageModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production

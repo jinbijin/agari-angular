@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ScheduleGame, ScheduleRound } from 'src/app/graphql/generated/types';
 import { TableConfiguration } from 'src/app/instrumentation/data/table-configuration.type';
 import { Transforms } from 'src/app/instrumentation/transforms/transforms';
+import { RoundRobinGame } from 'src/app/instrumentation/types/schedule/round-robin-game.type';
+import { RoundRobinRound } from 'src/app/instrumentation/types/schedule/round-robin-round.type';
 
 @Component({
   selector: 'agari-schedule-round-table',
@@ -12,9 +13,9 @@ import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 })
 export class ScheduleRoundTableComponent implements OnInit {
   @Input()
-  public scheduleRound: ScheduleRound;
+  public scheduleRound: RoundRobinRound;
 
-  public dataSource: [number, ScheduleGame][];
+  public dataSource: [number, RoundRobinGame][];
 
   public displayedColumns: string[] = [
     'table',
@@ -25,14 +26,14 @@ export class ScheduleRoundTableComponent implements OnInit {
     'participant4'
   ];
 
-  public tableConfiguration: TableConfiguration<[number, ScheduleGame]>;
+  public tableConfiguration: TableConfiguration<[number, RoundRobinGame]>;
 
   public constructor() {}
 
   public ngOnInit(): void {
     this.dataSource = [...this.scheduleRound.games.entries()];
     this.tableConfiguration = {
-      dataSource: new MatTableDataSource<[number, ScheduleGame]>(this.dataSource),
+      dataSource: new MatTableDataSource<[number, RoundRobinGame]>(this.dataSource),
       headers: false,
       columns: [
         { id: 'table', cell: element => 'Table', classes: ['agari-cell-text'] },
@@ -43,7 +44,7 @@ export class ScheduleRoundTableComponent implements OnInit {
         },
         ...[0, 1, 2, 3].map(i => ({
           id: 'participant' + i,
-          cell: (element: [number, ScheduleGame]) => Transforms.asOrdinal(element[1].participantNrs[i]),
+          cell: (element: [number, RoundRobinGame]) => Transforms.asOrdinal(element[1].participantNrs[i]),
           classes: ['agari-cell-numeric', ...(i === 3 ? ['agari-cell-right-gap'] : [])]
         }))
       ]

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
-import { Schedule } from 'src/app/graphql/generated/types';
+import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
 
 @Component({
   templateUrl: './schedule-dialog.component.html',
@@ -10,5 +10,5 @@ import { Schedule } from 'src/app/graphql/generated/types';
 })
 export class ScheduleDialogComponent {
   @Select(EventManagerState.schedule)
-  public readonly schedule$: Observable<Schedule | undefined>;
+  public readonly schedule$: Observable<RoundRobinSchedule | undefined>;
 }

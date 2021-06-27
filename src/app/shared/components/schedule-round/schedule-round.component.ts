@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { ScheduleRound } from 'src/app/graphql/generated/types';
+import { RoundRobinRound } from 'src/app/instrumentation/types/schedule/round-robin-round.type';
 
 @Component({
   selector: 'agari-schedule-round',
@@ -9,7 +9,7 @@ import { ScheduleRound } from 'src/app/graphql/generated/types';
 })
 export class ScheduleRoundComponent {
   @Input()
-  public scheduleRound: ScheduleRound;
+  public scheduleRound: RoundRobinRound;
 
   @Input()
   public roundNumber: number;

@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
-import { Schedule } from 'src/app/graphql/generated/types';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
+import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
 
 import {
   FinalizeConfiguration,
@@ -29,7 +29,7 @@ export class EventConfigurationStepComponent {
   public readonly roundParticipantSet$: Observable<boolean>;
 
   @Select(EventManagerState.schedule)
-  public readonly schedule$: Observable<Schedule | undefined>;
+  public readonly schedule$: Observable<RoundRobinSchedule | undefined>;
 
   @Select(EventManagerState.configurationFlag)
   public readonly finalized$: Observable<boolean>;
