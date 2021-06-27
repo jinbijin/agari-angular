@@ -188,7 +188,7 @@ export class EventManagerState implements NgxsOnInit {
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
             gameSet: updateItem<boolean>(payload.index.gameIndex, true)
-          })
+          }) as any
         )
       })
     );
@@ -213,7 +213,7 @@ export class EventManagerState implements NgxsOnInit {
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
             gameSet: updateItem<boolean>(payload.index.gameIndex, false)
-          })
+          }) as any
         )
       })
     );

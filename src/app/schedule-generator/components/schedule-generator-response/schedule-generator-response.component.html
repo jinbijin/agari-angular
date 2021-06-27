@@ -1,6 +1,6 @@
-<ng-container *ngIf="(result$ | async)! as result">
+<ng-container *ngIf="(response$ | async)! as response">
   <ng-container *ngIf="(status$ | async)! as status">
-    <ng-container *ngIf="status === 'DONE' && result.data.generateSchedule">
+    <ng-container *ngIf="status === 'DONE' && response?.data">
       <mat-toolbar>
         <div class="agari-spacer"></div>
         <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
@@ -10,7 +10,7 @@
       <div class="agari-grid">
         <div
           class="agari-grid-item"
-          *ngFor="let round of result.data?.generateSchedule?.rounds; index as index"
+          *ngFor="let round of response?.data?.rounds; index as index"
         >
           <agari-schedule-round
             *ngIf="round"
