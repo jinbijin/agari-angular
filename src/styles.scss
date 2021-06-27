@@ -1,17 +1,18 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,900&display=swap&subset=japanese');
 
-$agari-typography: mat-typography-config(
+$agari-typography: mat.define-typography-config(
   $font-family: '"Noto Serif JP", serif'
 );
 
-$agari-primary: mat-palette($mat-indigo);
-$agari-accent: mat-palette($mat-pink, A200, A100, A400);
-$agari-warn: mat-palette($mat-orange);
-$agari-theme: mat-light-theme($agari-primary, $agari-accent, $agari-warn);
+$agari-primary: mat.define-palette(mat.$indigo-palette);
+$agari-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$agari-warn: mat.define-palette(mat.$orange-palette);
+$agari-theme: mat.define-light-theme($agari-primary, $agari-accent, $agari-warn);
 
-@include mat-core($agari-typography);
-@include angular-material-theme($agari-theme);
+@include mat.core($agari-typography);
+@include mat.all-component-themes($agari-theme);
 
 $break-xs: 320px;
 $break-sm: 600px;
