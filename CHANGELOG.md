@@ -1,8 +1,12 @@
-# 2.0.0
-
-### Planned features
+# Planned features
 
 - Manage events in offline (mostly) mode
+
+# 2.0.0
+
+### Features
+
+- Improved schedule generation
 
 ### Breaking changes
 
