@@ -19,6 +19,8 @@
         data-test-id="participant-input"
       />
     </mat-form-field>
+
+    <mat-error *ngIf="formGroup.errors?.unavailable">No schedule available for this round and participant count.</mat-error>
   </div>
 
   <div class="agari-spacer"></div>

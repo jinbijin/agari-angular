@@ -19,6 +19,8 @@
         [formControl]="controls.participantCount"
       />
     </mat-form-field>
+
+    <mat-error *ngIf="formGroup.errors?.unavailable">No schedule available for this round and participant count.</mat-error>
   </div>
   </form>
 </mat-dialog-content>
