@@ -16,11 +16,15 @@ export class ScheduleGeneratorService {
     this.#http = http;
   }
 
+  public getMaxRounds(participantCount: number): Observable<Response<number, ErrorData>> {
+    return this.#http.get<Response<number, ErrorData>>(`${environment.apiBaseUrl}/schedule/round-robin/max-rounds?participantCount=${participantCount}`);
+  }
+
   public generateSchedule(roundParticipantCount: RoundParticipantCount): Observable<Response<RoundRobinSchedule, ErrorData>> {
-    return this.#http.post<Response<RoundRobinSchedule, ErrorData>>(`${environment.apiBaseUrl}/schedule/round-robin`, roundParticipantCount);
+    return this.#http.get<Response<RoundRobinSchedule, ErrorData>>(`${environment.apiBaseUrl}/schedule/round-robin?participantCount=${roundParticipantCount.participantCount}&roundCount=${roundParticipantCount.roundCount}`);
   }
 
   public validateGenerateScheduleQuery(roundParticipantCount: RoundParticipantCount): Observable<Response<boolean, ErrorData>> {
-    return this.#http.post<Response<boolean, ErrorData>>(`${environment.apiBaseUrl}/schedule/round-robin/validate`, roundParticipantCount);
+    return this.#http.get<Response<boolean, ErrorData>>(`${environment.apiBaseUrl}/schedule/round-robin/validate?participantCount=${roundParticipantCount.participantCount}&roundCount=${roundParticipantCount.roundCount}`);
   }
 }
