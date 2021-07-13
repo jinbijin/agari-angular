@@ -1,7 +1,8 @@
-import { version } from '../../package.json';
+import config from '../../package.json';
 
 export const environment = {
   production: true,
   apiBaseUrl: 'https://api.agari-mj.com',
-  version
+  version: config.version,
+  eventManager: false
 };

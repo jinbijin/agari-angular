@@ -1,7 +1,7 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ScheduleRound } from 'src/app/graphql/generated/types';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
+import { RoundRobinRound } from 'src/app/instrumentation/types/schedule/round-robin-round.type';
 
 import { ScheduleRoundTableComponent } from '../schedule-round-table/schedule-round-table.component';
 
@@ -58,5 +58,5 @@ class Page extends PageBase<TestHostComponent> {
 })
 class TestHostComponent {
   public roundNumber: number;
-  public scheduleRound: ScheduleRound;
+  public scheduleRound: RoundRobinRound;
 }

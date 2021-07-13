@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +20,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScheduleRoundTableComponent } from './components/schedule-round-table/schedule-round-table.component';
 import { ScheduleRoundComponent } from './components/schedule-round/schedule-round.component';
 import { ExcelExportDirective } from './directives/excel-export.directive';
-import { RoundParticipantCountInputComponent } from './form/round-participant-count-input/round-participant-count-input.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AsNumberPipe } from './pipes/as-number.pipe';
 import { AsOrdinalPipe } from './pipes/as-ordinal.pipe';
@@ -39,6 +39,7 @@ const materialModules: Type<any>[] = [
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatSelectModule,
   MatStepperModule,
   MatTableModule,
   MatToolbarModule,
@@ -48,7 +49,6 @@ const materialModules: Type<any>[] = [
 @NgModule({
   declarations: [
     LayoutComponent,
-    RoundParticipantCountInputComponent,
     ScheduleRoundComponent,
     ScheduleRoundTableComponent,
     AgariTableComponent,
@@ -64,7 +64,6 @@ const materialModules: Type<any>[] = [
     LayoutComponent,
     ReactiveFormsModule,
     ...materialModules,
-    RoundParticipantCountInputComponent,
     ScheduleRoundComponent,
     ScheduleRoundTableComponent,
     AgariTableComponent,

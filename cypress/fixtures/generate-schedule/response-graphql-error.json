@@ -1,11 +1,6 @@
 {
-  "data": { "generateSchedule": null },
-  "errors": [
-    {
-      "message": "Could not find valid seed for the cyclic schedule generator.",
-      "locations": [{ "line": 2, "column": 3 }],
-      "path": ["generateSchedule"],
-      "extensions": { "code": "SEED_NOT_FOUND" }
-    }
-  ]
+  "data": null,
+  "error": {
+    "message": "Could not find valid seed for the cyclic schedule generator."
+  }
 }

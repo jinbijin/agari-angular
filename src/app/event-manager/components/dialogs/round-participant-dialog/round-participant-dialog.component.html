@@ -1,9 +1,27 @@
 <h2 mat-dialog-title>Configuration</h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
-    <agari-round-participant-count-input
-      [formControl]="formGroup.controls.roundParticipantCount"
-    ></agari-round-participant-count-input>
+  <div>
+    <mat-form-field>
+      <mat-label>Number of rounds</mat-label>
+      <input
+        matInput
+        type="number"
+        [formControl]="controls.roundCount"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Number of participants</mat-label>
+      <input
+        matInput
+        type="number"
+        [formControl]="controls.participantCount"
+      />
+    </mat-form-field>
+
+    <mat-error *ngIf="formGroup.errors?.unavailable">No schedule available for this round and participant count.</mat-error>
+  </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
@@ -11,7 +29,7 @@
   <button
     mat-flat-button
     color="accent"
-    [mat-dialog-close]="formGroup.controls.roundParticipantCount.value"
+    [mat-dialog-close]="formGroup.value"
     [disabled]="formGroup.invalid"
   >
     <mat-icon>add_box</mat-icon>

@@ -1,17 +1,15 @@
-import {ApolloQueryResult} from '@apollo/client/core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 
 import { Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
 import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 
-import {
-  GenerateScheduleGQL,
-  GenerateScheduleQuery,
-  GenerateScheduleQueryVariables
-} from '../../../graphql/generated/types';
+import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
+import { ErrorData } from 'src/app/instrumentation/types/response/error-data.type';
+import { Response } from 'src/app/instrumentation/types/response/response.type';
+import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 import { ScheduleGeneratorState } from '../../store/schedule-generator.state';
 
 @Component({
@@ -25,33 +23,25 @@ export class ScheduleGeneratorResponseComponent implements OnInit {
   public status$: Observable<Status>;
 
   @Select(ScheduleGeneratorState.payload)
-  public payload$: Observable<GenerateScheduleQueryVariables | null>;
+  public payload$: Observable<RoundParticipantCount | null>;
 
-  public result$: Observable<ApolloQueryResult<GenerateScheduleQuery>>;
+  @Select(ScheduleGeneratorState.response)
+  public response$: Observable<Response<RoundRobinSchedule, ErrorData> | null>;
 
   public export$: Observable<ExcelExportConfiguration | undefined>;
 
-  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  public constructor() {}
 
   public ngOnInit(): void {
-    this.result$ = this.payload$.pipe(
-      filter(payload => !!payload),
-      switchMap(payload =>
-        this.generateScheduleGql.fetch(
-          payload as GenerateScheduleQueryVariables, // payload is not null because of filter
-          { fetchPolicy: 'cache-only' }
-        )
-      )
-    );
-    this.export$ = this.result$.pipe(
-      map(result =>
-        result.data.generateSchedule
+    this.export$ = this.response$.pipe(
+      map(response =>
+        response && response.data
           ? {
-              data: result.data.generateSchedule.rounds.map(r => r.games.flatMap(g => g.participantNrs)),
+              data: response.data.rounds.map(r => r.games.flatMap(g => g.participantNrs)),
               filename: [
                 'schedule',
-                result.data.generateSchedule.rounds.length,
-                result.data.generateSchedule.rounds[0].games.length,
+                response.data.rounds.length,
+                response.data.rounds[0].games.length,
                 new Date().toISOString()
               ].join('_'),
               sheetname: 'Schedule'

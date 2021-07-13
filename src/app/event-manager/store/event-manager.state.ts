@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { patch, updateItem } from '@ngxs/store/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GenerateScheduleGQL, Schedule } from 'src/app/graphql/generated/types';
+import { ScheduleGeneratorService } from 'src/app/core/services/schedule-generator.service';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundParticipantCount } from 'src/app/instrumentation/types/round-participant-count.type';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-index.type';
+import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
 
 import {
   FinalizeConfiguration,
@@ -25,7 +26,7 @@ import {
 
 export interface EventManagerStateModel {
   roundParticipantCount?: RoundParticipantCount;
-  schedule?: Schedule;
+  schedule?: RoundRobinSchedule;
   participants?: (Participant | undefined)[];
   results?: (RoundResult | undefined)[];
 
@@ -46,7 +47,7 @@ export interface EventManagerStateModel {
 })
 @Injectable()
 export class EventManagerState implements NgxsOnInit {
-  public constructor(private readonly generateScheduleGql: GenerateScheduleGQL) {}
+  public constructor(private readonly scheduleGenerator: ScheduleGeneratorService) {}
 
   @Selector()
   public static roundParticipantCount(state: EventManagerStateModel): RoundParticipantCount | undefined {
@@ -54,7 +55,7 @@ export class EventManagerState implements NgxsOnInit {
   }
 
   @Selector()
-  public static schedule(state: EventManagerStateModel): Schedule | undefined {
+  public static schedule(state: EventManagerStateModel): RoundRobinSchedule | undefined {
     return state.schedule;
   }
 
@@ -131,13 +132,13 @@ export class EventManagerState implements NgxsOnInit {
 
   @Action(GenerateSchedule)
   public generateSchedule(ctx: StateContext<EventManagerStateModel>): Observable<void> {
-    return this.generateScheduleGql
-      .fetch(ctx.getState().roundParticipantCount, { fetchPolicy: 'network-only' })
+    const roundParticipantCount = ctx.getState().roundParticipantCount;
+    return roundParticipantCount ? this.scheduleGenerator.generateSchedule(roundParticipantCount)
       .pipe(
         map(response => {
-          ctx.patchState({ schedule: response.data.generateSchedule });
+          ctx.patchState({ schedule: response.data ?? undefined });
         })
-      );
+      ) : of(undefined);
   }
 
   @Action(UnsetSchedule)
@@ -188,7 +189,7 @@ export class EventManagerState implements NgxsOnInit {
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, payload.game),
             gameSet: updateItem<boolean>(payload.index.gameIndex, true)
-          })
+          }) as any
         )
       })
     );
@@ -213,7 +214,7 @@ export class EventManagerState implements NgxsOnInit {
           patch({
             games: updateItem<GameResult>(payload.index.gameIndex, emptyGame),
             gameSet: updateItem<boolean>(payload.index.gameIndex, false)
-          })
+          }) as any
         )
       })
     );
@@ -237,6 +238,7 @@ export class EventManagerState implements NgxsOnInit {
   }
 
   public ngxsOnInit(ctx: StateContext<EventManagerStateModel>) {
+    /*
     ctx.setState({
       roundParticipantCount: {
         roundCount: 4,
@@ -310,6 +312,7 @@ export class EventManagerState implements NgxsOnInit {
       registrationFlag: false,
       eventFlag: false
     });
+    */
   }
 
 }
