@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { UpdateNotificationService } from './core/services/update-notification.service';
 
 @Component({
   selector: 'agari-root',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./agari.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgariComponent {}
+export class AgariComponent {
+  public constructor(updateNotificationService: UpdateNotificationService) {}
+}
