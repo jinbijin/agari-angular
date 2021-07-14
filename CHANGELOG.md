@@ -2,6 +2,12 @@
 
 - Manage events in offline (mostly) mode
 
+# 2.1.0
+
+### Features
+
+- Add update notifications
+
 # 2.0.0
 
 ### Features
