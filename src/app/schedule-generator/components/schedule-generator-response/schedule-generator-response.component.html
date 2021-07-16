@@ -1,12 +1,21 @@
 <ng-container *ngIf="(response$ | async)! as response">
   <ng-container *ngIf="(status$ | async)! as status">
-    <ng-container *ngIf="status === 'DONE' && response?.data">
-      <mat-toolbar>
-        <div class="agari-spacer"></div>
+    <div *ngIf="status === 'DONE' && response?.data" class="agari-wrapper">
+      <div class="agari-toolbar-grid">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Additional information
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul *ngIf="response?.data?.randomnessSources as randomnessSources">
+            <li *ngFor="let randomnessSource of randomnessSources">{{ randomnessSource }}</li>
+          </ul>
+        </mat-expansion-panel>
         <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
           Export to .xlsx
         </button>
-      </mat-toolbar>
+      </div>
       <div class="agari-grid">
         <div
           class="agari-grid-item"
@@ -19,9 +28,7 @@
             data-test-id="schedule-round"
           ></agari-schedule-round>
         </div>
-        <div class="agari-horizontal-filler"></div>
-        <div class="agari-horizontal-filler"></div>
       </div>
-    </ng-container>
+    </div>
   </ng-container>
 </ng-container>

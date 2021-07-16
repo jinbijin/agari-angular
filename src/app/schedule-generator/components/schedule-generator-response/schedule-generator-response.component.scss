@@ -1,20 +1,30 @@
+.agari-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
 .agari-grid {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 5px;
-  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
 }
 
-.agari-grid-item {
-  flex: 1 0 270px;
-  padding: 0;
-  margin: 5px;
+.agari-toolbar-grid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr auto;
+  align-items: flex-start;
 }
 
-.agari-horizontal-filler {
-  flex: 1 0 270px;
-  margin: 0 5px;
-  padding: 0;
-  height: 0;
+@media (min-width: 480px) {
+  .agari-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 720px) {
+  .agari-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
