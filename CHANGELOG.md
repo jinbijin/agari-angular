@@ -2,6 +2,12 @@
 
 - Manage events in offline (mostly) mode
 
+# 2.2.0
+
+### Features
+
+- Added a randomness disclosure to the schedule generator
+
 # 2.1.0
 
 ### Features
