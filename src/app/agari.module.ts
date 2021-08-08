@@ -17,7 +17,7 @@ import { PageModule } from './page/page.module';
   declarations: [AgariComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(agariRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(agariRoutes),
     CoreModule,
     HttpClientModule,
     MatSnackBarModule,
