@@ -71,3 +71,20 @@ $break-md: 880px;
 .mat-action-row {
   border-top-style: none !important;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: mat.get-color-from-palette($agari-primary, 200);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: mat.get-color-from-palette($agari-primary, 600);
+  border-radius: 3px;
+
+  &:hover {
+    background-color: mat.get-color-from-palette($agari-primary, 700);
+  }
+}
