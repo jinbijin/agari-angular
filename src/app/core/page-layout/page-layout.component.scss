@@ -1,0 +1,8 @@
+:host {
+  display: grid;
+  grid-template-areas: "agari_header agari_header" "agari_aside agari_content" "agari_footer agari_footer";
+  grid-template-columns: 30vw 70vw;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  width: 100vw;
+}

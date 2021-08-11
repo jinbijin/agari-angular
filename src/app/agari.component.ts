@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UpdateNotificationService } from './core/services/update-notification.service';
+import { UpdateNotificationService } from './core/pwa/update-notification.service';
 
 @Component({
   selector: 'agari-root',

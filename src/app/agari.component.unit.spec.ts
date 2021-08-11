@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
 import { AgariComponent } from './agari.component';
-import { UpdateNotificationService } from './core/services/update-notification.service';
+import { UpdateNotificationService } from './core/pwa/update-notification.service';
 
 describe('AgariComponent', () => {
   let page: Page;
