@@ -9,16 +9,16 @@ export const ROOT_ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('src/app/landing/landing.module').then(m => m.LandingModule),
+        loadChildren: async () => (await import('src/app/landing/landing.module')).LandingModule,
       },
       {
         path: 'schedule-generator',
-        loadChildren: () =>
-          import('src/app/schedule-generator/schedule-generator.module').then(m => m.ScheduleGeneratorModule),
+        loadChildren: async () =>
+          (await import('src/app/schedule-generator/schedule-generator.module')).ScheduleGeneratorModule,
       },
       ...(environment.eventManager ? [{
         path: 'event-manager',
-        loadChildren: () => import('src/app/event-manager/event-manager.module').then(m => m.EventManagerModule),
+        loadChildren: async () => (await import('src/app/event-manager/event-manager.module')).EventManagerModule,
       }] : [])
     ]
   }
