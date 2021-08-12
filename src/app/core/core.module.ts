@@ -3,10 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { PageLayoutModule } from './page-layout/page-layout.module';
 import { PwaModule } from './pwa/pwa.module';
-import { RootRoutingModule } from './root-routing/root-routing.module';
+import { ROOT_ROUTES } from './root.routes';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,7 @@ import { RootRoutingModule } from './root-routing/root-routing.module';
     HttpClientModule,
     NgxsModule,
     PwaModule,
-    RootRoutingModule,
+    RouterModule,
     PageLayoutModule,
   ],
   exports: [
@@ -25,7 +26,7 @@ import { RootRoutingModule } from './root-routing/root-routing.module';
     BrowserAnimationsModule,
     HttpClientModule,
     PwaModule,
-    RootRoutingModule,
+    RouterModule,
     PageLayoutModule,
   ],
   providers: []
@@ -35,8 +36,9 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        ...RootRoutingModule.forRoot().providers,
         ...PwaModule.forRoot().providers,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ...RouterModule.forRoot(ROOT_ROUTES).providers!,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         ...NgxsModule.forRoot([]).providers!
       ]
