@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
@@ -15,8 +15,8 @@ import { RootRoutingModule } from './root-routing/root-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxsModule.forRoot([]),
-    PwaModule.forRoot(),
+    NgxsModule,
+    PwaModule,
     RootRoutingModule,
     PageLayoutModule,
   ],
@@ -30,4 +30,16 @@ import { RootRoutingModule } from './root-routing/root-routing.module';
   ],
   providers: []
 })
-export class CoreModule {}
+export class CoreModule {
+  public static forRoot(): Required<ModuleWithProviders<CoreModule>> {
+    return {
+      ngModule: CoreModule,
+      providers: [
+        ...RootRoutingModule.forRoot().providers,
+        ...PwaModule.forRoot().providers,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ...NgxsModule.forRoot([]).providers!
+      ]
+    }
+  }
+}

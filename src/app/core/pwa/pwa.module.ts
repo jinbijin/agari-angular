@@ -7,19 +7,21 @@ import { UpdateNotificationService } from './update-notification.service';
 @NgModule({
   imports: [
     MatSnackBarModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    })
+    ServiceWorkerModule,
   ],
   exports: [
     ServiceWorkerModule
   ]
 })
 export class PwaModule {
-  public static forRoot(): ModuleWithProviders<PwaModule> {
+  public static forRoot(): Required<ModuleWithProviders<PwaModule>> {
     return {
       ngModule: PwaModule,
-      providers: [UpdateNotificationService]
+      providers: [
+        UpdateNotificationService,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ...ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }).providers!,
+      ]
     }
   }
 }

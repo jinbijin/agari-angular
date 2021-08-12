@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +19,17 @@ const rootRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(rootRoutes)],
+  imports: [RouterModule],
   exports: [RouterModule]
 })
-export class RootRoutingModule {}
+export class RootRoutingModule {
+  public static forRoot(): Required<ModuleWithProviders<RootRoutingModule>> {
+    return {
+      ngModule: RootRoutingModule,
+      providers: [
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ...RouterModule.forRoot(rootRoutes).providers!
+      ]
+    }
+  }
+}
