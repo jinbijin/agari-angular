@@ -4,7 +4,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Status } from 'src/app/instrumentation/enum/status.enum';
-import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
+import { ExcelExportConfiguration } from 'src/app/excel-export/excel-export-configuration.type';
 
 import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
 import { ErrorData } from 'src/app/instrumentation/types/response/error-data.type';

@@ -2,8 +2,9 @@
 
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
-import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 import * as Xlsx from 'xlsx';
+
+import { ExcelExportConfiguration } from './excel-export-configuration.type';
 
 @Injectable()
 export class ExcelExportService {

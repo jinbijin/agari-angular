@@ -1,7 +1,7 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ExcelExportService } from 'src/app/core/services/excel-export.service';
-import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
+import { ExcelExportConfiguration } from './excel-export-configuration.type';
+import { ExcelExportService } from './excel-export.service';
 
 @Directive({
   selector: '[agariExcelExport]'

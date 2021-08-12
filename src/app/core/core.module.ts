@@ -9,7 +9,6 @@ import { PageLayoutModule } from './page-layout/page-layout.module';
 import { PwaModule } from './pwa/pwa.module';
 import { ROOT_ROUTES } from './root.routes';
 import { ErrorMessageService } from './services/error-message.service';
-import { ExcelExportService } from './services/excel-export.service';
 import { ScheduleGeneratorService } from './services/schedule-generator.service';
 
 @NgModule({
@@ -19,35 +18,23 @@ import { ScheduleGeneratorService } from './services/schedule-generator.service'
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxsModule,
+    NgxsModule.forRoot([]),
     PwaModule,
-    RouterModule,
+    RouterModule.forRoot(ROOT_ROUTES),
     PageLayoutModule,
   ],
   exports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxsModule,
     PwaModule,
     RouterModule,
     PageLayoutModule,
   ],
-  providers: []
+  providers: [
+    ErrorMessageService,
+    ScheduleGeneratorService,
+  ]
 })
-export class CoreModule {
-  public static forRoot(): Required<ModuleWithProviders<CoreModule>> {
-    return {
-      ngModule: CoreModule,
-      providers: [
-        ErrorMessageService,
-        ExcelExportService,
-        ScheduleGeneratorService,
-        ...PwaModule.forRoot().providers,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        ...RouterModule.forRoot(ROOT_ROUTES).providers!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        ...NgxsModule.forRoot([]).providers!
-      ]
-    }
-  }
-}
+export class CoreModule {}

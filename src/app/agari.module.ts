@@ -5,7 +5,7 @@ import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AgariComponent],
-  imports: [CoreModule.forRoot()],
+  imports: [CoreModule],
   bootstrap: [AgariComponent]
 })
 export class AgariModule {}

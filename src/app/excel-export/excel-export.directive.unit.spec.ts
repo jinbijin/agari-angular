@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ExcelExportService } from 'src/app/core/services/excel-export.service';
-import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 import { PageBase } from 'src/app/instrumentation/test/page-base';
 
+import { ExcelExportConfiguration } from './excel-export-configuration.type';
 import { ExcelExportDirective } from './excel-export.directive';
+import { ExcelExportService } from './excel-export.service';
 
 describe('ExcelExportDirective', () => {
   let page: Page;
