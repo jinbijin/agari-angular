@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { agariRoutes } from 'src/app/agari.routes';
-import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -9,18 +7,11 @@ import { AgariRoutes } from 'src/app/instrumentation/routes/agari-routes.type';
   styleUrls: ['./page-layout-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageLayoutHeaderComponent implements OnInit {
-  @Input()
-  public routes: AgariRoutes = agariRoutes;
-
+export class PageLayoutHeaderComponent {
   public readonly brand: string = 'アガリ';
 
-  public displayedRoutes: AgariRoutes;
-
-  public constructor() {}
-
-  public ngOnInit(): void {
-    this.displayedRoutes = this.routes.filter(r => r.display);
-  }
+  public displayedRoutes = [{
+    path: 'schedule-generator', label: 'Schedule generator'
+  }];
 }
 
