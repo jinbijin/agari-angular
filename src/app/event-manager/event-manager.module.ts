@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
+import { ErrorMessageModule } from '../error-message/error-message.module';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -38,7 +39,8 @@ import { EventManagerState } from './store/event-manager.state';
     CommonModule,
     SharedModule,
     RouterModule.forChild(eventManagerRoutes),
-    NgxsModule.forFeature([EventManagerState])
+    NgxsModule.forFeature([EventManagerState]),
+    ErrorMessageModule,
   ],
   exports: [],
   providers: [ScoreConverterService]

@@ -8,7 +8,6 @@ import { NgxsModule } from '@ngxs/store';
 import { PageLayoutModule } from './page-layout/page-layout.module';
 import { PwaModule } from './pwa/pwa.module';
 import { ROOT_ROUTES } from './root.routes';
-import { ErrorMessageService } from './services/error-message.service';
 import { ScheduleGeneratorService } from './services/schedule-generator.service';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { ScheduleGeneratorService } from './services/schedule-generator.service'
     PageLayoutModule,
   ],
   providers: [
-    ErrorMessageService,
     ScheduleGeneratorService,
   ]
 })
