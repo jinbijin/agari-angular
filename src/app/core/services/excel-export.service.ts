@@ -5,7 +5,7 @@ import * as FileSaver from 'file-saver';
 import { ExcelExportConfiguration } from 'src/app/instrumentation/excel/excel-export-configuration.type';
 import * as Xlsx from 'xlsx';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ExcelExportService {
   private readonly fileType: string =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';

@@ -8,6 +8,9 @@ import { NgxsModule } from '@ngxs/store';
 import { PageLayoutModule } from './page-layout/page-layout.module';
 import { PwaModule } from './pwa/pwa.module';
 import { ROOT_ROUTES } from './root.routes';
+import { ErrorMessageService } from './services/error-message.service';
+import { ExcelExportService } from './services/excel-export.service';
+import { ScheduleGeneratorService } from './services/schedule-generator.service';
 
 @NgModule({
   declarations: [],
@@ -36,6 +39,9 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
+        ErrorMessageService,
+        ExcelExportService,
+        ScheduleGeneratorService,
         ...PwaModule.forRoot().providers,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         ...RouterModule.forRoot(ROOT_ROUTES).providers!,

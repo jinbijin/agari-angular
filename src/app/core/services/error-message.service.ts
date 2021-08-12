@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ErrorMessageService {
   private readonly errorMessages: KeyMessagePair[] = [
     { key: 'required', message: error => 'This field is required.' },
