@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 
-export const ROOT_ROUTES: Routes = [
+export const AGARI_ROUTES: Routes = [
   {
     path: '',
     component: PageLayoutComponent,

@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
-import { PageLayoutModule } from './page-layout/page-layout.module';
 import { PwaModule } from './pwa/pwa.module';
-import { ROOT_ROUTES } from './root.routes';
+import { AgariRoutingModule } from './routing/routing.module';
 import { ScheduleGeneratorService } from './services/schedule-generator.service';
 
 @NgModule({
@@ -19,8 +17,7 @@ import { ScheduleGeneratorService } from './services/schedule-generator.service'
     HttpClientModule,
     NgxsModule.forRoot([]),
     PwaModule,
-    RouterModule.forRoot(ROOT_ROUTES),
-    PageLayoutModule,
+    AgariRoutingModule,
   ],
   exports: [
     BrowserModule,
@@ -28,8 +25,7 @@ import { ScheduleGeneratorService } from './services/schedule-generator.service'
     HttpClientModule,
     NgxsModule,
     PwaModule,
-    RouterModule,
-    PageLayoutModule,
+    AgariRoutingModule,
   ],
   providers: [
     ScheduleGeneratorService,
