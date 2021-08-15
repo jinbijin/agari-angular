@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AGARI_ROUTES } from '../../agari.routes';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -10,8 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class AgariLayoutHeaderComponent {
   public readonly brand: string = 'アガリ';
 
-  public displayedRoutes = [{
-    path: 'schedule-generator', label: 'Schedule generator'
-  }];
+  public displayedRoutes = AGARI_ROUTES.filter(route => route.data?.inMenu).map(route => ({ path: route.path, label: route.data?.title }));
 }
 
