@@ -13,6 +13,12 @@ export const AGARI_ROUTES: Routes = [
       (await import('src/app/schedule-generator/schedule-generator.module')).ScheduleGeneratorModule,
     data: { title: 'Schedule generator', inMenu: true }
   },
+  {
+    path: 'schedule-generator-new',
+    loadChildren: async () =>
+      (await import('src/app/features/schedule-generator/schedule-generator.module')).ScheduleGeneratorModule,
+    data: { title: 'Schedule generator (new)', inMenu: true }
+  },
   ...(environment.eventManager ? [{
     path: 'event-manager',
     loadChildren: async () => (await import('src/app/event-manager/event-manager.module')).EventManagerModule,
