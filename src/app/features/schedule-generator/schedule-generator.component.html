@@ -1,1 +1,12 @@
-<p>schedule-generator works!</p>
+<form [formGroup]="formContainer.form" agariRoundRobinInput (ngSubmit)="onSubmit(formContainer.form.value)" #formContainer="agariRoundRobinInput">
+  <mat-card>
+    <mat-card-content>
+      <agari-round-robin-input-form></agari-round-robin-input-form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button type="submit">Generate</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<router-outlet></router-outlet>
