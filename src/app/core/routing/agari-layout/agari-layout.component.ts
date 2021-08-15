@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'agari-page-layout',
-  templateUrl: './page-layout.component.html',
-  styleUrls: ['./page-layout.component.scss'],
+  templateUrl: './agari-layout.component.html',
+  styleUrls: ['./agari-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageLayoutComponent {}
+export class AgariLayoutComponent {}

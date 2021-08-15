@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { PwaModule } from './pwa/pwa.module';
-import { AgariRoutingModule } from './routing/routing.module';
+import { AgariRoutingModule } from './routing/agari-routing.module';
 import { ScheduleGeneratorService } from './services/schedule-generator.service';
 
 @NgModule({

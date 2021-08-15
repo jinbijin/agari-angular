@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'aside[agariPageLayout]',
-  templateUrl: './page-layout-aside.component.html',
-  styleUrls: ['./page-layout-aside.component.scss'],
+  selector: 'aside[agariLayout]',
+  templateUrl: './agari-layout-aside.component.html',
+  styleUrls: ['./agari-layout-aside.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageLayoutAsideComponent {}
+export class AgariLayoutAsideComponent {}
