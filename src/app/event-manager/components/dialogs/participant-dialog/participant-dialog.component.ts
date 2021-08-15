@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ErrorMessageService } from 'src/app/error-message/error-message.service';
+import { ErrorMessageService } from 'src/app/widgets/error-message/error-message.service';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 
 @Component({

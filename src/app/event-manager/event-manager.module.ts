@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
-import { ErrorMessageModule } from '../error-message/error-message.module';
+import { ErrorMessageModule } from '../widgets/error-message/error-message.module';
 
 import { SharedModule } from '../shared/shared.module';
 

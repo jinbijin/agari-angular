@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
-import { ExcelExportModule } from '../excel-export/excel-export.module';
+import { ExcelExportModule } from '../widgets/excel-export/excel-export.module';
 
 import { SharedModule } from '../shared/shared.module';
 
