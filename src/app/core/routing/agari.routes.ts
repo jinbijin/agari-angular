@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment';
 export const AGARI_ROUTES: Routes = [
   {
     path: '',
-    loadChildren: async () => (await import('src/app/landing/landing.module')).LandingModule,
-    data: { title: 'Welcome to Agari', inMenu: false }
+    loadChildren: async () => (await import('src/app/features/landing/landing.module')).LandingModule,
+    data: { title: 'Welcome to Agari!', inMenu: false }
   },
   {
     path: 'schedule-generator',
