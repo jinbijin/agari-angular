@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
 import { agariError } from './agari-error';
-import { ErrorMessageModule } from './error-message.module';
 
-@Injectable({ providedIn: ErrorMessageModule })
+@Injectable()
 export class ErrorMessageService {
   private readonly errorMessages: KeyMessagePair[] = [
     { key: 'required', message: agariError`This field is required.` },
@@ -12,7 +11,9 @@ export class ErrorMessageService {
     { key: 'divisibleBy', message: agariError`Input is not divisible by ${'modulus'}.` },
   ];
 
-  public display(errors: ValidationErrors, customMessages?: KeyMessagePair[]): string | undefined {
+  public display(errors: ValidationErrors | null, customMessages?: KeyMessagePair[]): string | null {
+    if (!errors) { return null; }
+
     for (const keyMessagePair of this.errorMessages) {
       if (errors[keyMessagePair.key]) {
         const customKeyMessagePair = customMessages?.find(p => p.key === keyMessagePair.key);
@@ -29,5 +30,7 @@ export class ErrorMessageService {
         }
       }
     }
+
+    return null;
   }
 }

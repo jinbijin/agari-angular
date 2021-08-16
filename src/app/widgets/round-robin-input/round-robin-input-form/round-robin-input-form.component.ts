@@ -11,29 +11,17 @@ import { RoundRobinInputDirective } from '../round-robin-input.directive';
   styleUrls: ['./round-robin-input-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoundRobinInputFormComponent implements OnInit, OnDestroy {
+export class RoundRobinInputFormComponent implements OnDestroy {
   readonly #subscriptions: Subscription = new Subscription();
   readonly controls: RoundRobinInputControls;
   readonly possibleRoundCounts$: Observable<number[] | null>;
 
-  constructor(
-    roundRobinInputDirective: RoundRobinInputDirective,
-    private readonly errorMessageService: ErrorMessageService,
-  ) {
+  constructor(roundRobinInputDirective: RoundRobinInputDirective) {
     this.controls = roundRobinInputDirective.controls;
     this.possibleRoundCounts$ = roundRobinInputDirective.possibleRoundCounts$;
   }
 
-  ngOnInit(): void {
-  }
-
   ngOnDestroy(): void {
     this.#subscriptions.unsubscribe();
-  }
-
-  getParticipantCountErrorMessage(): string | undefined {
-    if (this.controls.participantCount.errors) {
-      return this.errorMessageService.display(this.controls.participantCount.errors);
-    }
   }
 }

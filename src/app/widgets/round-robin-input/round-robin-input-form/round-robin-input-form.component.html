@@ -6,7 +6,7 @@
       [formControl]="controls.participantCount"
       data-test-id="participant-input"
     />
-    <mat-error *ngIf="controls.participantCount.errors">{{ getParticipantCountErrorMessage() }}</mat-error>
+    <mat-error agariErrorMessage [control]="controls.participantCount"></mat-error>
   </mat-form-field>
 
   <mat-form-field *ngIf="possibleRoundCounts$ | async as possibleRoundCounts">
@@ -14,5 +14,5 @@
     <mat-select [formControl]="controls.roundCount" data-test-id="round-select">
       <mat-option *ngFor="let count of possibleRoundCounts" [value]="count">{{ count }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="controls.roundCount.errors">Please select a value</mat-error>
+    <mat-error agariErrorMessage [control]="controls.roundCount"></mat-error>
   </mat-form-field>
