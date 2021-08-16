@@ -22,7 +22,7 @@ export class RoundRobinInputDirective implements OnInit, OnDestroy {
     private readonly roundRobinInputApiService: RoundRobinInputApiService
   ) {
     this.controls = {
-      participantCount: new FormControl(null, { validators: [Validators.required, AgariValidators.mod(4, 0)] }),
+      participantCount: new FormControl(null, { validators: [Validators.required, AgariValidators.divisibleBy(4)] }),
       roundCount: new FormControl(null, { validators: [Validators.required] }),
     };
     this.form = new FormGroup(this.controls);

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
+import { ErrorMessageService } from '../../error-message/error-message.service';
 import { RoundRobinInputControls } from '../round-robin-input-controls.type';
 import { RoundRobinInputDirective } from '../round-robin-input.directive';
 
@@ -9,12 +11,15 @@ import { RoundRobinInputDirective } from '../round-robin-input.directive';
   styleUrls: ['./round-robin-input-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoundRobinInputComponent implements OnInit, OnDestroy {
+export class RoundRobinInputFormComponent implements OnInit, OnDestroy {
   readonly #subscriptions: Subscription = new Subscription();
   readonly controls: RoundRobinInputControls;
   readonly possibleRoundCounts$: Observable<number[] | null>;
 
-  constructor(roundRobinInputDirective: RoundRobinInputDirective) {
+  constructor(
+    roundRobinInputDirective: RoundRobinInputDirective,
+    private readonly errorMessageService: ErrorMessageService,
+  ) {
     this.controls = roundRobinInputDirective.controls;
     this.possibleRoundCounts$ = roundRobinInputDirective.possibleRoundCounts$;
   }
@@ -26,12 +31,9 @@ export class RoundRobinInputComponent implements OnInit, OnDestroy {
     this.#subscriptions.unsubscribe();
   }
 
-  // TODO use and/or refactor ErrorMessageModule for this
-  getParticipantCountErrorMessage(): string {
-    if (this.controls.participantCount.hasError('required')) {
-      return 'Please enter a number';
+  getParticipantCountErrorMessage(): string | undefined {
+    if (this.controls.participantCount.errors) {
+      return this.errorMessageService.display(this.controls.participantCount.errors);
     }
-
-    return '';
   }
 }
