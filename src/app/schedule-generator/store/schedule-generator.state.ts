@@ -20,7 +20,7 @@ export interface ScheduleGeneratorStateModel {
 }
 
 @State<ScheduleGeneratorStateModel>({
-  name: 'scheduleGenerator',
+  name: 'scheduleGeneratorDepr',
   defaults: {
     status: Status.Idle,
     payload: null,

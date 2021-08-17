@@ -8,6 +8,7 @@ import { PageLayoutComponent } from 'src/app/widgets/shared/layout/page-layout/p
 import { SharedModule } from 'src/app/widgets/shared/shared.module';
 import { ScheduleGeneratorComponent } from './schedule-generator.component';
 import { SCHEDULE_GENERATOR_ROUTES } from './schedule-generator.routes';
+import { ScheduleGeneratorStoreModule } from './store/schedule-generator-store.module';
 
 @NgModule({
   declarations: [ScheduleGeneratorComponent],
@@ -17,6 +18,7 @@ import { SCHEDULE_GENERATOR_ROUTES } from './schedule-generator.routes';
     MatButtonModule,
     MatCardModule,
     RoundRobinInputModule,
+    ScheduleGeneratorStoreModule,
   ]
 })
 export class ScheduleGeneratorModule {}
