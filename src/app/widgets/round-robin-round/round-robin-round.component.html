@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title>Round {{ roundNumber }}</mat-card-title>
   <mat-card-content>
-    <table>
+    <table data-test-id="schedule-round">
       <tr *ngFor="let game of round.games; index as index">
         <td agariTableNumber>Table {{ index | asOrdinal }}:</td>
         <td agariParticipantNumber *ngFor="let nr of game.participantNrs">{{ nr | asOrdinal }}</td>
