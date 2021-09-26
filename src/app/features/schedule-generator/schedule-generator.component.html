@@ -11,25 +11,21 @@
 
 <ng-container *ngIf="(state$ | async) as state">
   <ng-container *ngIf="state.status === 'DONE'">
-      <mat-card>
-        <mat-card-content class="card-content">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Additional information
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ul>
-              <li *ngFor="let randomnessSource of state.schedule.randomnessSources">{{ randomnessSource }}</li>
-            </ul>
-          </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Additional information
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li *ngFor="let randomnessSource of state.schedule.randomnessSources">{{ randomnessSource }}</li>
+      </ul>
+    </mat-expansion-panel>
 
-          <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
-            Export to .xlsx
-          </button>
+    <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
+      Export to .xlsx
+    </button>
 
-          <agari-round-grid [schedule]="state.schedule"></agari-round-grid>
-        </mat-card-content>
-      </mat-card>
+    <agari-round-grid [schedule]="state.schedule"></agari-round-grid>
   </ng-container>
 </ng-container>
