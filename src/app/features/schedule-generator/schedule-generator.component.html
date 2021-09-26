@@ -9,4 +9,32 @@
   </mat-card>
 </form>
 
-<router-outlet></router-outlet>
+<ng-container *ngIf="(state$ | async) as state">
+  <ng-container *ngIf="state.status === 'DONE'">
+      <mat-card>
+        <mat-card-content>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Additional information
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let randomnessSource of state.schedule.randomnessSources">{{ randomnessSource }}</li>
+            </ul>
+          </mat-expansion-panel>
+          <!-- Export button here -->
+
+          <div>
+            <agari-round-robin-round *ngFor="let round of state.schedule.rounds; index as index" [round]="round" [roundNumber]="index | asOrdinal"></agari-round-robin-round>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  </ng-container>
+  <ng-container *ngIf="state.status === 'IN_PROGRESS'">
+    Loading...
+  </ng-container>
+  <ng-container *ngIf="state.status === 'FAILED'">
+    {{ state.error }}
+  </ng-container>
+</ng-container>
