@@ -1,5 +1,5 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { filter, tap, switchMap } from 'rxjs/operators';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
@@ -12,21 +12,18 @@ import { RoundRobinInputControls } from './round-robin-input-controls.type';
 })
 export class RoundRobinInputDirective implements OnInit, OnDestroy {
   readonly #subscriptions: Subscription = new Subscription();
-  readonly controls: RoundRobinInputControls;
-  readonly form: UntypedFormGroup;
+  readonly form = new FormGroup({
+    participantCount: new FormControl<number | null>(null, { validators: [Validators.required, AgariValidators.divisibleBy(4)] }),
+    roundCount: new FormControl<number | null>(null, { validators: [Validators.required] }),
+  });
+  readonly controls: RoundRobinInputControls = this.form.controls;
 
   readonly #possibleRoundCounts: Subject<number[] | null> = new Subject<number[] | null>();
   readonly possibleRoundCounts$: Observable<number[] | null> = this.#possibleRoundCounts.asObservable();
 
   constructor(
     private readonly roundRobinInputApiService: RoundRobinInputApiService
-  ) {
-    this.controls = {
-      participantCount: new UntypedFormControl(null, { validators: [Validators.required, AgariValidators.divisibleBy(4)] }),
-      roundCount: new UntypedFormControl(null, { validators: [Validators.required] }),
-    };
-    this.form = new UntypedFormGroup(this.controls);
-  }
+  ) { }
 
   ngOnInit(): void {
     this.#subscriptions.add(this.controls.participantCount.valueChanges.pipe(

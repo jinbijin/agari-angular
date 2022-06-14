@@ -1,4 +1,4 @@
-import { AbstractControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 export class AgariValidators {
   static divisibleBy(modulus: number): ValidatorFn {
@@ -32,7 +32,7 @@ export class AgariValidators {
     };
   }
 
-  static zeroSum: ValidatorFn = (control: UntypedFormGroup) => {
+  static zeroSum: ValidatorFn = (control: FormGroup) => {
     const keys = Object.keys(control.controls);
     let sum = 0;
     if (control.controls) {

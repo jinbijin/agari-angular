@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
-import { ErrorMessageService } from '../../error-message/error-message.service';
 import { RoundRobinInputControls } from '../round-robin-input-controls.type';
 import { RoundRobinInputDirective } from '../round-robin-input.directive';
 
