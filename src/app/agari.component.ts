@@ -4,7 +4,7 @@ import { UpdateNotificationService } from './core/pwa/update-notification.servic
 @Component({
   selector: 'agari-root',
   templateUrl: './agari.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgariComponent {
   public constructor(updateNotificationService: UpdateNotificationService) {}
