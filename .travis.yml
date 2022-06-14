@@ -9,8 +9,6 @@ cache:
   npm: true
   directories:
     - ~/.cache
-env:
-  - CYPRESS_KEY=$cypress_key
 install:
   - npm ci
   - npm run cy:verify
