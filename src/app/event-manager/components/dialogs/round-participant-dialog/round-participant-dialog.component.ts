@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, tap } from 'rxjs/operators';
 import { ScheduleGeneratorService } from 'src/app/core/services/schedule-generator.service';
@@ -10,21 +10,21 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoundParticipantDialogComponent implements OnInit {
-  public formGroup: FormGroup;
+  public formGroup: UntypedFormGroup;
 
   public controls: {
-    roundCount: FormControl;
-    participantCount: FormControl;
+    roundCount: UntypedFormControl;
+    participantCount: UntypedFormControl;
   };
 
   public constructor(private readonly scheduleGenerator: ScheduleGeneratorService, private readonly changeDetectorRef: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public readonly data: RoundParticipantCount) {}
 
   public ngOnInit(): void {
     this.controls = {
-      roundCount: new FormControl(null, { validators: [Validators.required] }),
-      participantCount: new FormControl(null, { validators: [Validators.required] })
+      roundCount: new UntypedFormControl(null, { validators: [Validators.required] }),
+      participantCount: new UntypedFormControl(null, { validators: [Validators.required] })
     };
-    this.formGroup = new FormGroup(this.controls, { asyncValidators: this.inputValidator });
+    this.formGroup = new UntypedFormGroup(this.controls, { asyncValidators: this.inputValidator });
   }
 
   private get inputValidator(): AsyncValidatorFn {

@@ -118,7 +118,6 @@
       }
     }
   },
-  "defaultProject": "agari-angular",
   "cli": {
     "analytics": false
   }

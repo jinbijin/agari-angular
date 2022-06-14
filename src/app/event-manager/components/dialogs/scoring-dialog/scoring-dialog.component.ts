@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -36,44 +36,44 @@ export class ScoringDialogComponent {
   private readonly scoreRegex = new RegExp(/^\-?\d*\.?\d{0,1}$/);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  public formGroup: FormGroup & {
-    controls: Record<'basicScore' | 'bonusScore', FormGroup & { controls: Record<string, FormControl> }>;
-  } = new FormGroup({
-    basicScore: new FormGroup(
+  public formGroup: UntypedFormGroup & {
+    controls: Record<'basicScore' | 'bonusScore', UntypedFormGroup & { controls: Record<string, UntypedFormControl> }>;
+  } = new UntypedFormGroup({
+    basicScore: new UntypedFormGroup(
       {
-        [this.keys[0]]: new FormControl(
+        [this.keys[0]]: new UntypedFormControl(
           Transforms.asScore(this.data.game[this.keys[0]]?.basicScoreTimesSixty),
           [Validators.required, Validators.pattern(this.scoreRegex)]
         ),
-        [this.keys[1]]: new FormControl(
+        [this.keys[1]]: new UntypedFormControl(
           Transforms.asScore(this.data.game[this.keys[1]]?.basicScoreTimesSixty),
           [Validators.required, Validators.pattern(this.scoreRegex)]
         ),
-        [this.keys[2]]: new FormControl(
+        [this.keys[2]]: new UntypedFormControl(
           Transforms.asScore(this.data.game[this.keys[2]]?.basicScoreTimesSixty),
           [Validators.required, Validators.pattern(this.scoreRegex)]
         ),
-        [this.keys[3]]: new FormControl(
+        [this.keys[3]]: new UntypedFormControl(
           Transforms.asScore(this.data.game[this.keys[3]]?.basicScoreTimesSixty),
           [Validators.required, Validators.pattern(this.scoreRegex)]
         )
       },
       { validators: [AgariValidators.zeroSum] }
     ),
-    bonusScore: new FormGroup({
-      [this.keys[0]]: new FormControl(
+    bonusScore: new UntypedFormGroup({
+      [this.keys[0]]: new UntypedFormControl(
         Transforms.asScore(this.data.game[this.keys[0]]?.bonusScoreTimesSixty),
         [Validators.pattern(this.scoreRegex)]
       ),
-      [this.keys[1]]: new FormControl(
+      [this.keys[1]]: new UntypedFormControl(
         Transforms.asScore(this.data.game[this.keys[1]]?.bonusScoreTimesSixty),
         [Validators.pattern(this.scoreRegex)]
       ),
-      [this.keys[2]]: new FormControl(
+      [this.keys[2]]: new UntypedFormControl(
         Transforms.asScore(this.data.game[this.keys[2]]?.bonusScoreTimesSixty),
         [Validators.pattern(this.scoreRegex)]
       ),
-      [this.keys[3]]: new FormControl(
+      [this.keys[3]]: new UntypedFormControl(
         Transforms.asScore(this.data.game[this.keys[3]]?.bonusScoreTimesSixty),
         [Validators.pattern(this.scoreRegex)]
       )
