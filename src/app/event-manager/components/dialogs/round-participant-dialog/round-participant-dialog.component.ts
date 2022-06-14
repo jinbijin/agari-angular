@@ -19,19 +19,19 @@ export class RoundParticipantDialogComponent implements OnInit {
 
   public constructor(private readonly scheduleGenerator: ScheduleGeneratorService, private readonly changeDetectorRef: ChangeDetectorRef, @Inject(MAT_DIALOG_DATA) public readonly data: RoundParticipantCount) {}
 
-  public ngOnInit(): void {
-    this.controls = {
-      roundCount: new UntypedFormControl(null, { validators: [Validators.required] }),
-      participantCount: new UntypedFormControl(null, { validators: [Validators.required] })
-    };
-    this.formGroup = new UntypedFormGroup(this.controls, { asyncValidators: this.inputValidator });
-  }
-
   private get inputValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => this.scheduleGenerator.validateGenerateScheduleQuery(control.value)
       .pipe(
         map(response => response?.data ? null : { unavailable: true }),
         tap(() => this.changeDetectorRef.markForCheck())
       );
+  }
+
+  public ngOnInit(): void {
+    this.controls = {
+      roundCount: new UntypedFormControl(null, { validators: [Validators.required] }),
+      participantCount: new UntypedFormControl(null, { validators: [Validators.required] })
+    };
+    this.formGroup = new UntypedFormGroup(this.controls, { asyncValidators: this.inputValidator });
   }
 }
