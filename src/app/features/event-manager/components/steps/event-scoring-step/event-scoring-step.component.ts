@@ -3,19 +3,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { ScoreConverterService } from 'src/app/event-manager/services/score-converter.service';
-import {
-  FinalizeRoundResult,
-  SetGameResult,
-  UnsetGameResult
-} from 'src/app/event-manager/store/event-manager.actions';
-import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { RoundResult } from 'src/app/instrumentation/types/round-result.type';
 
+import { ScoreConverterService } from '../../../services/score-converter.service';
+import {
+  FinalizeRoundResult,
+  SetGameResult,
+  UnsetGameResult
+} from '../../../store/event-manager.actions';
+import { EventManagerState } from '../../../store/event-manager.state';
 import { ScoringDialogComponent } from '../../dialogs/scoring-dialog/scoring-dialog.component';
 
 @Component({

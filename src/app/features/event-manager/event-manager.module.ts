@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
-import { ErrorMessageModule } from '../widgets/error-message/error-message.module';
+import { ErrorMessageModule } from '../../widgets/error-message/error-message.module';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { ParticipantDialogComponent } from './components/dialogs/participant-dialog/participant-dialog.component';
 import { RoundParticipantDialogComponent } from './components/dialogs/round-participant-dialog/round-participant-dialog.component';

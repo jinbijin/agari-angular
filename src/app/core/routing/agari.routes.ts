@@ -15,7 +15,7 @@ export const AGARI_ROUTES: Routes = [
   },
   ...(environment.eventManager ? [{
     path: 'event-manager',
-    loadChildren: async () => (await import('src/app/event-manager/event-manager.module')).EventManagerModule,
+    loadChildren: async () => (await import('src/app/features/event-manager/event-manager.module')).EventManagerModule,
     data: { title: 'Event manager', inMenu: true }
   }] : [])
 ];

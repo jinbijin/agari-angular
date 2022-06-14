@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { FinalizeEvent } from 'src/app/event-manager/store/event-manager.actions';
-import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
+import { FinalizeEvent } from '../../../store/event-manager.actions';
+import { EventManagerState } from '../../../store/event-manager.state';
 
 @Component({
   selector: 'agari-event-finalization-step',

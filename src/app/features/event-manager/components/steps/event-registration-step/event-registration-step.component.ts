@@ -3,12 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { FinalizeRegistration, SetParticipant } from 'src/app/event-manager/store/event-manager.actions';
-import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { EmptyBase } from 'src/app/instrumentation/mixins/base-class/empty-base';
 import { Mixin } from 'src/app/instrumentation/mixins/mixin';
 import { Participant } from 'src/app/instrumentation/types/participant.type';
 
+import { FinalizeRegistration, SetParticipant } from '../../../store/event-manager.actions';
+import { EventManagerState } from '../../../store/event-manager.state';
 import { ParticipantDialogComponent } from '../../dialogs/participant-dialog/participant-dialog.component';
 
 @Component({

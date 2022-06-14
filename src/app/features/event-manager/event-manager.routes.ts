@@ -1,4 +1,4 @@
-import { AgariRoutes } from '../instrumentation/routes/agari-routes.type';
+import { AgariRoutes } from '../../instrumentation/routes/agari-routes.type';
 
 import { EventManagerComponent } from './page/event-manager.component';
 

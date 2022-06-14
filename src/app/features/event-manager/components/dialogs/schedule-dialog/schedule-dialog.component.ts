@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
+import { EventManagerState } from '../../../store/event-manager.state';
 
 @Component({
   templateUrl: './schedule-dialog.component.html',

@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ErrorMessageService } from 'src/app/widgets/error-message/error-message.service';
-import { EventManagerState } from 'src/app/event-manager/store/event-manager.state';
 import { Transforms } from 'src/app/instrumentation/transforms/transforms';
 import { GameResult } from 'src/app/instrumentation/types/game-result.type';
 import { KeyMessagePair } from 'src/app/instrumentation/types/key-message-pair.type';
@@ -12,6 +11,7 @@ import { Participant } from 'src/app/instrumentation/types/participant.type';
 import { ScheduleGameIndex } from 'src/app/instrumentation/types/schedule-game-index.type';
 import { AgariErrorStateMatcher } from 'src/app/instrumentation/validators/agari-error-state-matcher';
 import { AgariValidators } from 'src/app/instrumentation/validators/agari-validators';
+import { EventManagerState } from '../../../store/event-manager.state';
 
 @Component({
   templateUrl: './scoring-dialog.component.html',
