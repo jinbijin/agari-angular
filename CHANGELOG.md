@@ -2,6 +2,12 @@
 
 - Manage events in offline (mostly) mode
 
+# 2.3.0
+
+### Features
+
+- Overhaul design and upgrade framework
+
 # 2.2.0
 
 ### Features
