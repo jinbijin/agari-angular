@@ -9,15 +9,16 @@ cache:
   npm: true
   directories:
     - ~/.cache
+env:
+  - CYPRESS_KEY=$cypress_key
 install:
   - npm ci
   - npm run cy:verify
   - npm run lint
 script:
   - npm run build
-  - npm run start:ci &
   - npm run test:ci
-  - npm run cy:ci -- --key $cypress_key
+  - npm run cy:ci
 deploy:
   - provider: script
     skip_cleanup: true
