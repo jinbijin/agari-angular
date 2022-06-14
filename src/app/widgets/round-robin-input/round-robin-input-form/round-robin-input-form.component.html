@@ -1,0 +1,18 @@
+  <mat-form-field>
+    <mat-label>Number of participants</mat-label>
+    <input
+      matInput
+      type="number"
+      [formControl]="controls.participantCount"
+      data-test-id="participant-input"
+    />
+    <mat-error agariErrorMessage [control]="controls.participantCount"></mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="possibleRoundCounts$ | async as possibleRoundCounts">
+    <mat-label>Number of rounds</mat-label>
+    <mat-select [formControl]="controls.roundCount" data-test-id="round-select">
+      <mat-option *ngFor="let count of possibleRoundCounts" [value]="count">{{ count }}</mat-option>
+    </mat-select>
+    <mat-error agariErrorMessage [control]="controls.roundCount"></mat-error>
+  </mat-form-field>

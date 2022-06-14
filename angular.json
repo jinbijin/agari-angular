@@ -74,6 +74,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "port": 4242,
             "browserTarget": "agari-angular:build"
           },
           "configurations": {
@@ -114,11 +115,27 @@
               "src/**/*.html"
             ]
           }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "agari-angular:serve",
+            "watch": true,
+            "headless": false
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "agari-angular:serve",
+            "watch": false,
+            "headless": true,
+            "record": true
+          }
         }
       }
     }
   },
-  "defaultProject": "agari-angular",
   "cli": {
     "analytics": false
   }

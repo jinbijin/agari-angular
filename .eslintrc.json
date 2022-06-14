@@ -40,12 +40,6 @@
             "style": "camelCase"
           }
         ],
-        "@typescript-eslint/explicit-member-accessibility": [
-          "error",
-          {
-            "accessibility": "explicit"
-          }
-        ],
         "@typescript-eslint/member-delimiter-style": [
           "off",
           {

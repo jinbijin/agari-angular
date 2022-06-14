@@ -1,0 +1,31 @@
+<form [formGroup]="formContainer.form" agariRoundRobinInput (ngSubmit)="onSubmit(formContainer.form.value)" #formContainer="agariRoundRobinInput">
+  <mat-card>
+    <mat-card-content>
+      <agari-round-robin-input-form></agari-round-robin-input-form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button type="submit" color="primary" data-test-id="request-button">Generate</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<ng-container *ngIf="(state$ | async) as state">
+  <ng-container *ngIf="state.status === 'DONE'">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Additional information
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li *ngFor="let randomnessSource of state.schedule.randomnessSources">{{ randomnessSource }}</li>
+      </ul>
+    </mat-expansion-panel>
+
+    <button mat-flat-button color="primary" [agariExcelExport]="(export$ | async)!">
+      Export to .xlsx
+    </button>
+
+    <agari-round-grid [schedule]="state.schedule"></agari-round-grid>
+  </ng-container>
+</ng-container>

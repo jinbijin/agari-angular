@@ -7,7 +7,7 @@ import { RoundParticipantCount } from 'src/app/instrumentation/types/round-parti
 import { RoundRobinSchedule } from 'src/app/instrumentation/types/schedule/round-robin-schedule.type';
 import { environment } from 'src/environments/environment';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ScheduleGeneratorService {
   // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   readonly #http: HttpClient;

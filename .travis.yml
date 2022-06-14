@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-  - 14.17.0
+  - 16.13.2
 os: linux
+env:
+  global:
+    - CYPRESS_RECORD_KEY=$cypress_key
 addons:
   ssh_known_hosts:
     secure: N8oOSXuRA1lGaE2uIlWcso6R4foxATajG4PI+uVg0J5pjw+xFcMo8+FfhD8zrjcfjNRxIvcY/uNgG8sZ7rnYC4PCuRcwR76Uav3NIDGRIqxCRLH7Jy6g2MpzxIgTODzKO7IFvHstR+3LXGJFwlas3po5+uN4JI2TfbS7MtHwPwYHZcf+KtZMbAqsY7YGeoTOjTnLQ1cIEGjB5TDYXp9PpdR+zMp4U4O6+E+7lonpp250oxoiCicrA0R456ZwOIA8A6AOSFhXK9M2n0C0T90Bbsmp+1w2uxxWA5IGC4Y6xaJgkJE8r5H2cM7aelviCjSZXTFVT/0ptDuJZOjVv1fCks02teSb79vGTTzciCBzl+PtPW/srkQAr1W0jJBmYDs1H2uvp4pzSeb/odyYSNi1P6JGjBG6eK7bJ+4oJecNOewVVQ2qQ3338OcQRnhdMW1F1K90Ib/i83UN3ie2WAyjASO0liJenBsgTaVTv7IfI+uqsDeCi+8Slzm/vt5hrZyCxyPVcKngS5yXs+OvMlkmA06/XoORC81xdyYPfnUTdm18kZOCFaYzVBy2ajHQ+0E/2uWBEBa2L1aOhv91UYRixXxQ9X6uUJtTOjB/k+qpmtAZ7geFfLQdXNAgu21PhBLL2cnd+yROmVnqXg7e2npRxjSAIh5wjTRSy1r+KFG2ejg=
@@ -15,9 +18,8 @@ install:
   - npm run lint
 script:
   - npm run build
-  - npm run start:ci &
   - npm run test:ci
-  - npm run cy:ci -- --key $cypress_key
+  - npm run cy:ci
 deploy:
   - provider: script
     skip_cleanup: true

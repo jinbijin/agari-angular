@@ -19,7 +19,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ScheduleRoundTableComponent } from './components/schedule-round-table/schedule-round-table.component';
 import { ScheduleRoundComponent } from './components/schedule-round/schedule-round.component';
-import { ExcelExportDirective } from './directives/excel-export.directive';
 import { LayoutComponent } from './layout/layout.component';
 import { AsNumberPipe } from './pipes/as-number.pipe';
 import { AsOrdinalPipe } from './pipes/as-ordinal.pipe';
@@ -52,7 +51,6 @@ const materialModules: Type<any>[] = [
     ScheduleRoundComponent,
     ScheduleRoundTableComponent,
     AgariTableComponent,
-    ExcelExportDirective,
     AsNumberPipe,
     AsOrdinalPipe,
     AsScorePipe,
@@ -67,7 +65,6 @@ const materialModules: Type<any>[] = [
     ScheduleRoundComponent,
     ScheduleRoundTableComponent,
     AgariTableComponent,
-    ExcelExportDirective,
     AsNumberPipe,
     AsOrdinalPipe,
     AsScorePipe,

@@ -1,13 +1,19 @@
 import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 export class AgariValidators {
-  public static mod(modulus: number, remainder: number): ValidatorFn {
+  static divisibleBy(modulus: number): ValidatorFn {
+    return (control: AbstractControl) => !control.value || control.value % modulus === 0
+        ? null
+        : { divisibleBy: { modulus } };
+  }
+
+  static mod(modulus: number, remainder: number): ValidatorFn {
     return (control: AbstractControl) => !control.value || control.value % modulus === remainder
         ? null
         : { mod: { modulus, remainder, actual: control.value % modulus } };
   }
 
-  public static minParticipant(roundCountControl: AbstractControl): ValidatorFn {
+  static minParticipant(roundCountControl: AbstractControl): ValidatorFn {
     return (control: AbstractControl) => {
       if (!roundCountControl.value || !control.value) {
         return null; // Some other validation should fail.
@@ -26,7 +32,7 @@ export class AgariValidators {
     };
   }
 
-  public static zeroSum: ValidatorFn = (control: FormGroup) => {
+  static zeroSum: ValidatorFn = (control: FormGroup) => {
     const keys = Object.keys(control.controls);
     let sum = 0;
     if (control.controls) {
