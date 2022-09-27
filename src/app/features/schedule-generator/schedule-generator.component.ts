@@ -27,7 +27,7 @@ export class ScheduleGeneratorComponent implements OnInit {
       map(state =>
         state && state.status === 'DONE' && state.schedule
           ? {
-              data: state.schedule.rounds.map(r => r.games.flatMap(g => g.participantNrs)),
+              data: state.schedule.rounds.map(r => r.games.flatMap(g => g.participantNrs.map(x => x + 1))),
               filename: [
                 'schedule',
                 state.schedule.rounds.length,
